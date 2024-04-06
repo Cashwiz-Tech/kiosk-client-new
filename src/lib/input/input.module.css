@@ -1,0 +1,86 @@
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 600px;
+	gap: 9px;
+	position: relative;
+}
+
+.label {
+	width: 100%;
+	color: #283760;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 109%;
+}
+
+.input {
+	box-sizing: border-box;
+	width: 100%;
+	height: 120px;
+	border-radius: 15px;
+	border: 1.448px solid #dadada;
+	background: var(--white, #fff);
+	box-shadow: 0px 2.172px 60px 0px rgba(40, 55, 96, 0.1);
+	color: #717171;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 109%;
+	padding: 0 33px;
+}
+
+.input.error {
+	border: 1.448px solid #c93d4e;
+}
+
+.errorMessage {
+	width: 100%;
+	color: var(--worning, #c93d4e);
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 0;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+}
+
+.errorMessage::before {
+	display: inline-block;
+	content: "";
+	height: 40px;
+	width: 40px;
+	background: url("../../assets/error.svg");
+}
+
+.input.phoneNumber {
+	background: url("../../assets/phone.svg") no-repeat scroll calc(100% - 50px) 40px,
+		url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
+	padding-right: 150px;
+}
+
+.input.identityNumber {
+	background: url("../../assets/identity-number.svg") no-repeat scroll calc(100% - 36px) 40px,
+		url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
+	padding-right: 150px;
+}
+
+.input.success {
+	border: 1.448px solid var(--yellow, #f8a801);
+}
+
+.successIcon {
+	position: absolute;
+	left: 21px;
+	top: 85px;
+}

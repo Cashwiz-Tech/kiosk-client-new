@@ -1,0 +1,76 @@
+.title {
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 50px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 109%;
+	padding: 0 14.55%;
+	margin: 10px 0;
+}
+
+.text {
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 44px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 109%;
+	padding: 0 20%;
+}
+
+.button {
+	color: #283760;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 109%;
+	background-color: transparent;
+	border: none;
+}
+
+.content {
+	display: flex;
+	margin-top: 90px;
+	align-items: center;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.footer {
+	position: relative;
+}
+
+.buttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 10%;
+}
+
+.steps {
+	position: absolute;
+	display: flex;
+	width: fit-content;
+	height: 20px;
+	gap: 8px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.step {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	border: solid 5px #283760;
+}
+
+.step.current {
+	background-color: #283760;
+}

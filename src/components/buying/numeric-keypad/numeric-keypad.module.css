@@ -1,0 +1,35 @@
+.container {
+	width: fit-content;
+	height: fit-content;
+	border-radius: 20px;
+	background: #d5dfed;
+	padding: 76px 112px;
+}
+
+.keypad {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 46px;
+}
+
+.key {
+	width: 94.9px;
+	height: 94.9px;
+	background-color: #283760;
+	border-radius: 50%;
+	color: #fff;
+	text-align: center;
+	font-family: Roboto;
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.key:hover {
+	background-color: #f8a801;
+	transition: background-color 200ms linear;
+}

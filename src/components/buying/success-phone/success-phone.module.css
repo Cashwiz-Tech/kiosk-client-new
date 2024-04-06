@@ -1,0 +1,54 @@
+.container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 120px;
+	flex-direction: column;
+}
+
+.content {
+	width: 70%;
+}
+
+.arrowRight {
+	transform: rotate(180deg);
+}
+
+.arrowRight > svg > g > path {
+	stroke: #283760;
+}
+
+.btn > button {
+	border: 0px !important;
+}
+
+.title {
+	color: #283760;
+	font-family: "Noto Sans Hebrew";
+	font-size: 60px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 109%;
+}
+
+.title::first-line {
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 60px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 109%;
+}
+
+.text {
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 109%; /* 43.6px */
+}

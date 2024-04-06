@@ -1,0 +1,73 @@
+.layout {
+	position: relative;
+	width: 100vw;
+	height: 100svh;
+	overflow: hidden;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	position: relative;
+	height: 120px;
+	overflow: hidden;
+}
+
+.logo {
+	position: absolute;
+	left: 0;
+	width: 40%;
+	height: 120px;
+}
+
+.logo > svg {
+	height: fit-content;
+}
+
+.children {
+	flex: 1 1 auto;
+	overflow: auto;
+}
+
+.footer {
+	color: #fff;
+	height: fit-content;
+	background-color: #4f5c7d;
+	flex-direction: column;
+}
+
+.contacts {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: center;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-style: normal;
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.powerBy {
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 16.199px;
+	font-style: normal;
+	font-weight: 400;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+}
+
+.stick {
+	font-weight: 100;
+}
+
+.link {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+}

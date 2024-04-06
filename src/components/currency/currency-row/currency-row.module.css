@@ -1,0 +1,88 @@
+.container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.currencyBlock {
+	display: block;
+}
+
+.currencyRow {
+	display: flex;
+	width: 90%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.currencyRow.confirm {
+	width: 95%;
+}
+
+.currency {
+	color: #283760;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 27.414px;
+	font-style: normal;
+	font-weight: 900;
+	line-height: 109%;
+	margin-bottom: 18px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.currency.confirm {
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 900;
+	line-height: 109%;
+	margin-bottom: 0;
+}
+
+.conversion {
+	color: #283760;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 21.322px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 109%;
+}
+
+.lineDividers {
+	background: linear-gradient(to right, transparent 50%, #dadada 0%) repeat-x bottom;
+	background-size: 10px 1px;
+	height: 1px;
+	border: none;
+	width: 100%;
+	margin: 0;
+}
+
+.lineDividers.confirm {
+	width: 95%;
+	margin-top: 20px;
+}
+
+.price {
+	width: 250px;
+	height: 79px;
+	background: #e3e9f1;
+	color: #283760;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 109%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+}

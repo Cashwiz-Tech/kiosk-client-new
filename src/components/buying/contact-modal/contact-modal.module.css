@@ -1,0 +1,47 @@
+.modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+
+.phoneNumber {
+	width: 396px;
+	height: 111px;
+	flex-shrink: 0;
+	color: #283760;
+	background: #f2f4f8;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 60px;
+	font-style: normal;
+	font-weight: 800;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 109%;
+	margin: 18px auto 50px;
+}
+
+.contact {
+	color: var(--blue, #283760);
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 109%;
+	margin-top: 18px;
+}
+
+.time {
+	color: var(--blue, #283760);
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 109%;
+	white-space: pre-line;
+	margin-top: 15px;
+}

@@ -1,0 +1,69 @@
+.container {
+	height: 100%;
+	max-width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 90%;
+}
+
+.buyingSVG {
+	width: 414.999px;
+	height: 434.939px;
+	margin: 74px auto;
+}
+
+.title {
+	box-sizing: border-box;
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 70px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 109%;
+	width: 100%;
+	white-space: pre-line;
+}
+
+.text {
+	color: #283760;
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 44px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 109%;
+}
+
+.operations {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.operation {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	width: fit-content;
+	height: fit-content;
+}
+
+.paymentsCard {
+	margin: 100px 0;
+	width: 80%;
+}
+
+.buttons {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
