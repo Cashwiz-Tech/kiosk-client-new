@@ -1,15 +1,13 @@
 .container {
-	height: 100%;
-	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 120px;
+	padding: 120px 20px 0;
 	flex-direction: column;
 }
 
 .content {
-	width: 70%;
+	width: min(100%, 800px);
 }
 
 .arrowRight {
@@ -18,6 +16,10 @@
 
 .arrowRight > svg > g > path {
 	stroke: #283760;
+}
+
+.btn {
+	margin-bottom: 100px;
 }
 
 .btn > button {

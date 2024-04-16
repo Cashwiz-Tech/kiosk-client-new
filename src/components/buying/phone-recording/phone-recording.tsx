@@ -27,7 +27,7 @@ export default function PhoneRecording({ onNext, onBack }: Props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
-				<h3 className={styles.title}>קניית מט״ח באמצעות כרטיס אשראי ובתשלומים</h3>
+				<h3 className={styles.title}>על מנת לקבל שירות עליך להרשם תחילה:</h3>
 				<div className={styles.phoneInput}>
 					<Input
 						type="phoneNumber"

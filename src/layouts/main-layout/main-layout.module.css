@@ -1,8 +1,7 @@
 .layout {
 	position: relative;
 	width: 100vw;
-	height: 100svh;
-	overflow: hidden;
+	height: 100dvh;
 	background-color: white;
 	display: flex;
 	flex-direction: column;
@@ -27,7 +26,12 @@
 
 .children {
 	flex: 1 1 auto;
-	overflow: auto;
+	padding: 100px 0;
+}
+
+.children > div {
+	height: fit-content;
+	min-height: 100%;
 }
 
 .footer {

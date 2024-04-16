@@ -4,6 +4,7 @@ import PhoneRecording from "components/buying/phone-recording"
 import SuccessPhone from "components/buying/success-phone"
 import ContactModal from "components/buying/contact-modal/contact-modal"
 import OnBoarding from "components/buying/on-boarding/on-boarding"
+import { phoneRegister } from "api/phone-register"
 
 export default function Buying() {
 	const [step, setStep] = useState(0)
@@ -18,6 +19,7 @@ export default function Buying() {
 					onNext={(phoneNumber: string) => {
 						setStep(2)
 						setPhoneNumber(phoneNumber)
+						phoneRegister(phoneNumber)
 					}}
 					onBack={() => setStep(0)}
 				/>

@@ -19,6 +19,7 @@
 	font-style: normal;
 	font-weight: 800;
 	line-height: 109%;
+	margin: 0 0 50px;
 }
 
 .phoneInput {
@@ -33,9 +34,8 @@
 	box-sizing: border-box;
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
-	padding: 0 160px;
-	margin-top: 177px;
+	width: min(100%, 700px);
+	margin-top: 60px;
 }
 
 .arrowRight {

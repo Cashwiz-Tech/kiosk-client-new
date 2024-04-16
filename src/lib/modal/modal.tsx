@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { createPortal } from "react-dom"
 import { ReactComponent as CrossSVG } from "assets/cross.svg"
 import styles from "./modal.module.css"
 
@@ -18,13 +19,18 @@ export default function Modal({ children, header, show, setShow }: Props) {
 		</>
 	)
 
-	return (
-		<div className={`${styles.modal} ${!show ? styles.close : ""}`}>
-			<div className={styles.container}>
-				<header className={styles.header}>{modalHeader}</header>
-				<div className={styles.content}>{children}</div>
-			</div>
-			<div className={styles.overflow} />
-		</div>
+	return createPortal(
+		<>
+			{show && (
+				<div className={`${styles.modal} ${!show ? styles.close : ""}`}>
+					<div className={styles.container}>
+						<header className={styles.header}>{modalHeader}</header>
+						<div className={styles.content}>{children}</div>
+					</div>
+					<div className={styles.overflow} onClick={() => setShow(false)} />
+				</div>
+			)}
+		</>,
+		document.body
 	)
 }

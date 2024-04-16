@@ -1,6 +1,6 @@
 .button {
 	display: inline-flex;
-	padding: 20px 44px;
+	padding: 20px 40px;
 	justify-content: center;
 	align-items: center;
 	gap: 20px;
@@ -11,11 +11,11 @@
 	color: var(--white, #fff);
 	text-align: center;
 	font-family: "Noto Sans Hebrew";
-	font-size: 40px;
+	font-size: 30px;
 	font-style: normal;
 	font-weight: 900;
 	line-height: 109%;
-	height: 116px;
+	height: 105px;
 }
 
 button:disabled {

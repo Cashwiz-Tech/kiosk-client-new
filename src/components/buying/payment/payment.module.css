@@ -1,6 +1,4 @@
 .container {
-	height: 100%;
-	max-width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -14,8 +12,8 @@
 }
 
 .buyingSVG {
-	width: 414.999px;
-	height: 434.939px;
+	width: 90vw;
+	height: 30vh;
 	margin: 74px auto;
 }
 
@@ -24,11 +22,11 @@
 	color: #283760;
 	text-align: center;
 	font-family: "Noto Sans Hebrew";
-	font-size: 70px;
+	font-size: 60px;
 	font-style: normal;
 	font-weight: 800;
 	line-height: 109%;
-	width: 100%;
+	width: min(100%, 700px);
 	white-space: pre-line;
 }
 
@@ -36,7 +34,7 @@
 	color: #283760;
 	text-align: center;
 	font-family: "Noto Sans Hebrew";
-	font-size: 44px;
+	font-size: 38px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 109%;
@@ -46,7 +44,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	gap: 32px;
+	gap: 16px;
 }
 
 .operation {
@@ -58,7 +56,7 @@
 }
 
 .paymentsCard {
-	margin: 100px 0;
+	margin: 50px 0;
 	width: 80%;
 }
 
