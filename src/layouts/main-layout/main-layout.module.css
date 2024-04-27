@@ -5,6 +5,7 @@
 	background-color: white;
 	display: flex;
 	flex-direction: column;
+	overflow-x: hidden;
 }
 
 .header {
@@ -39,6 +40,7 @@
 	height: fit-content;
 	background-color: #4f5c7d;
 	flex-direction: column;
+	width: 100%;
 }
 
 .contacts {
@@ -63,7 +65,7 @@
 	gap: 8px;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 16px;
+	margin-bottom: 46px;
 }
 
 .stick {
@@ -71,6 +73,7 @@
 }
 
 .link {
+	cursor: pointer;
 	text-decoration: underline;
 	text-underline-offset: 3px;
 	text-decoration-thickness: 1px;
