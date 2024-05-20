@@ -2,7 +2,7 @@ export const phoneRegister = async (phoneNumber: string) => {
   try {
     console.log("phoneRegister", phoneNumber);
     const data = await fetch(
-      "https://ec2-3-76-159-5.eu-central-1.compute.amazonaws.com:443/api/register",
+      "ec2-3-76-159-5.eu-central-1.compute.amazonaws.com/api/register",
       {
         method: "POST",
         headers: {
