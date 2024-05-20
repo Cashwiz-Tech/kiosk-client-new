@@ -1,13 +1,22 @@
 export const phoneRegister = async (phoneNumber: string) => {
-	try {
-		const data = await fetch("http://ec2-3-76-159-5.eu-central-1.compute.amazonaws.com:8080/api/register", {
-			method: "POST",
-			body: JSON.stringify({ phoneNumber }),
-		}).then((res) => res.json())
+  try {
+    console.log("phoneRegister", phoneNumber);
+    const data = await fetch(
+      "https://ec2-3-76-159-5.eu-central-1.compute.amazonaws.com:443/api/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phoneNumber }),
+      }
+    ).then((res) => res.json());
 
-		return data
-	} catch (e) {
-		console.log(e)
-		return { success: false, message: "Can't registry your phone number!" }
-	}
-}
+    console.log(data);
+
+    return data;
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: "Can't registry your phone number!" };
+  }
+};
