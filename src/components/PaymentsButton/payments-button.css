@@ -1,0 +1,10 @@
+.payments-button-container {
+  background-color: #fff;
+  border: 1px solid #283760;
+  border-radius: 99px;
+}
+
+.diabled-payments-button-container {
+  background-color: #dadada;
+  border: none;
+}

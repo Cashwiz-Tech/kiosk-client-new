@@ -1,0 +1,16 @@
+{
+  "i18n-ally.localesPaths": [
+    "src/Translates/locales",
+    "ios/Pods/Flipper-Boost-iOSX/boost/locale",
+    "ios/Pods/Flipper-Folly/folly/lang",
+    "ios/Pods/RCT-Folly/folly/lang",
+    "ios/Pods/Flipper-Boost-iOSX/boost/predef/language"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "he",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+"editor.formatOnSave": true
+
+  }
+}

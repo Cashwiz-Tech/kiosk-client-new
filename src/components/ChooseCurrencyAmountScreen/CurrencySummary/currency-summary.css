@@ -1,0 +1,62 @@
+.currency-summary-container {
+  width: 100%;
+}
+
+.currency-summary-payments-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #ebf2fc;
+  padding: 30px 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.choose-payments-text {
+  font-size: 32px;
+}
+
+.intrest-text-container {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.dashed-border {
+  border-bottom: 2px dashed #dadada;
+}
+
+.intrest-text {
+  font-size: 28px;
+  color: #fff;
+}
+
+.total-text {
+  font-size: 40px;
+  color: #fff;
+  font-weight: 800;
+}
+
+.currency-summary-bottom-container {
+  background-color: #283760;
+  padding: 30px 50px;
+}
+
+.currency-summary-payments-inner-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.currency-summary-payments-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.currency-summary-payments-text {
+  font-size: 32px;
+  font-weight: 700;
+  color: #283760;
+}

@@ -5,6 +5,14 @@ import SuccessPhone from "components/buying/success-phone";
 import ContactModal from "components/buying/contact-modal/contact-modal";
 import OnBoarding from "components/buying/on-boarding/on-boarding";
 import { phoneRegister } from "api/phone-register";
+import { Screens } from "types/Screens";
+import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
+import { useAppDispatch, useAppSelector } from "store/store";
+import { setCurrentScreen } from "store/navigationSlice";
+import ChooseAmountScreen from "screens/ChooseAmountScreen/ChooseAmountScreen";
+import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
+import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
+import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
 
 export default function Buying({
   setShow,
@@ -13,42 +21,53 @@ export default function Buying({
   setShow: (val: boolean) => void;
   show: boolean;
 }) {
-  const [step, setStep] = useState(0);
+  const dispatch = useAppDispatch();
+  const currentScreen = useAppSelector(
+    (state) => state.navigation.currentScreen
+  );
   const [isShowOnBoarding, setIsShowOnBoarding] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  console.log(show, "show");
-
-  switch (step) {
-    case 1:
+  switch (currentScreen) {
+    case Screens.PHONE_RECORDING:
       return (
         <PhoneRecording
           onNext={(phoneNumber: string) => {
-            setStep(2);
+            dispatch(setCurrentScreen(Screens.PHONE_SUCCESS));
             setPhoneNumber(phoneNumber);
             phoneRegister(phoneNumber);
           }}
           onBack={() => {
-            setStep(0);
+            dispatch(setCurrentScreen(Screens.ON_BOARDING));
             setIsShowOnBoarding(false);
             setShow(false);
           }}
         />
       );
-    case 2:
+    case Screens.PHONE_SUCCESS:
       return (
         <SuccessPhone
           onBack={() => {
-            setStep(0);
+            dispatch(setCurrentScreen(Screens.ON_BOARDING));
             setShow(false);
           }}
         />
       );
+    case Screens.CHOOSE_CURRENCY:
+      return <ChooseCurrencyScreen />;
+    case Screens.CHOOSE_AMOUNT:
+      return <ChooseAmountScreen />;
+    case Screens.PAYMENT:
+      return <PaymentScreen />;
+    case Screens.PAYMENT_SUCCESS:
+      return <PaymentSuccessScreen />;
+    case Screens.ORDER_SUMMARY:
+      return <OrderSummaryScreen />;
     default:
       return (
         <>
           <Payment
-            setStep={(step: number) => setStep(step)}
+            setStep={(step: Screens) => dispatch(setCurrentScreen(step))}
             setIsShowOnBoarding={setIsShowOnBoarding}
           />
           <ContactModal
