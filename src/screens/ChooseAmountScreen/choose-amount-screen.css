@@ -18,6 +18,23 @@
   width: 100%;
 }
 
+.modal-text {
+  font-size: 44px;
+  padding-top: 40px;
+  font-weight: 500;
+}
+
+.modal-inner-container {
+  height: 100%;
+  padding: 80px 0;
+  border: 1px solid #c93d4e;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .choose-amount-subtitle {
   font-size: 32px;
 }

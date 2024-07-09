@@ -27,7 +27,12 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
 
   return (
     <div className="currency-summary-container">
-      <div className="currency-summary-payments-container">
+      <div
+        style={{
+          padding: type === "SELECT_PAYMENTS" ? "30px 50px" : "40px 50px",
+        }}
+        className="currency-summary-payments-container"
+      >
         <p className="choose-payments-text">
           {type === "SELECT_PAYMENTS"
             ? "מספר התשלומים לבחירה"
@@ -37,7 +42,7 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
           {type === "SELECT_PAYMENTS" ? (
             <div className="currency-summary-payments-buttons-container">
               <PaymentsButton
-                disabled={selectedPayments === 1}
+                disabled={!selectedPayments}
                 height={60}
                 width={60}
                 type="DEC"
@@ -55,7 +60,7 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
               />
             </div>
           ) : (
-            <p>{selectedPayments} תשלומים</p>
+            <p className="payments-number-text">{selectedPayments} תשלומים</p>
           )}
         </div>
       </div>

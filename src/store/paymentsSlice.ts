@@ -5,7 +5,7 @@ interface PaymentsSlice {
 }
 
 const initialState: PaymentsSlice = {
-  selectedPayments: 1,
+  selectedPayments: 0,
 };
 
 export const paymentsSlice = createSlice({

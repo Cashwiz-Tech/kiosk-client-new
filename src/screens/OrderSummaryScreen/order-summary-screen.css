@@ -1,0 +1,57 @@
+.order-summary-subtitle {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.order-summary-card-container {
+  width: 100%;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.terms-list-item {
+  font-size: 32px;
+  font-weight: 500;
+  color: #282c34;
+}
+.terms-list {
+  padding: 50px;
+}
+
+#terms-modal-inner-container {
+  padding: 80px 80px;
+  border: 1px solid #f8a801;
+}
+.order-summary-bottom-container {
+  width: 100%;
+}
+
+.terms-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.checkbox {
+  width: 50px;
+  height: 50px;
+}
+
+.terms-text {
+  font-size: 32px;
+}
+
+.terms-link-text {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.terms-outer-container {
+  padding-top: 40px;
+  padding-bottom: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

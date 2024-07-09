@@ -19,13 +19,16 @@ export default function MainLayout({ children, setShow }: Props) {
       </div>
       <footer className={styles.footer}>
         <div className={styles.contacts}>
-          <p className={styles.link} onClick={() => setShow(true)}>
+          <p
+            className={styles.link + " white-text"}
+            onClick={() => setShow(true)}
+          >
             צריך עזרה?
           </p>
-          <p className={styles.stick}>|</p>
-          <p>077225643</p>
-          <p className={styles.stick}>|</p>
-          <p>בקרו אותנו באתר: www.cashwis.co.il</p>
+          <p className={styles.stick + " white-text"}>|</p>
+          <p className="white-text">077225643</p>
+          <p className={styles.stick + " white-text"}>|</p>
+          <p className="white-text">בקרו אותנו באתר: www.cashwis.co.il</p>
         </div>
         <div className={styles.powerBy}>
           <PowerBy /> :Power by

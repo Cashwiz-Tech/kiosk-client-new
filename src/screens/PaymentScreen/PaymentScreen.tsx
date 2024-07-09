@@ -1,8 +1,12 @@
 import React from "react";
 import "./PaymentScreen.css";
 import Button from "lib/button";
+import { useAppDispatch } from "store/store";
+import { setCurrentScreen } from "store/navigationSlice";
+import { Screens } from "types/Screens";
 
 const PaymentScreen = () => {
+  const dispatch = useAppDispatch();
   return (
     <div className="main-container">
       <p className="title">נא להעביר כרטיס</p>
@@ -53,7 +57,11 @@ const PaymentScreen = () => {
         </div>
       </div>
       <div className="button-container">
-        <Button style={{ border: "none" }} onClick={() => {}} type="outline">
+        <Button
+          style={{ border: "none" }}
+          onClick={() => dispatch(setCurrentScreen(Screens.ORDER_SUMMARY))}
+          type="outline"
+        >
           <img
             src={"/chevron-right.svg"}
             className="button-icon"

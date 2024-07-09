@@ -3,12 +3,18 @@
 }
 
 .currency-summary-payments-container {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   flex-direction: row;
   background-color: #ebf2fc;
-  padding: 30px 50px;
   align-items: center;
   justify-content: space-between;
+}
+
+.payments-number-text {
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .choose-payments-text {
@@ -40,6 +46,8 @@
 
 .currency-summary-bottom-container {
   background-color: #283760;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
   padding: 30px 50px;
 }
 
