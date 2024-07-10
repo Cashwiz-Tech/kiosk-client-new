@@ -10,7 +10,10 @@ const PaymentScreen = () => {
   return (
     <div className="main-container">
       <p className="title">נא להעביר כרטיס</p>
-      <div className="total-container">
+      <div
+        onClick={() => dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS))} // TODO: Remove in PROD
+        className="total-container"
+      >
         <p className="total-container-text">{`סה״כ לתשלום ${"50₪"}`}</p>
       </div>
       <div className="options-container">
