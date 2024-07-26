@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from "store/store";
 import PaymentsButton from "../../PaymentsButton/PaymentsButton";
-import { setPayments } from "store/paymentsSlice";
+import { setPayments, setPercentageProfit } from "store/paymentsSlice";
 import "./currency-summary.css";
+import { getPaymentsDetails } from "api/paymentsApi";
 
 interface CurrencySummaryProps {
   type: "SELECT_PAYMENTS" | "PAYMENTS_SUMMARY";
@@ -12,18 +13,52 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
   const selectedPayments = useAppSelector(
     (state) => state.payments.selectedPayments
   );
+  const percentageProfit = useAppSelector(
+    (state) => state.payments.percentageProfit
+  );
   const { selectedCurrencyAmount, selectedCurrencyRate } = useAppSelector(
     (state) => state.currency
   );
 
-  const getTotalAmount = () => {
+  const handlePaymentsChange = async (direction: "INC" | "DEC" | "INTIAL") => {
+    const tempValue = selectedPayments;
+    try {
+      const value =
+        direction === "INTIAL"
+          ? selectedPayments
+          : selectedPayments + (direction === "INC" ? 1 : -1);
+      direction === "DEC"
+        ? dispatch(setPayments(value))
+        : dispatch(setPayments(value));
+      const paymentsDetails = await getPaymentsDetails(value);
+
+      if (!paymentsDetails) {
+        return;
+      }
+      dispatch(
+        setPercentageProfit(
+          paymentsDetails.data.paymentsDetails.percentageProfit
+        )
+      );
+      dispatch(
+        setPayments(paymentsDetails.data.paymentsDetails.numberOfPayments)
+      );
+    } catch (error) {
+      dispatch(setPayments(tempValue));
+      console.log(error);
+    }
+  };
+
+  const getTotals = () => {
     const baseAmount =
       selectedCurrencyAmount *
       (selectedCurrencyRate ? selectedCurrencyRate : 1);
-    return baseAmount;
+    const intrest = (baseAmount * percentageProfit) / 100;
+    return { baseAmount, intrest };
   };
 
-  const totalAmount = getTotalAmount();
+  const { baseAmount, intrest } = getTotals();
+  const totalAmount = baseAmount + intrest;
 
   return (
     <div className="currency-summary-container">
@@ -42,11 +77,11 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
           {type === "SELECT_PAYMENTS" ? (
             <div className="currency-summary-payments-buttons-container">
               <PaymentsButton
-                disabled={!selectedPayments}
+                disabled={selectedPayments === 1}
                 height={60}
                 width={60}
                 type="DEC"
-                onClick={() => dispatch(setPayments(selectedPayments - 1))}
+                onClick={async () => await handlePaymentsChange("DEC")}
               />
               <p className="currency-summary-payments-text">
                 {selectedPayments}
@@ -56,7 +91,7 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
                 height={60}
                 width={60}
                 type="INC"
-                onClick={() => dispatch(setPayments(selectedPayments + 1))}
+                onClick={async () => await handlePaymentsChange("INC")}
               />
             </div>
           ) : (
@@ -67,13 +102,18 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
       <div className="currency-summary-bottom-container">
         <div className="intrest-text-container dashed-border">
           <p className="total-text">סה״כ לתשלום</p>
-          <p className="total-text">{`${totalAmount} ₪`}</p>
+          <p className="total-text">{`${totalAmount.toFixed(2)} ₪`}</p>
         </div>
         <div className="intrest-text-container">
-          <p className="intrest-text">{`סך כל תשלום ${
+          <p className="intrest-text">{`סך כל תשלום ${(isNaN(
             totalAmount / selectedPayments
-          }`}</p>
-          <p className="intrest-text">{`(עמלת כרטיס אשראי ${"25 ₪"})`}</p>
+          )
+            ? 0
+            : totalAmount / selectedPayments
+          ).toFixed(2)}`}</p>
+          <p className="intrest-text">{`(עמלת כרטיס אשראי ${intrest.toFixed(
+            2
+          )}₪)`}</p>
         </div>
       </div>
     </div>

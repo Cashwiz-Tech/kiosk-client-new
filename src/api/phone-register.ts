@@ -1,6 +1,5 @@
 export const phoneRegister = async (phoneNumber: string) => {
   try {
-    console.log("phoneRegister", phoneNumber);
     const data = await fetch("https://cashwizkiosk.info/api/register", {
       method: "POST",
       headers: {
@@ -8,9 +7,6 @@ export const phoneRegister = async (phoneNumber: string) => {
       },
       body: JSON.stringify({ phoneNumber }),
     }).then((res) => res.json());
-
-    console.log(data);
-
     return data;
   } catch (e) {
     console.log(e);

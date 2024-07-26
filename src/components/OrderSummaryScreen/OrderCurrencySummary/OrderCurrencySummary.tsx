@@ -24,7 +24,7 @@ const OrderCurrencySummary = ({
         />
         <div className="currency-text">
           <p className="summary-currency-big-text">{currency}</p>
-          <p className="summary-rate-text">{`שער המרה: ${rate}`}</p>
+          <p className="summary-rate-text">{`שער המרה: ${rate.toFixed(2)}`}</p>
         </div>
       </div>
       <div className="summary-currency-container">

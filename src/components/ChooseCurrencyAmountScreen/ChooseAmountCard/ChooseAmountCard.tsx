@@ -19,7 +19,9 @@ const ChooseAmountCard = () => {
           />
           <div className="currency-details-container">
             <p className="currency-name">{selectedCurrency}</p>
-            <p className="currency-rate">{`שער המרה: ${selectedCurrencyRate}`}</p>
+            <p className="currency-rate">{`שער המרה: ${selectedCurrencyRate.toFixed(
+              2
+            )}`}</p>
           </div>
         </div>
         <div>

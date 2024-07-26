@@ -37,6 +37,7 @@ const ChooseAmountScreen = () => {
       return "עליך לבחור מס׳ תשלומים";
     }
   };
+
   return (
     <>
       <Modal
