@@ -6,7 +6,7 @@ import {
 export const getCurrencyExchangeRate = async (currency: PossibleCurrencies) => {
   try {
     const data: GetCurrencyExchangeRateResponse = await fetch(
-      "http://localhost:8080/api/get-exchange-rate",
+      "https://3.121.101.253:8080/api/get-exchange-rate",
       {
         method: "POST",
         headers: {
