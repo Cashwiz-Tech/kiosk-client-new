@@ -1,38 +1,45 @@
-import { ReactNode } from "react"
-import { ReactComponent as CrossSVG } from "assets/cross.svg"
-import styles from "./bottom-modal.module.css"
-import { createPortal } from "react-dom"
+import { ReactNode } from "react";
+import { ReactComponent as CrossSVG } from "assets/cross.svg";
+import styles from "./bottom-modal.module.css";
+import { createPortal } from "react-dom";
 
 type Props = {
-	children: ReactNode
-	show: boolean
-	setShow: (v: boolean) => void
-	header?: JSX.Element
-	footer?: JSX.Element
-}
+  children: ReactNode;
+  show: boolean;
+  setShow: (v: boolean) => void;
+  header?: JSX.Element;
+  footer?: JSX.Element;
+};
 
-export default function BottomModal({ children, show, setShow, header, footer }: Props) {
-	const modalHeader = header || (
-		<>
-			<div className={styles.crossSVG} onClick={() => setShow(false)}>
-				<CrossSVG />
-			</div>
-		</>
-	)
+export default function BottomModal({
+  children,
+  show,
+  setShow,
+  header,
+  footer,
+}: Props) {
+  const modalHeader = header || (
+    <>
+      <div className={styles.crossSVG} onClick={() => setShow(false)}>
+        <CrossSVG />
+      </div>
+    </>
+  );
+  //
 
-	return createPortal(
-		<>
-			{show && (
-				<div className={`${styles.modal} ${!show ? styles.close : ""}`}>
-					<div className={styles.container}>
-						<header className={styles.header}>{modalHeader}</header>
-						<div className={styles.content}>{children}</div>
-						{footer && <footer className={styles.footer}>{footer}</footer>}
-					</div>
-					<div className={styles.overflow} onClick={() => setShow(false)} />
-				</div>
-			)}
-		</>,
-		document.body
-	)
+  return createPortal(
+    <>
+      {show && (
+        <div className={`${styles.modal} ${!show ? styles.close : ""}`}>
+          <div className={styles.container}>
+            <header className={styles.header}>{modalHeader}</header>
+            <div className={styles.content}>{children}</div>
+            {footer && <footer className={styles.footer}>{footer}</footer>}
+          </div>
+          <div className={styles.overflow} onClick={() => setShow(false)} />
+        </div>
+      )}
+    </>,
+    document.body
+  );
 }
