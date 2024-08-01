@@ -1,9 +1,10 @@
 import { GetPaymentsDetailsResponse } from "types/Payments";
+import { baseUrl } from "./config";
 
 export const getPaymentsDetails = async (numberOfPayments: number) => {
   try {
     const data: GetPaymentsDetailsResponse = await fetch(
-      "https://cashwizkiosk.info:8080/api/payments-details",
+      baseUrl + "/payments-details",
       {
         method: "POST",
         headers: {

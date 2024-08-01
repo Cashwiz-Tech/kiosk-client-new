@@ -1,17 +1,19 @@
-import { MakePaymentRequest } from "types/PaymentProvider";
+import { PossibleCurrencies } from "types/Currencies";
+import { baseUrl } from "./config";
 
-export const getPaymentsDetails = async (numberOfPayments: number) => {
+export const makePayment = async (args: {
+  numberOfPayments: number;
+  amount: number;
+  currency: PossibleCurrencies;
+}) => {
   try {
-    const data = await fetch(
-      "https://cashwizkiosk.info:8080/api/make-payment",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ numberOfPayments }),
-      }
-    ).then((res) => res.json());
+    const data = fetch(baseUrl + "/make-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(args),
+    }).then((res) => res.json());
     return data;
   } catch (error) {
     console.log(error);

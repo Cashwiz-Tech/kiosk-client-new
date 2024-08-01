@@ -2,11 +2,12 @@ import {
   GetCurrencyExchangeRateResponse,
   PossibleCurrencies,
 } from "types/Currencies";
+import { baseUrl } from "./config";
 
 export const getCurrencyExchangeRate = async (currency: PossibleCurrencies) => {
   try {
     const data: GetCurrencyExchangeRateResponse = await fetch(
-      "https://cashwizkiosk.info:8080/api/get-exchange-rate",
+      baseUrl + "/get-exchange-rate",
       {
         method: "POST",
         headers: {

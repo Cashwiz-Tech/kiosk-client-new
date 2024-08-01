@@ -1,6 +1,8 @@
+import { baseUrl } from "./config";
+
 export const phoneRegister = async (phoneNumber: string) => {
   try {
-    const data = await fetch("https://cashwizkiosk.info/api/register", {
+    const data = await fetch(baseUrl + "/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

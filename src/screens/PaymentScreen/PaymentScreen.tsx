@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PaymentScreen.css";
 import Button from "lib/button";
-import { useAppDispatch } from "store/store";
+import { useAppDispatch, useAppSelector } from "store/store";
 import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
+import { makePayment } from "api/paymentProviderApi";
 
 const PaymentScreen = () => {
   const dispatch = useAppDispatch();
+  const numberOfPayments = useAppSelector(
+    (state) => state.payments.selectedPayments
+  );
+  const { selectedCurrency, selectedCurrencyAmount } = useAppSelector(
+    (state) => state.currency
+  );
+  useEffect(() => {
+    if (!selectedCurrency || !selectedCurrencyAmount) {
+      dispatch(setCurrentScreen(Screens.ORDER_SUMMARY));
+      return;
+    }
+    makePayment({
+      numberOfPayments,
+      amount: selectedCurrencyAmount,
+      currency: selectedCurrency,
+    }).then((data) => {
+      console.log(data);
+      if (data.success) {
+        dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS));
+      }
+    });
+  }, []);
   return (
     <div className="main-container">
       <p className="title">נא להעביר כרטיס</p>
