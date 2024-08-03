@@ -113,7 +113,7 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
           ).toFixed(2)}`}</p>
           <p className="intrest-text">{`(עמלת כרטיס אשראי ${intrest.toFixed(
             2
-          )}₪)`}</p>
+          )} ₪)`}</p>
         </div>
       </div>
     </div>
