@@ -7,4 +7,6 @@ export enum Screens {
   ORDER_SUMMARY,
   PAYMENT,
   PAYMENT_SUCCESS,
+  WELCOME_SCREEN,
+  USER_DETAILS
 }

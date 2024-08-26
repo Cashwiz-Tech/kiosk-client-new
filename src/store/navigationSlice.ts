@@ -6,7 +6,9 @@ interface NavigationState {
 }
 
 const initialState: NavigationState = {
-  currentScreen: Screens.CHOOSE_CURRENCY,
+ // currentScreen: Screens.CHOOSE_CURRENCY,
+   currentScreen: Screens.WELCOME_SCREEN,
+
 };
 
 export const navigationSlice = createSlice({

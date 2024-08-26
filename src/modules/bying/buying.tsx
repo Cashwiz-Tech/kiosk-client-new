@@ -7,12 +7,14 @@ import OnBoarding from "components/buying/on-boarding/on-boarding";
 import { phoneRegister } from "api/phone-register";
 import { Screens } from "types/Screens";
 import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
+import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { setCurrentScreen } from "store/navigationSlice";
 import ChooseAmountScreen from "screens/ChooseAmountScreen/ChooseAmountScreen";
 import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
 import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
+import UserDetails from "screens/UserDetails/UserDetails";
 
 export default function Buying({
   setShow,
@@ -27,6 +29,8 @@ export default function Buying({
   );
   const [isShowOnBoarding, setIsShowOnBoarding] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberContact, setphoneNumberContact] = useState("0527686543");
+
 
   switch (currentScreen) {
     case Screens.PHONE_RECORDING:
@@ -55,6 +59,22 @@ export default function Buying({
       );
     case Screens.CHOOSE_CURRENCY:
       return <ChooseCurrencyScreen />;
+    case Screens.WELCOME_SCREEN:
+        return <>
+        <WelcomeScreen />
+        <ContactModal
+        show={show}
+        setShow={setShow}
+        phoneNumber={phoneNumberContact}
+      /></>;
+    case Screens.USER_DETAILS:
+        return <>
+        <UserDetails />
+        <ContactModal
+        show={show}
+        setShow={setShow}
+        phoneNumber={phoneNumberContact}
+      /></>;
     case Screens.CHOOSE_AMOUNT:
       return <ChooseAmountScreen />;
     case Screens.PAYMENT:
@@ -70,11 +90,7 @@ export default function Buying({
             setStep={(step: Screens) => dispatch(setCurrentScreen(step))}
             setIsShowOnBoarding={setIsShowOnBoarding}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumber}
-          />
+          
           <OnBoarding
             show={isShowOnBoarding}
             setShow={(v) => setIsShowOnBoarding(v)}

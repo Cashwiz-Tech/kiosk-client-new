@@ -10,6 +10,7 @@ type Props = {
 }
 
 export default function ContactModal({ show, setShow, phoneNumber }: Props) {
+
 	return (
 		<Modal show={show} setShow={setShow}>
 			<div className={styles.modal}>

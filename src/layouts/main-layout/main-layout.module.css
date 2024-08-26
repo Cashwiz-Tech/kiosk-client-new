@@ -19,6 +19,7 @@
 	left: 0;
 	width: 40%;
 	height: 120px;
+	max-width: 400px;
 }
 
 .logo > svg {
@@ -37,10 +38,14 @@
 
 .footer {
 	color: #fff;
-	height: fit-content;
-	background-color: #4f5c7d;
-	flex-direction: column;
-	width: 100%;
+    height: -moz-fit-content;
+    height: fit-content;
+    background-color: #4f5c7d;
+    flex-direction: row;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+	gap: 35px;
 }
 
 .contacts {
@@ -66,6 +71,9 @@
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 46px;
+	margin-top: 40px;
+	border-right: 1px solid white;
+    padding-right: 25px;
 }
 
 .stick {

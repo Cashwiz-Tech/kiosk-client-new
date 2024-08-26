@@ -7,10 +7,14 @@ import { store } from "store/store";
 
 function App() {
   const [show, setShow] = useState(false);
+  function setShow_func(){
+    debugger;
+    setShow(true);
+  }
   return (
     <Provider store={store}>
       <div className="App">
-        <MainLayout setShow={setShow}>
+        <MainLayout setShow={setShow_func}>
           <Buying show={show} setShow={setShow} />
         </MainLayout>
       </div>
