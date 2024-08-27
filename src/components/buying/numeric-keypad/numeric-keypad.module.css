@@ -33,3 +33,20 @@
 	background-color: #f8a801;
 	transition: background-color 200ms linear;
 }
+
+
+.cancel{
+	background-color: #c93d4e;
+    height: 98px;
+    border-radius: 12px;
+    padding-top: 17px;
+	width: 105px;
+}
+
+.approve{
+	background-color: #4abb92;
+    height: 98px;
+    border-radius: 12px;
+    padding-top: 17px;
+	width: 105px;
+}

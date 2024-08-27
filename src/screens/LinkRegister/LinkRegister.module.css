@@ -1,0 +1,92 @@
+.container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.content {
+	width: 600px;
+}
+
+.title {
+	color: var(--blue, #283760);
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 60px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 109%;
+	margin: 0 0 50px;
+}
+
+.phoneInput {
+	max-width: 600px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+}
+
+.buttons {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	width: min(100%, 700px);
+	margin-top: 60px;
+}
+
+.arrowRight {
+	transform: rotate(180deg);
+}
+
+.arrowRight > svg > g > path {
+	stroke: #283760;
+}
+
+.buttons > button {
+	border: 0px !important;
+}
+
+
+.back_to_main{
+	width: 400px;
+    height: 97px;
+    margin-top: 41px;
+    font-size: 40px;
+    background-color: #283760;
+    color: white;
+    font-family: "Noto Sans Hebrew";
+	background-image: url(../../assets/left.png);
+    background-repeat: no-repeat;
+    padding-left: 50px;
+    background-position: 24px;
+    font-weight: 700;
+    background-size: 10%;
+    border-radius: 10px;
+}
+
+.phone_place {
+	background-color: #F2F4F8;
+	height: 177px;
+	width: 522px;
+	margin: 0 auto;
+}
+
+.sub_title{
+	font-size: 60px;
+    margin-bottom: 50px;
+}
+
+.sub_text{
+	font-size: 40px;
+    margin-top: 150px;
+}
+
+.phone_number{
+	font-size: 60px;
+	font-weight: 700;
+	padding-top: 50px;
+}

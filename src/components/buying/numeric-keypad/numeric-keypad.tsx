@@ -1,10 +1,15 @@
 import styles from "./numeric-keypad.module.css"
-
+import approve from '../../../assets/approve.png'
+import cancel from '../../../assets/cancel.png'
 type Props = {
 	setValue: (v: string) => void
+	cancel_caracter: (v: string) => void
+
+
 }
 
-export default function NumericKeypad({ setValue }: Props) {
+export default function NumericKeypad({ setValue, cancel_caracter }: Props) {
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.keypad} dir="ltr">
@@ -13,14 +18,18 @@ export default function NumericKeypad({ setValue }: Props) {
 						{idx + 1}
 					</div>
 				))}
-				<div className={styles.key} onClick={() => setValue("+")}>
-					+
+				<div  onClick={() => setValue("+")}>
+					<div className={styles.approve}>
+						<img src={approve} />
+					</div>
 				</div>
 				<div className={styles.key} onClick={() => setValue("0")}>
 					0
 				</div>
-				<div className={styles.key} onClick={() => setValue("#")}>
-					#
+				<div  onClick={() => cancel_caracter('')}>
+					<div className={styles.cancel}>
+						<img src={cancel} />
+					</div>
 				</div>
 			</div>
 		</div>

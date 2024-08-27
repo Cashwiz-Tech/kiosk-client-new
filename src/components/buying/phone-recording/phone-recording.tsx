@@ -38,7 +38,7 @@ export default function PhoneRecording({ onNext, onBack }: Props) {
 						isVisited={isVisited}
 						validate={validate}
 					/>
-					<NumericKeypad setValue={(v) => setPhoneNumber((prev) => prev + v)} />
+					{/* <NumericKeypad setValue={(v) => setPhoneNumber((prev) => prev + v)} /> */}
 				</div>
 			</div>
 			<div className={styles.buttons}>

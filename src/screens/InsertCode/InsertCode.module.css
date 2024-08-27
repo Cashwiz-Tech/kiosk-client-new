@@ -1,0 +1,92 @@
+.container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.content {
+	width: 600px;
+}
+
+.title {
+	color: var(--blue, #283760);
+	text-align: center;
+	font-family: "Noto Sans Hebrew";
+	font-size: 60px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 109%;
+	margin: 0 0 50px;
+}
+
+.phoneInput {
+	max-width: 600px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+}
+
+.buttons {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	width: min(100%, 700px);
+	margin-top: 60px;
+}
+
+.arrowRight {
+	transform: rotate(180deg);
+}
+
+.arrowRight > svg > g > path {
+	stroke: #283760;
+}
+
+.buttons > button {
+	border: 0px !important;
+}
+
+
+.no_code{
+    font-size: 44px;
+    margin-bottom: -58px;
+
+}
+
+.resend_code{
+    font-size: 44px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.code_place{
+    background-color: #F2F4F8;
+    height: 177px;
+    width: 522px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-direction: row-reverse;
+}
+
+.code_small_input{
+    width: 55px;
+    height: 70px;
+    border: 0;
+    border-bottom: 7px solid #283760;
+    background-color: transparent;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 48px;
+}
+
+.code_small_input:focus{
+
+    outline: none;
+
+}

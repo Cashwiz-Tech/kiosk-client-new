@@ -15,6 +15,11 @@ import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
 import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
 import UserDetails from "screens/UserDetails/UserDetails";
+import InsertCode from "screens/InsertCode/InsertCode";
+import ErrorModal from "components/buying/error-modal";
+import ChooseRegisterOption from "screens/ChooseRegisterOption/ChooseRegisterOption";
+import QRRegister from "screens/QRRegister/QRRegister";
+import LinkRegister from "screens/LinkRegister/LinkRegister";
 
 export default function Buying({
   setShow,
@@ -67,9 +72,67 @@ export default function Buying({
         setShow={setShow}
         phoneNumber={phoneNumberContact}
       /></>;
+
+    case Screens.INSERT_CODE:
+        return <>
+        <InsertCode />
+        <ContactModal
+        show={show}
+        setShow={setShow}
+        phoneNumber={phoneNumberContact}
+        />
+   
+      </>;
+
+    case Screens.CHOOSE_REGISTER_OPTION:
+      return <>
+      <ChooseRegisterOption />
+      <ContactModal
+      show={show}
+      setShow={setShow}
+      phoneNumber={phoneNumberContact}
+      />
+
+    </>;
+
+
+
+    case Screens.QR_REGISTER:
+      return <>
+
+      <QRRegister />
+      <ContactModal
+      show={show}
+      setShow={setShow}
+      phoneNumber={phoneNumberContact}
+      />
+    </>;
+
+    case Screens.LINK_REGISTER:
+      return <>
+
+      <LinkRegister />
+      <ContactModal
+      show={show}
+      setShow={setShow}
+      phoneNumber={phoneNumberContact}
+      />
+    </>;
+
     case Screens.USER_DETAILS:
         return <>
-        <UserDetails />
+        <UserDetails 
+        onNext={(phoneNumber: string) => {
+          dispatch(setCurrentScreen(Screens.INSERT_CODE));
+          setPhoneNumber(phoneNumber);
+          phoneRegister(phoneNumber);
+        }}
+        onBack={() => {
+          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+          setIsShowOnBoarding(false);
+          setShow(false);
+        }}
+        />
         <ContactModal
         show={show}
         setShow={setShow}

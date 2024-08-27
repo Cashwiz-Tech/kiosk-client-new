@@ -11,9 +11,10 @@ type Props = {
 	errorMessage?: string
 	isVisited?: boolean
 	type?: "phoneNumber" | "identityNumber"
+	focus_func?: (v: boolean) => void
 }
 
-export default function Input({ value, setValue, placeholder, label, errorMessage, validate, isVisited, type }: Props) {
+export default function Input({ value, setValue, placeholder, label, errorMessage, validate, isVisited, type,focus_func }: Props) {
 	const [focus, setFocus] = useState(false)
 	const success = isVisited && !errorMessage
 
@@ -50,7 +51,8 @@ export default function Input({ value, setValue, placeholder, label, errorMessag
 				value={getValue()}
 				placeholder={placeholder || ""}
 				onChange={(e) => setValue(e.target.value)}
-				onFocus={() => setFocus(true)}
+				onFocus={() => {setFocus(true);
+					focus_func && focus_func(true)}}
 				onBlur={() => {
 					setFocus(false)
 					validate && validate(value)
