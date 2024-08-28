@@ -69,10 +69,22 @@
 	padding-right: 150px;
 }
 
-.input.identityNumber {
+.input.identityNumber, .input.darkon {
 	background: url("../../assets/identity-number.svg") no-repeat scroll calc(100% - 36px) 40px,
 		url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
 	padding-right: 150px;
+}
+
+.input.email {
+	background: url("../../assets/email_icon.png") no-repeat scroll calc(100% - 36px) 40px,
+		url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
+	padding-right: 150px;
+}
+
+.input.userName{
+	background: url("../../assets/user_icon.png") no-repeat scroll calc(100% - 36px) 40px,
+	url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
+padding-right: 150px;
 }
 
 .input.success {

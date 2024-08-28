@@ -10,15 +10,20 @@ type Props = {
 	validate?: (v: string) => void
 	errorMessage?: string
 	isVisited?: boolean
-	type?: "phoneNumber" | "identityNumber"
+	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"
 	focus_func?: (v: boolean) => void
 }
 
 export default function Input({ value, setValue, placeholder, label, errorMessage, validate, isVisited, type,focus_func }: Props) {
 	const [focus, setFocus] = useState(false)
+
 	const success = isVisited && !errorMessage
 
 	useEffect(() => {
+		if (type === "email" || type === "userName" || "darkon"){
+			setValue(value)
+			validate && validate(value)
+		} else 
 		if (type === "phoneNumber" || value.length > 10) {
 			const val = value.replace(/\D/g, "").slice(0, 10)
 			setValue(val)

@@ -15,11 +15,15 @@ import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
 import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
 import UserDetails from "screens/UserDetails/UserDetails";
+import DocumentType from "screens/DocumentType/DocumentType";
 import InsertCode from "screens/InsertCode/InsertCode";
 import ErrorModal from "components/buying/error-modal";
 import ChooseRegisterOption from "screens/ChooseRegisterOption/ChooseRegisterOption";
 import QRRegister from "screens/QRRegister/QRRegister";
 import LinkRegister from "screens/LinkRegister/LinkRegister";
+import Register from "screens/Register/Register";
+import ScanVideo from "screens/ScanVideo/ScanVideo";
+import ScanDoc from "screens/ScanDoc/ScanDoc";
 
 export default function Buying({
   setShow,
@@ -110,7 +114,6 @@ export default function Buying({
 
     case Screens.LINK_REGISTER:
       return <>
-
       <LinkRegister />
       <ContactModal
       show={show}
@@ -119,13 +122,83 @@ export default function Buying({
       />
     </>;
 
+    case Screens.REGISTER_HERE:
+      return <>
+      <Register 
+      onNext={() => {
+        dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
+      }}
+      onBack={() => {
+        dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
+      }}
+      />
+      <ContactModal
+      show={show}
+      setShow={setShow}
+      phoneNumber={phoneNumberContact}
+      />
+    </>;
+
+    case Screens.DOCUMENT_TYPE:
+        return <>
+        <DocumentType 
+        onNext={() => {
+          dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
+        }}
+        onBack={() => {
+          dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
+        }}
+        />
+        <ContactModal
+        show={show}
+        setShow={setShow}
+        phoneNumber={phoneNumberContact}
+        />
+    </>;
+
+    case Screens.SCAN_VIDEO:
+      return <>
+      <ScanVideo
+      onNext={() => {
+        dispatch(setCurrentScreen(Screens.SCAN_DOC));
+      }}
+      onBack={() => {
+        dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
+      }}
+      />
+      <ContactModal
+      show={show}
+      setShow={setShow}
+      phoneNumber={phoneNumberContact}
+      />
+    </>;
+
+
+    case Screens.SCAN_DOC:
+      return <>
+      <ScanDoc
+      onNext={() => {
+        dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
+      }}
+      onBack={() => {
+        dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
+      }}
+      />
+      <ContactModal
+      show={show}
+      setShow={setShow}
+      phoneNumber={phoneNumberContact}
+      />
+    </>;
+
+
     case Screens.USER_DETAILS:
         return <>
         <UserDetails 
         onNext={(phoneNumber: string) => {
           dispatch(setCurrentScreen(Screens.INSERT_CODE));
           setPhoneNumber(phoneNumber);
-          phoneRegister(phoneNumber);
+     
         }}
         onBack={() => {
           dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));

@@ -24,7 +24,10 @@ const ChooseRegisterOption = () => {
 
     function link_register(){
         dispatch(setCurrentScreen(Screens.LINK_REGISTER));
-        
+    }
+
+    function register_here(){
+        dispatch(setCurrentScreen(Screens.REGISTER_HERE));
     }
 
     return (
@@ -38,7 +41,7 @@ const ChooseRegisterOption = () => {
 
              <button className={styles.register_btn_option} onClick={scan_qr_register}> לסרוק קוד QR </button>   
 
-             <button className={styles.register_btn_option}> הרשמה במכשיר זה </button>   
+             <button className={styles.register_btn_option} onClick={register_here}> הרשמה במכשיר זה </button>   
 
         </div>
         <div className={styles.buttons}>

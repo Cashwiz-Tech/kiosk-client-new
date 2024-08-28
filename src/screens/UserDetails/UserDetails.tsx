@@ -68,26 +68,19 @@ export default function UserDetails({ onNext, onBack }: Props) {
 
     async function store_phone_number(){
 
-		// let phone_num_international = israel_prefix + phoneNumber.substring(1);
+		let phone_num_international = israel_prefix + phoneNumber.substring(1);
 
-		// let data ={
-		// 	personalId : identityNumber,
-		// 	phoneNumber : phone_num_international
-		// }
-
-		// await axios({
-        //     url: "http://18.219.223.53/kiosk_stage/send_otp_exist.php",
-        //     method: "POST",
-        //     data: data,
-        // }).then((res:any) => {
-		// 	onNext(phoneNumber); 
-		// 	dispatch(setPhoneNum(phoneNumber));
-		// })
-		// .catch((err:any) => {});
-	
-
-		onNext(phoneNumber); 
-		dispatch(setPhoneNum(phoneNumber));
+		await axios({
+            url: "http://18.219.223.53/kiosk_stage/send_otp_exist.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
+            method: "GET",
+			headers: {
+				'Content-Type': 'application/json'
+			}
+        }).then((res:any) => {
+			onNext(phoneNumber); 
+			dispatch(setPhoneNum(phoneNumber));
+		})
+		.catch((err:any) => {});
 
     }
 
