@@ -1,6 +1,6 @@
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "lib/input"
 import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
@@ -10,6 +10,8 @@ import {setPhoneNum } from "store/navigationSlice"
 import { useAppDispatch } from "store/store"
 import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
+import { ReactComponent as SuccessSVG } from "assets/success.svg"
+import { setDarkonNum, setDBirth, setdocumentType, setIDNum } from "store/registerSlice"
 
 type Props = {
 	onNext: () => void
@@ -28,10 +30,10 @@ export default function DocumentType({ onNext, onBack }: Props) {
 	
     const [errorMessageIdentity, seterrorMessageIdentity] = useState("")
     const [errorMessageBDay, seterrorMessageBDay] = useState("")
-
+    const [isVisitedDate, setisVisitedDate] = useState(false)
+	
 	const [isVisitedID, setisVisitedID] = useState(false)
 	const [isVisitedDarkon, setisVisitedDarkon] = useState(false)
-	const [isVisitedEmail, setisVisitedEmail] = useState(false)
 	
 	const [focusisVisitedID, setfocusisVisitedID] = useState(true)
 
@@ -87,14 +89,33 @@ export default function DocumentType({ onNext, onBack }: Props) {
 		setdarkonNum(str)
     }
 
+	useEffect(() => {
+		validateDate();
+    },[date_birth_val]);
+
+
 	function validateDate(){
-		debugger;
-		if (date_birth_val.length==8) {
-			seterrorMessageBDay('');
-			setdate_birth_valid(true);
-		} else {
-			seterrorMessageBDay('תאריך לידה לא תקין');
-		}
+			setisVisitedDate(true);
+			if (date_birth_val.length==8) {
+				seterrorMessageBDay('');
+				setdate_birth_valid(true);
+			} else {
+				seterrorMessageBDay('תאריך לידה לא תקין');
+				setdate_birth_valid(false);
+			}
+		
+	}
+
+	function go_to_next_page(){
+
+		let birth_format= date_birth_val.substring(4, 8) +  '-' + date_birth_val.substring(2, 4) + '-'+ date_birth_val.substring(0, 2)  ;
+
+		dispatch(setIDNum(userName));
+		dispatch(setDarkonNum(darkonNum));
+		dispatch(setDBirth(birth_format));
+		dispatch(setdocumentType(doc_type));
+		onNext()
+
 	}
 
 	return (
@@ -135,7 +156,7 @@ export default function DocumentType({ onNext, onBack }: Props) {
 				   }
 
 				   <p className={styles.birth_date_title}> תאריך לידה </p>
-				   <div className={styles.date_birth + (date_birth_valid ? ' '+ styles.date_valid : '')}> 
+				   <div className={styles.date_birth + (date_birth_valid ? ' '+ styles.date_valid : ' ' + styles.date_notvalid)}> 
 				   		<input type="text"  className={styles.date_birth_input} value={date_birth_val[0]?date_birth_val[0]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[1]?date_birth_val[1]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
 						<span  className={styles.date_birth_sep}> / </span>
@@ -144,9 +165,14 @@ export default function DocumentType({ onNext, onBack }: Props) {
 						<span  className={styles.date_birth_sep}> / </span>
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[4]?date_birth_val[4]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[5]?date_birth_val[5]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[6]?date_birth_val[6]:''} onFocus={()=>{setfocusisVisitedID(false)}} onChange={validateDate}/>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[7]?date_birth_val[7]:''} onFocus={()=>{setfocusisVisitedID(false)}} onChange={validateDate}/>
+						<input type="text"  className={styles.date_birth_input} value={date_birth_val[6]?date_birth_val[6]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
+						<input type="text"  className={styles.date_birth_input} value={date_birth_val[7]?date_birth_val[7]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
+						{errorMessageBDay==''?<div className={styles.successIcon}>
+							<SuccessSVG />
+						</div>:''}
 				   </div>
+				  
+				   {errorMessageBDay?<p className={styles.errorMessage}>{errorMessageBDay}</p>:''}
 
 					{focusisVisitedID && doc_type=='id'?<NumericKeypad  setValue={(v:any) => setuserName((prev) => prev + v)} cancel_caracter={cancel_caracter}/> :
 					focusisVisitedID && doc_type=='darkon' ?
@@ -161,7 +187,7 @@ export default function DocumentType({ onNext, onBack }: Props) {
 					</div>
 					חזרה
 				</Button>
-				<Button onClick={() =>{onNext()}} disabled={(!!errorMessageIdentity || !isVisitedID)}>
+				<Button onClick={() =>{go_to_next_page();}} disabled={(!!errorMessageIdentity || (!isVisitedID && !isVisitedDarkon)) || (!!errorMessageBDay || !isVisitedDate)}>
 					המשך
 					<Arrow />
 				</Button>

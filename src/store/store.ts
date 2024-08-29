@@ -4,11 +4,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import currencyReducer from "./currencySlice";
 import navigationReducer from "./navigationSlice";
 import paymentsReducer from "./paymentsSlice";
+import registersReducer from "./registerSlice";
 
 const rootReducer = combineReducers({
   currency: currencyReducer,
   navigation: navigationReducer,
   payments: paymentsReducer,
+  register: registersReducer
+
 });
 
 export const store = configureStore({

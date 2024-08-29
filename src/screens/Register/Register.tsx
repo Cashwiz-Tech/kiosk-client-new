@@ -3,13 +3,14 @@
 import { useState } from "react"
 import Input from "lib/input"
 import Button from "lib/button"
-import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
+
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./Register.module.css"
-import {setPhoneNum } from "store/navigationSlice"
+
 import { useAppDispatch } from "store/store"
-import axios from "axios";
+
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
+import { setEmail, setFullName } from "store/registerSlice"
 
 type Props = {
 	onNext: () => void
@@ -73,6 +74,14 @@ export default function Register({ onNext, onBack }: Props) {
 		setuserName(str)
     }
 
+	function go_to_next_page(){
+
+		dispatch(setFullName(userName));
+		dispatch(setEmail(emailAddress));
+		
+		onNext();
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
@@ -113,7 +122,7 @@ export default function Register({ onNext, onBack }: Props) {
 					</div>
 					חזרה
 				</Button>
-				<Button onClick={() =>{onNext()}} disabled={(!!errorMessage || !isVisitedEmail) || (!!errorMessageIdentity || !isVisitedID)}>
+				<Button onClick={() =>{go_to_next_page();}} disabled={(!!errorMessage || !isVisitedEmail) || (!!errorMessageIdentity || !isVisitedID)}>
 					המשך
 					<Arrow />
 				</Button>

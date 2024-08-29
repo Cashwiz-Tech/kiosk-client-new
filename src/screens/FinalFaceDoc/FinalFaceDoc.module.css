@@ -73,3 +73,14 @@
 	margin-top: 20px;
 }
 
+
+.scand_tz{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+
+.error{
+	color:#c93d4e;
+	font-size: 30px;
+}

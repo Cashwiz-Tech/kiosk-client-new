@@ -6,9 +6,10 @@ import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./UserDetails.module.css"
-import {setPhoneNum } from "store/navigationSlice"
+import {setCurrentScreen, setOTP, setPhoneNum, setUserExist } from "store/navigationSlice"
 import { useAppDispatch } from "store/store"
 import axios from "axios";
+import { Screens } from "types/Screens"
 
 type Props = {
 	onNext: (phoneNumber: string) => void
@@ -31,7 +32,7 @@ export default function UserDetails({ onNext, onBack }: Props) {
 	const validate = (v: string) => {
 		setIsVisited(true);
 
-		if (v.length !== 10) {
+		if (v.length !== 11) {
 			setErrorMessage("מספר הטלפון אינו תקין")
 		} else {
 			setErrorMessage("")
@@ -42,8 +43,8 @@ export default function UserDetails({ onNext, onBack }: Props) {
 
 		setisVisitedID(true);
 
-        var id = String(id).trim();
-       
+        var id = id.trim();
+  
         if (id.length ==9 && Array
                 .from(id, Number)
                   .reduce((counter, digit, i) => {
@@ -77,8 +78,19 @@ export default function UserDetails({ onNext, onBack }: Props) {
 				'Content-Type': 'application/json'
 			}
         }).then((res:any) => {
-			onNext(phoneNumber); 
+			debugger;
+
 			dispatch(setPhoneNum(phoneNumber));
+
+			if (res.data.error_code==0) {
+				
+				dispatch(setUserExist(true));
+				dispatch(setOTP(res.data.otp));
+				dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
+			} else if (res.data.error_code==504) { // custumer not found
+				onNext(phoneNumber); 
+			}
+			
 		})
 		.catch((err:any) => {});
 
@@ -131,3 +143,4 @@ export default function UserDetails({ onNext, onBack }: Props) {
 		</div>
 	)
 }
+

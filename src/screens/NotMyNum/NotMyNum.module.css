@@ -31,11 +31,13 @@
 }
 
 .buttons {
-	box-sizing: border-box;
-	display: flex;
-	justify-content: space-between;
-	width: min(100%, 700px);
-	margin-top: 60px;
+    box-sizing: border-box;
+    display: flex;
+    width: 700px;
+    margin-top: 60px;
+    gap: 0;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
 
 .arrowRight {
@@ -48,28 +50,35 @@
 
 .buttons > button {
 	border: 0px !important;
-}
-
-
-.video_place{
-	background-color: #DFE6F1;
-	height: 540px;
-	border-radius: 24px;
-}
-
-
-.video_place_text{
-	font-size: 32px;
-	font-weight: 700;
-	padding-top: 225px;
-}
-
-.camera_icon{
-	margin-top: 184px;
+	font-size: 24px;
+	height: 105px;
+	width: 100%;
 }
 
 .subtitle{
-	font-size: 38px;
-	margin-top: 20px;
+	font-size: 32px;
+	margin-top: -15px;
+}
+
+.code_place{
+    background-color: #F2F4F8;
+    height: 130px;
+    width: 522px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-direction: row-reverse;
+    margin-top: 30px;
+}
+
+.buttons_bottom{
+	margin-top: 350px;
+}
+
+.phone_to_send{
+	direction: ltr;
+    font-size: 60px;
+    margin-top: 28px;
 }
 

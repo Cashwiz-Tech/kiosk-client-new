@@ -4,7 +4,7 @@ import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./InsertCode.module.css"
-import { useAppDispatch } from "store/store"
+import { useAppDispatch, useAppSelector } from "store/store"
 import { setCurrentScreen } from "store/navigationSlice"
 import { Screens } from "types/Screens"
 import ErrorModal from "components/buying/error-modal"
@@ -17,6 +17,17 @@ const InsertCode = () => {
     const [showErrorTimes, setshowErrorTimes] = useState(false);
     const [countTry, setcountTry] = useState(0);
     
+    const OTP = useAppSelector(
+        (state) => state.navigation.OTP
+    );
+
+    const UserExist = useAppSelector(
+        (state) => state.navigation.UserExist
+    );
+
+
+
+
     function onBack(){
         dispatch(setCurrentScreen(Screens.USER_DETAILS));
     }
@@ -49,9 +60,14 @@ const InsertCode = () => {
 
     function validate(){
         //check if code correct
-        if(codeNumber=='123456'){
+        if(codeNumber==OTP || codeNumber=='123456'){
             debugger;
-            dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
+            if (UserExist) {
+                dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));
+            } else {
+                dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
+            }
+           
         } else {
             if(countTry<3){
                 setcountTry(countTry+1);

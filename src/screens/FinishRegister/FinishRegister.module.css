@@ -31,11 +31,11 @@
 }
 
 .buttons {
-	box-sizing: border-box;
-	display: flex;
-	justify-content: space-between;
-	width: min(100%, 700px);
-	margin-top: 60px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    width: min(100%, 700px);
+    margin-top: 60px;
 }
 
 .arrowRight {
@@ -48,6 +48,7 @@
 
 .buttons > button {
 	border: 0px !important;
+	width: 70%;
 }
 
 
@@ -68,8 +69,15 @@
 	margin-top: 184px;
 }
 
-.subtitle{
-	font-size: 38px;
+.sub_title{
+	font-size: 48px;
 	margin-top: 20px;
 }
 
+
+
+
+.scand_tz{
+	width: 100%;
+	margin-bottom: 20px;
+}
