@@ -66,7 +66,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 
 		let id_to_request = (documentType=="darkon"? darkon :teudatZehot );
 		  
-		let params = "fName="+firstName+"&lName="+lastName +"&email="+email+"&personalId="+id_to_request+"&phoneNumber="+phone_num_international+"&documentType="+documentType; //+"&photo="+userImage ;
+	//	let params = "fName="+firstName+"&lName="+lastName +"&email="+email+"&personalId="+id_to_request+"&phoneNumber="+phone_num_international+"&documentType="+documentType; //+"&photo="+userImage ;
 		
 		// let params_to_post={
 		// 	fName : firstName,
@@ -78,13 +78,19 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 		// 	photo : userImage
 		// }
 		
+		var formData = new FormData();
+		formData.append('fName', firstName);
+		formData.append('lName', lastName);
+		formData.append('email', email);
+		formData.append('personalId', id_to_request);
+		formData.append('phoneNumber', phone_num_international);
+		formData.append('documentType', documentType);
+		formData.append('photo', userImage);
+
 		await axios({
-            url: "http://18.219.223.53/kiosk_stage/register.php?"+params,
+            url: "http://18.219.223.53/kiosk_stage/register.php",
             method: "POST",
-		//	data: params_to_post,
-			headers: {
-				'Content-Type': 'application/json'
-			}
+			data: formData,
         }).then((res:any) => {
 
 			if (res.data.error_code==0) {
