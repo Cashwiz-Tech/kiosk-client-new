@@ -10,6 +10,7 @@ import {setCurrentScreen, setOTP, setPhoneNum, setUserExist } from "store/naviga
 import { useAppDispatch } from "store/store"
 import axios from "axios";
 import { Screens } from "types/Screens"
+import { setIDNum } from "store/registerSlice"
 
 type Props = {
 	onNext: (phoneNumber: string) => void
@@ -68,16 +69,20 @@ export default function UserDetails({ onNext, onBack }: Props) {
     }
 
     async function store_phone_number(){
+		debugger;
+		let phone_num=phoneNumber.trim();
+		phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
 
-		let phone_num_international = israel_prefix + phoneNumber.substring(1);
+		let phone_num_international = israel_prefix + phone_num.substring(1);
+
 
 		await axios({
-            url: "http://18.219.223.53/kiosk_stage/send_otp_exist.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
+            url: "http://18.219.223.53/kiosk_stage/check_user.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
             method: "GET",
 			headers: {
 				'Content-Type': 'application/json'
 			}
-        }).then((res:any) => {
+        }).then(async (res:any) => {
 			debugger;
 
 			dispatch(setPhoneNum(phoneNumber));
@@ -85,10 +90,30 @@ export default function UserDetails({ onNext, onBack }: Props) {
 			if (res.data.error_code==0) {
 				
 				dispatch(setUserExist(true));
-				dispatch(setOTP(res.data.otp));
+				// dispatch(setOTP(res.data.otp));
 				dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
+				dispatch(setIDNum(identityNumber));
 			} else if (res.data.error_code==504) { // custumer not found
-				onNext(phoneNumber); 
+				debugger;
+				dispatch(setUserExist(false));
+				await axios({
+					url: "http://18.219.223.53/kiosk_stage//send_otp_new.php?phoneNumber="+phone_num_international,
+					method: "GET",
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}).then((res_1:any) => {
+					debugger;
+
+					if (res_1.data.error_code==0){
+						
+						dispatch(setOTP(res_1.data.otp));
+				
+						onNext(phoneNumber); 
+					} 
+
+				}).catch((err:any) => {});
+
 			}
 			
 		})

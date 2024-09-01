@@ -48,26 +48,45 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 		(state) => state.navigation.phoneNum
 	);
 
+
+	const userImage = useAppSelector(
+		(state) => state.register.UserImage
+	);
+
+	
 	async function go_to_next_page(){
 	
 		let firstName=fullName.split(' ')[0];
 		let lastName=fullName.split(' ')[1];
 
+		let phone_num=phoneNumber.trim();
+		phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
 
-		let phone_num_international = israel_prefix + phoneNumber.substring(1);
+		let phone_num_international = israel_prefix + phone_num.substring(1);
 
 		let id_to_request = (documentType=="darkon"? darkon :teudatZehot );
 		  
-		let params = "fName="+firstName+"&lName="+lastName +"&email="+email+"&personalId="+id_to_request+"&phoneNumber="+phone_num_international+"&documentType="+documentType ;
+		let params = "fName="+firstName+"&lName="+lastName +"&email="+email+"&personalId="+id_to_request+"&phoneNumber="+phone_num_international+"&documentType="+documentType; //+"&photo="+userImage ;
+		
+		// let params_to_post={
+		// 	fName : firstName,
+		// 	lName : lastName,
+		// 	email : email,
+		// 	personalId : id_to_request,
+		// 	phoneNumber : phone_num_international,
+		// 	documentType : documentType,
+		// 	photo : userImage
+		// }
 		
 		await axios({
             url: "http://18.219.223.53/kiosk_stage/register.php?"+params,
-            method: "GET",
+            method: "POST",
+		//	data: params_to_post,
 			headers: {
 				'Content-Type': 'application/json'
 			}
         }).then((res:any) => {
-			debugger;
+
 			if (res.data.error_code==0) {
 				onNext()
 			} else {
@@ -86,7 +105,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 			
 				
 				<img src={scand_tz} className={styles.scand_tz}/>
-				<img src={scan_face} className={styles.scand_tz}/>
+				<img src={userImage} className={styles.scand_tz}/>
 				
 				
 				{show_error? <p className={styles.error}> {show_error} </p>: <></>}

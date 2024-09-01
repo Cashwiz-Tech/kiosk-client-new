@@ -6,7 +6,7 @@ import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./SendOTPExisted.module.css"
-import {setCurrentScreen, setOTP, setPhoneNum } from "store/navigationSlice"
+import {setCurrentScreen, setOTP, setPhoneNum, setUserExist } from "store/navigationSlice"
 import { useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 import { Screens } from "types/Screens"
@@ -19,25 +19,54 @@ type Props = {
 export default function SendOTPExisted({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
 	const [phoneNumber, setPhoneNumber] = useState<string>("")
-    const [identityNumber, setidentityNumber] = useState("")
+   // const [identityNumber, setidentityNumber] = useState("")
 	const [errorMessage, setErrorMessage] = useState("")
     const [errorMessageIdentity, seterrorMessageIdentity] = useState("")
 	const [isVisited, setIsVisited] = useState(false)
 	const [isVisitedID, setisVisitedID] = useState(false)
+    const [israel_prefix, setisrael_prefix] = useState('+972')
 
 	const phoneNum = useAppSelector(
 		(state) => state.navigation.phoneNum
-	  );
-	  
+	);
 
-	  function not_my_num(){
+	const identityNumber = useAppSelector(
+		(state) => state.register.IDNum
+	);
+
+	function not_my_num(){
 		debugger;;
 		dispatch(setCurrentScreen(Screens.NOT_MY_NUM));
-	  }
+	}
 
-	  
-	  function send_code(){
-		dispatch(setCurrentScreen(Screens.INSERT_CODE));
+	async function send_code(){
+
+		let phone_num=phoneNum.trim();
+		phone_num=phoneNum.slice(0,3)+phoneNum.slice(4,11);
+
+		let phone_num_international = israel_prefix + phone_num.substring(1);
+
+		await axios({
+            url: "http://18.219.223.53/kiosk_stage/send_otp_exist.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
+            method: "GET",
+			headers: {
+				'Content-Type': 'application/json'
+			}
+        }).then((res:any) => {
+
+			dispatch(setPhoneNum(phoneNumber));
+
+			if (res.data.error_code==0) {
+				dispatch(setOTP(res.data.otp));
+				dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
+				dispatch(setCurrentScreen(Screens.INSERT_CODE));
+			} else if (res.data.error_code==504) { // custumer not found
+				onNext(phoneNumber); 
+			}
+			
+		})
+		.catch((err:any) => {});
+
 	  }
 
 	  function voice_code(){
@@ -53,8 +82,6 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 				<div className={styles.code_place}>
 					<p className={styles.phone_to_send}> {phoneNum[0]+phoneNum[1]+phoneNum[2]+'****'+phoneNum[9]+phoneNum[10]} </p>
 				</div>
-
-			
 
 			</div>
 

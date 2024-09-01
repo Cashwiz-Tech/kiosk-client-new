@@ -84,6 +84,7 @@ const InsertCode = () => {
 
     }
 
+
     return (
         <div className={styles.container}>
         <div className={styles.content}>
@@ -91,12 +92,12 @@ const InsertCode = () => {
             <div className={styles.phoneInput}>
 
                 <div className={styles.code_place}> 
-                    <input type="text"  className={styles.code_small_input} value={codeNumber[0]?codeNumber[0]:''}/>
-                    <input type="text"  className={styles.code_small_input} value={codeNumber[1]?codeNumber[1]:''}/>
-                    <input type="text"  className={styles.code_small_input} value={codeNumber[2]?codeNumber[2]:''}/>
-                    <input type="text"  className={styles.code_small_input} value={codeNumber[3]?codeNumber[3]:''}/>
-                    <input type="text"  className={styles.code_small_input} value={codeNumber[4]?codeNumber[4]:''}/>
-                    <input type="text"  className={styles.code_small_input} value={codeNumber[5]?codeNumber[5]:''}/>
+                    <input type="text"  className={styles.code_small_input} value={codeNumber[0]?codeNumber[0]:''} />
+                    <input type="text"  className={styles.code_small_input} value={codeNumber[1]?codeNumber[1]:''} />
+                    <input type="text"  className={styles.code_small_input} value={codeNumber[2]?codeNumber[2]:''} />
+                    <input type="text"  className={styles.code_small_input} value={codeNumber[3]?codeNumber[3]:''} />
+                    <input type="text"  className={styles.code_small_input} value={codeNumber[4]?codeNumber[4]:''} />
+                    <input type="text"  className={styles.code_small_input} value={codeNumber[5]?codeNumber[5]:''} />
                 </div>
 
                 <p className={styles.no_code}> לא קיבלת קוד? </p>   
