@@ -18,7 +18,7 @@ export default function NumericKeypad({ setValue, cancel_caracter }: Props) {
 						{idx + 1}
 					</div>
 				))}
-				<div  onClick={() => setValue("+")}>
+				<div  onClick={() => setValue("")}>
 					<div className={styles.approve}>
 						<img src={approve} />
 					</div>

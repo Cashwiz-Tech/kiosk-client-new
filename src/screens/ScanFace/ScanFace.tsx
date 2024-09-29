@@ -23,10 +23,15 @@ type Props = {
 
 export default function ScanFace({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
+	const FACING_MODE_USER = "user";
+	const FACING_MODE_ENVIRONMENT = "environment";
+	  
+	const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+
 	const videoConstraints = {
-		width: 1080,
-		height: 720,
-		facingMode: "user"
+		// width: 1080,
+		// height: 720,
+		facingMode: facingMode
 	  };
 
 	  const webcamRef = useRef(null);
@@ -53,13 +58,14 @@ export default function ScanFace({ onNext, onBack }: Props) {
 
 				<div className={styles.webcam_cont}>
 					<Webcam
+		
 						audio={false}
-						height={720}
 						ref={webcamRef}
 						screenshotFormat="image/jpeg"
-						width={1080}
-						videoConstraints={videoConstraints}
-						
+						videoConstraints={{
+						...videoConstraints,
+						facingMode
+						}}
 					/>
 				
 				</div>

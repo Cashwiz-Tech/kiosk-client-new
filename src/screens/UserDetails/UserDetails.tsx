@@ -28,34 +28,46 @@ export default function UserDetails({ onNext, onBack }: Props) {
 
     const [focusisVisitedID, setfocusisVisitedID] = useState(true)
 
-    const [israel_prefix, setisrael_prefix] = useState('+972')
+    const [israel_prefix, setisrael_prefix] = useState('972')
 	
 	const validate = (v: string) => {
-		setIsVisited(true);
 
-		if (v.length !== 11) {
-			setErrorMessage("מספר הטלפון אינו תקין")
-		} else {
-			setErrorMessage("")
+		let num = v;
+
+		if (String(num).trim().length>1) {
+			setIsVisited(true);
+
+			if ( num.includes("-")) {
+				num = num.slice(0, 3) + num.slice(4, num.length)
+			}
+
+			if (num.length !== 10 || num[0]!="0") {
+				setErrorMessage("מספר הטלפון אינו תקין")
+			} else {
+				setErrorMessage("")
+			}
 		}
 	}
 
     const validateId = (id: string) => {
 
-		setisVisitedID(true);
-
         var id = id.trim();
-  
-        if (id.length ==9 && Array
-                .from(id, Number)
-                  .reduce((counter, digit, i) => {
-                    const step = digit * ((i % 2) + 1);
-                            return counter + (step > 9 ? step - 9 : step);
-                        }) % 10 === 0) {
-                            seterrorMessageIdentity("")
-                        } else {
-                            seterrorMessageIdentity("מספר הת.ז אינו תקין")
-                        }
+
+		if (String(id).trim().length>1) {
+			setisVisitedID(true);
+
+			if (id.length ==9 && Array
+					.from(id, Number)
+					.reduce((counter, digit, i) => {
+						const step = digit * ((i % 2) + 1);
+								return counter + (step > 9 ? step - 9 : step);
+							}) % 10 === 0) {
+								seterrorMessageIdentity("")
+							} else {
+								seterrorMessageIdentity("מספר הת.ז אינו תקין")
+							}
+					
+						}
 	}
 
 	function cancel_caracter(){
@@ -69,21 +81,25 @@ export default function UserDetails({ onNext, onBack }: Props) {
     }
 
     async function store_phone_number(){
-		debugger;
+	
 		let phone_num=phoneNumber.trim();
-		phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
+
+		if ( phone_num.includes("-")) {
+			phone_num = phone_num.slice(0, 3) + phone_num.slice(4, phone_num.length)
+		}
+
+		//phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
 
 		let phone_num_international = israel_prefix + phone_num.substring(1);
 
-
 		await axios({
-            url: "http://18.219.223.53/kiosk_stage/check_user.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
+            url: "https://backend.no1currency.co.il/kiosk_stage/check_user.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
             method: "GET",
 			headers: {
 				'Content-Type': 'application/json'
 			}
         }).then(async (res:any) => {
-			debugger;
+		
 
 			dispatch(setPhoneNum(phoneNumber));
 
@@ -94,16 +110,16 @@ export default function UserDetails({ onNext, onBack }: Props) {
 				dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
 				dispatch(setIDNum(identityNumber));
 			} else if (res.data.error_code==504) { // custumer not found
-				debugger;
+			
 				dispatch(setUserExist(false));
 				await axios({
-					url: "http://18.219.223.53/kiosk_stage//send_otp_new.php?phoneNumber="+phone_num_international,
+					url: "https://backend.no1currency.co.il/kiosk_stage//send_otp_new.php?phoneNumber="+phone_num_international,
 					method: "GET",
 					headers: {
 						'Content-Type': 'application/json'
 					}
 				}).then((res_1:any) => {
-					debugger;
+				
 
 					if (res_1.data.error_code==0){
 						

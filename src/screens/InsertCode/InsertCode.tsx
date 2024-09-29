@@ -61,7 +61,7 @@ const InsertCode = () => {
     function validate(){
         //check if code correct
         if(codeNumber==OTP || codeNumber=='123456'){
-            debugger;
+      
             if (UserExist) {
                 dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));
             } else {

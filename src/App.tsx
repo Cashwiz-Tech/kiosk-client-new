@@ -8,7 +8,6 @@ import { store } from "store/store";
 function App() {
   const [show, setShow] = useState(false);
   function setShow_func(){
-    debugger;
     setShow(true);
   }
   return (

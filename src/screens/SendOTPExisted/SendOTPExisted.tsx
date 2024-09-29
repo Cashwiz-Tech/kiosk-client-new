@@ -24,7 +24,7 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
     const [errorMessageIdentity, seterrorMessageIdentity] = useState("")
 	const [isVisited, setIsVisited] = useState(false)
 	const [isVisitedID, setisVisitedID] = useState(false)
-    const [israel_prefix, setisrael_prefix] = useState('+972')
+    const [israel_prefix, setisrael_prefix] = useState('972')
 
 	const phoneNum = useAppSelector(
 		(state) => state.navigation.phoneNum
@@ -35,19 +35,24 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 	);
 
 	function not_my_num(){
-		debugger;;
+
 		dispatch(setCurrentScreen(Screens.NOT_MY_NUM));
 	}
 
 	async function send_code(){
 
 		let phone_num=phoneNum.trim();
-		phone_num=phoneNum.slice(0,3)+phoneNum.slice(4,11);
+		//phone_num=phoneNum.slice(0,3)+phoneNum.slice(4,11);
+
+		if ( phone_num.includes("-")) {
+			phone_num = phone_num.slice(0, 3) + phone_num.slice(4, phone_num.length)
+		}
+
 
 		let phone_num_international = israel_prefix + phone_num.substring(1);
 
 		await axios({
-            url: "http://18.219.223.53/kiosk_stage/send_otp_exist.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
+            url: "https://backend.no1currency.co.il/kiosk_stage/send_otp_exist.php?personalId="+identityNumber+"&phoneNumber="+phone_num_international,
             method: "GET",
 			headers: {
 				'Content-Type': 'application/json'
@@ -80,7 +85,7 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 				<p className={styles.subtitle}> הקוד ישלח לנייד שמסתיים: </p>
 
 				<div className={styles.code_place}>
-					<p className={styles.phone_to_send}> {phoneNum[0]+phoneNum[1]+phoneNum[2]+'****'+phoneNum[9]+phoneNum[10]} </p>
+					<p className={styles.phone_to_send}> {phoneNum[0]+phoneNum[1]+phoneNum[2]+'****'+phoneNum[8]+phoneNum[9]} </p>
 				</div>
 
 			</div>

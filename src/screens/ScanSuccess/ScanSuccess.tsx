@@ -7,7 +7,7 @@ import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./ScanSuccess.module.css"
 import {setPhoneNum } from "store/navigationSlice"
-import { useAppDispatch } from "store/store"
+import { useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import scand_tz from '../../assets/scand_tz.png'
@@ -19,14 +19,18 @@ type Props = {
 export default function ScanSuccess({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
    
+	const UserDoc = useAppSelector(
+		(state) => state.register.UserDoc
+	);
+	
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> הסריקה בוצעה בהצלחה </h3>
 			
 			
-				<img src={scand_tz} className={styles.scand_tz}/>
-			
+				{/* <img src={scand_tz} className={styles.scand_tz}/> */}
+				<img src={UserDoc} className={styles.scand_tz}/>
 				
 			</div>
 			<div className={styles.buttons}>

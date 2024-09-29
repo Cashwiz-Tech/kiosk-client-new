@@ -95,6 +95,7 @@ export default function DocumentType({ onNext, onBack }: Props) {
 
 
 	function validateDate(){
+		if (date_birth_val.length>1) {
 			setisVisitedDate(true);
 			if (date_birth_val.length==8) {
 				seterrorMessageBDay('');
@@ -103,6 +104,7 @@ export default function DocumentType({ onNext, onBack }: Props) {
 				seterrorMessageBDay('תאריך לידה לא תקין');
 				setdate_birth_valid(false);
 			}
+		}
 		
 	}
 
@@ -156,7 +158,7 @@ export default function DocumentType({ onNext, onBack }: Props) {
 				   }
 
 				   <p className={styles.birth_date_title}> תאריך לידה </p>
-				   <div className={styles.date_birth + (date_birth_valid ? ' '+ styles.date_valid : ' ' + styles.date_notvalid)}> 
+				   <div className={styles.date_birth + (date_birth_valid && isVisitedDate ? ' '+ styles.date_valid : (isVisitedDate ? ' ' + styles.date_notvalid : ''))}> 
 				   		<input type="text"  className={styles.date_birth_input} value={date_birth_val[0]?date_birth_val[0]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[1]?date_birth_val[1]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
 						<span  className={styles.date_birth_sep}> / </span>
@@ -167,7 +169,7 @@ export default function DocumentType({ onNext, onBack }: Props) {
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[5]?date_birth_val[5]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[6]?date_birth_val[6]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
 						<input type="text"  className={styles.date_birth_input} value={date_birth_val[7]?date_birth_val[7]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
-						{errorMessageBDay==''?<div className={styles.successIcon}>
+						{errorMessageBDay=='' && isVisitedDate?<div className={styles.successIcon}>
 							<SuccessSVG />
 						</div>:''}
 				   </div>

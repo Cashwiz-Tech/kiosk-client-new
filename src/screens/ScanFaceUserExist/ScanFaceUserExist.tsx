@@ -14,17 +14,25 @@ import scan_face from '../../assets/scan_face.png'
 import Webcam from "react-webcam";
 import { setUserImage } from "store/registerSlice"
 
+
 type Props = {
 	onNext: () => void
 	onBack: () => void
 }
 
 export default function ScanFaceUserExist({ onNext, onBack }: Props) {
+
+	const FACING_MODE_USER = "user";
+	const FACING_MODE_ENVIRONMENT = "environment";
+	  
+	const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+
+
 	const dispatch = useAppDispatch();
 	const videoConstraints = {
-		width: 1080,
-		height: 720,
-		facingMode: "user"
+		// width: 1080,
+		// height: 720,
+		facingMode: facingMode
 	  };
 
 	  const webcamRef = useRef(null);
@@ -51,7 +59,7 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 				{/* <img src={scan_face} className={styles.scand_tz}/> */}
 
 				<div className={styles.webcam_cont}>
-					<Webcam
+					{/* <Webcam
 						audio={false}
 						height={720}
 						ref={webcamRef}
@@ -59,7 +67,18 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 						width={1080}
 						videoConstraints={videoConstraints}
 						
-					/>
+					/> */}
+
+
+				<Webcam
+						audio={false}
+						ref={webcamRef}
+						screenshotFormat="image/jpeg"
+						videoConstraints={{
+						...videoConstraints,
+						facingMode
+						}}
+				/>
 				
 				</div>
 			</div>

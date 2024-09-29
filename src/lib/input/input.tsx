@@ -27,6 +27,7 @@ export default function Input({ value, setValue, placeholder, label, errorMessag
 		if (type === "phoneNumber" || value.length > 10) {
 			const val = value.replace(/\D/g, "").slice(0, 10)
 			setValue(val)
+			
 			val.length === 10 && validate && validate(value)
 		} else if (type === "identityNumber" || value.length > 9) {
 			const val = value.replace(/\D/g, "").slice(0, 9)

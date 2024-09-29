@@ -20,7 +20,7 @@ type Props = {
 
 export default function FinalFaceDoc({ onNext, onBack }: Props) {
 
-	const [israel_prefix, setisrael_prefix] = useState('+972')
+	const [israel_prefix, setisrael_prefix] = useState('972')
 	const [show_error, setshow_error] = useState('')
 
 	const fullName = useAppSelector(
@@ -53,6 +53,10 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 		(state) => state.register.UserImage
 	);
 
+	const UserDoc = useAppSelector(
+		(state) => state.register.UserDoc
+	);
+
 	
 	async function go_to_next_page(){
 	
@@ -60,7 +64,10 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 		let lastName=fullName.split(' ')[1];
 
 		let phone_num=phoneNumber.trim();
-		phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
+		
+		if ( phone_num.includes("-")) {
+			phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
+		}
 
 		let phone_num_international = israel_prefix + phone_num.substring(1);
 
@@ -88,7 +95,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 		formData.append('photo', userImage);
 
 		await axios({
-            url: "http://18.219.223.53/kiosk_stage/register.php",
+            url: "https://backend.no1currency.co.il/kiosk_stage/register.php",
             method: "POST",
 			data: formData,
         }).then((res:any) => {
@@ -110,7 +117,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 				<h3 className={styles.title}> תעודה מזהה ותצלום פנים</h3>
 			
 				
-				<img src={scand_tz} className={styles.scand_tz}/>
+				<img src={UserDoc} className={styles.scand_tz}/>
 				<img src={userImage} className={styles.scand_tz}/>
 				
 				

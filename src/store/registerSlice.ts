@@ -8,7 +8,8 @@ interface RegisterSlice {
   DBirth: string;
   documentType: string;
   DocImage: string;
-  UserImage: string
+  UserImage: string;
+  UserDoc: string;
 }
 
 const initialState: RegisterSlice = {
@@ -20,8 +21,8 @@ const initialState: RegisterSlice = {
   DBirth: "",
   documentType: "",
   DocImage: "",
-  UserImage: ""
-
+  UserImage: "",
+  UserDoc: ""
 };
 
 export const registerSlice = createSlice({
@@ -58,8 +59,11 @@ export const registerSlice = createSlice({
     setUserImage: (state, action: PayloadAction<string>) => {
       state.UserImage = action.payload;
     },
+    setUserDoc: (state, action: PayloadAction<string>) => {
+      state.UserDoc = action.payload;
+    },
   },
 });
 
-export const { setFullName ,setEmail,setIDNum,setDarkonNum,setDBirth,setdocumentType,setDocImage,setUserImage} = registerSlice.actions;
+export const { setFullName ,setEmail,setIDNum,setDarkonNum,setDBirth,setdocumentType,setDocImage,setUserImage,setUserDoc} = registerSlice.actions;
 export default registerSlice.reducer;
