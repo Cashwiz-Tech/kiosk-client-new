@@ -1,7 +1,10 @@
 import { GetPaymentsDetailsResponse } from "types/Payments";
 import { baseUrl } from "./config";
 
-export const getPaymentsDetails = async (numberOfPayments: number) => {
+export const getPaymentsDetails = async (
+  numberOfPayments: number,
+  partnerId?: string
+) => {
   try {
     const data: GetPaymentsDetailsResponse = await fetch(
       baseUrl + "/payments-details",
@@ -10,7 +13,10 @@ export const getPaymentsDetails = async (numberOfPayments: number) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ numberOfPayments }),
+        body: JSON.stringify({
+          numberOfPayments,
+          partnerId: partnerId ? Number(partnerId) : partnerId,
+        }),
       }
     ).then((res) => res.json());
     return data;

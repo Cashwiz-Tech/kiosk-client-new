@@ -3,12 +3,14 @@ import PaymentsButton from "../../PaymentsButton/PaymentsButton";
 import { setPayments, setPercentageProfit } from "store/paymentsSlice";
 import "./currency-summary.css";
 import { getPaymentsDetails } from "api/paymentsApi";
+import { useParams } from "react-router-dom";
 
 interface CurrencySummaryProps {
   type: "SELECT_PAYMENTS" | "PAYMENTS_SUMMARY";
 }
 
 const CurrencySummary = ({ type }: CurrencySummaryProps) => {
+  const params = useParams();
   const dispatch = useAppDispatch();
   const selectedPayments = useAppSelector(
     (state) => state.payments.selectedPayments
@@ -30,7 +32,10 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
       direction === "DEC"
         ? dispatch(setPayments(value))
         : dispatch(setPayments(value));
-      const paymentsDetails = await getPaymentsDetails(value);
+      const paymentsDetails = await getPaymentsDetails(
+        value,
+        params?.partnerId
+      );
 
       if (!paymentsDetails) {
         return;

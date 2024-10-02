@@ -10,17 +10,19 @@ import { Screens } from "types/Screens";
 import { getCurrencyExchangeRate } from "api/currencyApi";
 import { getPaymentsDetails } from "api/paymentsApi";
 import { setPayments, setPercentageProfit } from "store/paymentsSlice";
+import { useParams } from "react-router-dom";
 
 interface CurrencyBoxProps {
   currency: PossibleCurrencies;
 }
 
 const CurrencyBox = ({ currency }: CurrencyBoxProps) => {
+  const params = useParams();
   const dispatch = useAppDispatch();
   const chooseCurrency = async () => {
     try {
       const exchangeRate = await getCurrencyExchangeRate(currency);
-      const paymentsDetails = await getPaymentsDetails(1);
+      const paymentsDetails = await getPaymentsDetails(1, params?.partnerId);
       if (!exchangeRate || !paymentsDetails) {
         return;
       }

@@ -4,17 +4,25 @@ import "./App.css";
 import MainLayout from "./layouts/main-layout/main-layout";
 import { Provider } from "react-redux";
 import { store } from "store/store";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [show, setShow] = useState(false);
-  function setShow_func(){
+  function setShow_func() {
     setShow(true);
   }
   return (
     <Provider store={store}>
       <div className="App">
         <MainLayout setShow={setShow_func}>
-          <Buying show={show} setShow={setShow} />
+          <Router>
+            <Routes>
+              <Route
+                path="/:partnerId"
+                element={<Buying show={show} setShow={setShow} />}
+              />
+            </Routes>
+          </Router>
         </MainLayout>
       </div>
     </Provider>
