@@ -5,16 +5,15 @@ interface NavigationState {
   currentScreen: Screens;
   phoneNum: string;
   OTP: string;
-  UserExist: boolean
+  UserExist: boolean;
 }
 
 const initialState: NavigationState = {
- // currentScreen: Screens.CHOOSE_CURRENCY,
-   currentScreen: Screens.WELCOME_SCREEN,
-   phoneNum: "",
-   OTP: "",
-   UserExist: false
-
+  // currentScreen: Screens.CHOOSE_CURRENCY,
+  currentScreen: Screens.WELCOME_SCREEN,
+  phoneNum: "",
+  OTP: "",
+  UserExist: false,
 };
 
 export const navigationSlice = createSlice({
@@ -33,9 +32,9 @@ export const navigationSlice = createSlice({
     setUserExist: (state, action: PayloadAction<boolean>) => {
       state.UserExist = action.payload;
     },
-
   },
 });
 
-export const { setCurrentScreen ,setPhoneNum, setOTP,setUserExist} = navigationSlice.actions;
+export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist } =
+  navigationSlice.actions;
 export default navigationSlice.reducer;

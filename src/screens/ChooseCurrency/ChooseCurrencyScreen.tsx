@@ -8,15 +8,13 @@ import { Screens } from "types/Screens";
 
 const possibleCurrencies: PossibleCurrencies[] = ["USD", "EUR"];
 
-
 const ChooseCurrencyScreen = () => {
-
   const dispatch = useAppDispatch();
   const currenciesElements = possibleCurrencies.map((currency) => (
-    <CurrencyBox currency={currency} />
+    <CurrencyBox key={currency} currency={currency} />
   ));
 
-  function cancel_btn(){
+  function cancel_btn() {
     dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
   }
 
@@ -31,7 +29,9 @@ const ChooseCurrencyScreen = () => {
           style={{
             borderColor: "#fff",
           }}
-          onClick={() => {cancel_btn()}}
+          onClick={() => {
+            cancel_btn();
+          }}
           type="outline"
         >
           <img
