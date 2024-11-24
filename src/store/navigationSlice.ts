@@ -9,7 +9,6 @@ interface NavigationState {
 }
 
 const initialState: NavigationState = {
-  // currentScreen: Screens.CHOOSE_CURRENCY,
   currentScreen: Screens.WELCOME_SCREEN,
   phoneNum: "",
   OTP: "",

@@ -5,13 +5,14 @@ import currencyReducer from "./currencySlice";
 import navigationReducer from "./navigationSlice";
 import paymentsReducer from "./paymentsSlice";
 import registersReducer from "./registerSlice";
+import partnerReducer from "./partnerSlice";
 
 const rootReducer = combineReducers({
   currency: currencyReducer,
   navigation: navigationReducer,
   payments: paymentsReducer,
-  register: registersReducer
-
+  register: registersReducer,
+  partner: partnerReducer,
 });
 
 export const store = configureStore({

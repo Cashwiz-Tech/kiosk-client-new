@@ -1,9 +1,14 @@
 import { useAppDispatch, useAppSelector } from "store/store";
 import PaymentsButton from "../../PaymentsButton/PaymentsButton";
-import { setPayments, setPercentageProfit } from "store/paymentsSlice";
+import {
+  setPayments,
+  setPercentageProfit,
+  setTotalAmount,
+} from "store/paymentsSlice";
 import "./currency-summary.css";
 import { getPaymentsDetails } from "api/paymentsApi";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 interface CurrencySummaryProps {
   type: "SELECT_PAYMENTS" | "PAYMENTS_SUMMARY";
@@ -64,6 +69,10 @@ const CurrencySummary = ({ type }: CurrencySummaryProps) => {
 
   const { baseAmount, intrest } = getTotals();
   const totalAmount = baseAmount + intrest;
+
+  useEffect(() => {
+    dispatch(setTotalAmount(totalAmount));
+  }, []);
 
   return (
     <div className="currency-summary-container">

@@ -5,9 +5,12 @@ import { useAppDispatch, useAppSelector } from "store/store";
 import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
 import { makePayment } from "api/paymentProviderApi";
+import ts from "typescript";
 
 const PaymentScreen = () => {
   const dispatch = useAppDispatch();
+  const partnerData = useAppSelector((state) => state.partner.partnerData);
+  const totalAmount = useAppSelector((state) => state.payments.totalAmount);
   const numberOfPayments = useAppSelector(
     (state) => state.payments.selectedPayments
   );
@@ -23,6 +26,8 @@ const PaymentScreen = () => {
       numberOfPayments,
       amount: selectedCurrencyAmount,
       currency: selectedCurrency,
+      // @ts-ignore
+      pinpadId: partnerData?.data?.partnerData?.pinpadId ?? "",
     }).then((data) => {
       console.log(data);
       if (data.success) {
@@ -37,7 +42,9 @@ const PaymentScreen = () => {
         onClick={() => dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS))} // TODO: Remove in PROD
         className="total-container"
       >
-        <p className="total-container-text">{`סה״כ לתשלום ${"50₪"}`}</p>
+        <p className="total-container-text">{`סה״כ לתשלום ${totalAmount.toFixed(
+          2
+        )}₪`}</p>
       </div>
       <div className="options-container">
         <p className="options-title">לנוחיותך 3 אפשרויות תשלום</p>

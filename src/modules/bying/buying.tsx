@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Payment from "components/buying/payment";
 import PhoneRecording from "components/buying/phone-recording";
 import SuccessPhone from "components/buying/success-phone";
@@ -31,6 +31,9 @@ import FinishRegister from "screens/FinishRegister/FinishRegister";
 import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
 import NotMyNum from "screens/NotMyNum/NotMyNum";
 import ScanFaceUserExist from "screens/ScanFaceUserExist/ScanFaceUserExist";
+import { useParams } from "react-router-dom";
+import { getPartnerData } from "api/partnerApi";
+import { setPartnerData } from "store/partnerSlice";
 
 export default function Buying({
   setShow,
@@ -39,6 +42,8 @@ export default function Buying({
   setShow: (val: boolean) => void;
   show: boolean;
 }) {
+  const params = useParams();
+  const [isLoadingPartnerData, setIsLoadingPartnerData] = useState(false);
   const dispatch = useAppDispatch();
   const currentScreen = useAppSelector(
     (state) => state.navigation.currentScreen
@@ -47,6 +52,28 @@ export default function Buying({
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberContact, setphoneNumberContact] = useState("0527686543");
 
+  useEffect(() => {
+    (async () => {
+      setIsLoadingPartnerData(true);
+      try {
+        const getPartnerDataResponse = await getPartnerData(
+          Number(params?.partnerId) ?? 0
+        );
+
+        if (getPartnerDataResponse) {
+          dispatch(setPartnerData(getPartnerDataResponse));
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoadingPartnerData(false);
+      }
+    })();
+  }, []);
+
+  if (isLoadingPartnerData) {
+    return <></>;
+  }
 
   switch (currentScreen) {
     case Screens.PHONE_RECORDING:
@@ -76,272 +103,294 @@ export default function Buying({
     case Screens.CHOOSE_CURRENCY:
       return <ChooseCurrencyScreen />;
     case Screens.WELCOME_SCREEN:
-        return <>
-        <WelcomeScreen />
-        <ContactModal
-        show={show}
-        setShow={setShow}
-        phoneNumber={phoneNumberContact}
-      /></>;
+      return (
+        <>
+          <WelcomeScreen />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.INSERT_CODE:
-        return <>
-        <InsertCode />
-        <ContactModal
-        show={show}
-        setShow={setShow}
-        phoneNumber={phoneNumberContact}
-        />
-   
-      </>;
+      return (
+        <>
+          <InsertCode />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.CHOOSE_REGISTER_OPTION:
-      return <>
-      <ChooseRegisterOption />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-
-    </>;
-
-
+      return (
+        <>
+          <ChooseRegisterOption />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.QR_REGISTER:
-      return <>
-
-      <QRRegister />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
+      return (
+        <>
+          <QRRegister />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.LINK_REGISTER:
-      return <>
-      <LinkRegister />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
+      return (
+        <>
+          <LinkRegister />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.REGISTER_HERE:
-      return <>
-      <Register 
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
-
-    case Screens.DOCUMENT_TYPE:
-        return <>
-        <DocumentType 
-        onNext={() => {
-          dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
-        }}
-        onBack={() => {
-          dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
-        }}
-        />
-        <ContactModal
-        show={show}
-        setShow={setShow}
-        phoneNumber={phoneNumberContact}
-        />
-    </>;
-
-    case Screens.SCAN_VIDEO:
-      return <>
-      <ScanVideo
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_DOC));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
-
-
-    case Screens.SCAN_DOC:
-      return <>
-      <ScanDoc
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_SUCCESS));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
-
-    case Screens.SCAN_SUCCESS:
-      return <>
-      <ScanSuccess
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_FACE));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_DOC));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
-
-
-    case Screens.SCAN_FACE:
-      return <>
-      <ScanFace
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_SUCCESS));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
-
-      case Screens.SCAN_FACE_USER_EXIST:
-          return <>
-          <ScanFaceUserExist
-          onNext={() => {
-            dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));
-          }}
-          onBack={() => {
-            dispatch(setCurrentScreen(Screens.INSERT_CODE));
-          }}
+      return (
+        <>
+          <Register
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
+            }}
           />
           <ContactModal
-          show={show}
-          setShow={setShow}
-          phoneNumber={phoneNumberContact}
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
           />
-      </>;
+        </>
+      );
+
+    case Screens.DOCUMENT_TYPE:
+      return (
+        <>
+          <DocumentType
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
+
+    case Screens.SCAN_VIDEO:
+      return (
+        <>
+          <ScanVideo
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_DOC));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
+
+    case Screens.SCAN_DOC:
+      return (
+        <>
+          <ScanDoc
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_SUCCESS));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
+
+    case Screens.SCAN_SUCCESS:
+      return (
+        <>
+          <ScanSuccess
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_FACE));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_DOC));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
+
+    case Screens.SCAN_FACE:
+      return (
+        <>
+          <ScanFace
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_SUCCESS));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
+
+    case Screens.SCAN_FACE_USER_EXIST:
+      return (
+        <>
+          <ScanFaceUserExist
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.INSERT_CODE));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.FINAL_FACE_DOC:
-      return <>
-      <FinalFaceDoc
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.FINISH_REGISTER));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.SCAN_FACE));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
+      return (
+        <>
+          <FinalFaceDoc
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.FINISH_REGISTER));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.SCAN_FACE));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.FINISH_REGISTER:
-      return <>
-      <FinishRegister
-      onNext={() => {
-        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
-      }}
-      onBack={() => {
-        dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
-      }}
-      />
-      <ContactModal
-      show={show}
-      setShow={setShow}
-      phoneNumber={phoneNumberContact}
-      />
-    </>;
-
+      return (
+        <>
+          <FinishRegister
+            onNext={() => {
+              dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
     case Screens.USER_DETAILS:
-        return <>
-        <UserDetails 
-        onNext={(phoneNumber: string) => {
-          dispatch(setCurrentScreen(Screens.INSERT_CODE));
-    
-        }}
-        onBack={() => {
-          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
-          setIsShowOnBoarding(false);
-        }}
-        />
-        <ContactModal
-        show={show}
-        setShow={setShow}
-        phoneNumber={phoneNumberContact}
-      /></>;
+      return (
+        <>
+          <UserDetails
+            onNext={(phoneNumber: string) => {
+              dispatch(setCurrentScreen(Screens.INSERT_CODE));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+              setIsShowOnBoarding(false);
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
-      case Screens.SEND_OTP_EXISTED:
-        return <>
-        <SendOTPExisted 
-        onNext={(phoneNumber: string) => {
-          dispatch(setCurrentScreen(Screens.INSERT_CODE));
-    
-        }}
-        onBack={() => {
-          dispatch(setCurrentScreen(Screens.USER_DETAILS));
-          setIsShowOnBoarding(false);
-        }}
-        />
-        <ContactModal
-        show={show}
-        setShow={setShow}
-        phoneNumber={phoneNumberContact}
-      /></>;
+    case Screens.SEND_OTP_EXISTED:
+      return (
+        <>
+          <SendOTPExisted
+            onNext={(phoneNumber: string) => {
+              dispatch(setCurrentScreen(Screens.INSERT_CODE));
+            }}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.USER_DETAILS));
+              setIsShowOnBoarding(false);
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
+    case Screens.NOT_MY_NUM:
+      return (
+        <>
+          <NotMyNum
+            onNext={(phoneNumber: string) => {}}
+            onBack={() => {
+              dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+              setIsShowOnBoarding(false);
+            }}
+          />
+          <ContactModal
+            show={show}
+            setShow={setShow}
+            phoneNumber={phoneNumberContact}
+          />
+        </>
+      );
 
-      case Screens.NOT_MY_NUM:
-        return <>
-        <NotMyNum 
-        onNext={(phoneNumber: string) => {
-
-        }}
-        onBack={() => {
-          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
-          setIsShowOnBoarding(false);
-        }}
-        />
-        <ContactModal
-        show={show}
-        setShow={setShow}
-        phoneNumber={phoneNumberContact}
-      /></>;
-
-      
-
-      
     case Screens.CHOOSE_AMOUNT:
       return <ChooseAmountScreen />;
     case Screens.PAYMENT:
@@ -357,7 +406,7 @@ export default function Buying({
             setStep={(step: Screens) => dispatch(setCurrentScreen(step))}
             setIsShowOnBoarding={setIsShowOnBoarding}
           />
-          
+
           <OnBoarding
             show={isShowOnBoarding}
             setShow={(v) => setIsShowOnBoarding(v)}

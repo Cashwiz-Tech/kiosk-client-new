@@ -1,11 +1,7 @@
-import { PossibleCurrencies } from "types/Currencies";
 import { baseUrl } from "./config";
+import { MakePaymentRequest } from "types/PaymentProvider";
 
-export const makePayment = async (args: {
-  numberOfPayments: number;
-  amount: number;
-  currency: PossibleCurrencies;
-}) => {
+export const makePayment = async (args: MakePaymentRequest) => {
   try {
     const data = fetch(baseUrl + "/make-payment", {
       method: "POST",
