@@ -34,6 +34,5 @@ export const navigationSlice = createSlice({
   },
 });
 
-export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist } =
-  navigationSlice.actions;
+export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist } = navigationSlice.actions;
 export default navigationSlice.reducer;

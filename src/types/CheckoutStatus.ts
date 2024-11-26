@@ -1,0 +1,5 @@
+export enum CheckoutStatus {
+  TECHNICAL_ERROR = "TECHNICAL_ERROR",
+  SUCCESS = "SUCCESS",
+  CREDIT_CARD_ERROR = "CREDIT_CARD_ERROR",
+}

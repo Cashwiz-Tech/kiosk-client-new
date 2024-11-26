@@ -1,11 +1,12 @@
 // store.js
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import checkoutReducer from "./checkoutSlice";
 import currencyReducer from "./currencySlice";
 import navigationReducer from "./navigationSlice";
+import partnerReducer from "./partnerSlice";
 import paymentsReducer from "./paymentsSlice";
 import registersReducer from "./registerSlice";
-import partnerReducer from "./partnerSlice";
 
 const rootReducer = combineReducers({
   currency: currencyReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   payments: paymentsReducer,
   register: registersReducer,
   partner: partnerReducer,
+  checkout: checkoutReducer,
 });
 
 export const store = configureStore({

@@ -24,6 +24,7 @@
 
   gap: 10px;
 }
+
 .bottom-container {
   display: flex;
   align-items: center;
@@ -31,6 +32,8 @@
   font-size: 27px;
   color: #283760;
   gap: 10px;
+  position: relative;
+  top: 50px;
 }
 
 .main-container {

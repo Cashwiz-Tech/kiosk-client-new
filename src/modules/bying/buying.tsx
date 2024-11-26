@@ -1,53 +1,45 @@
-import { useEffect, useState } from "react";
+import { getPartnerData } from "api/partnerApi";
+import { phoneRegister } from "api/phone-register";
+import ContactModal from "components/buying/contact-modal/contact-modal";
+import OnBoarding from "components/buying/on-boarding/on-boarding";
 import Payment from "components/buying/payment";
 import PhoneRecording from "components/buying/phone-recording";
 import SuccessPhone from "components/buying/success-phone";
-import ContactModal from "components/buying/contact-modal/contact-modal";
-import OnBoarding from "components/buying/on-boarding/on-boarding";
-import { phoneRegister } from "api/phone-register";
-import { Screens } from "types/Screens";
-import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
-import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
-import { useAppDispatch, useAppSelector } from "store/store";
-import { setCurrentScreen } from "store/navigationSlice";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import CheckoutFinishScreen from "screens/CheckoutFinishScreen/CheckoutFinishScreen";
 import ChooseAmountScreen from "screens/ChooseAmountScreen/ChooseAmountScreen";
-import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
-import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
-import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
-import UserDetails from "screens/UserDetails/UserDetails";
-import DocumentType from "screens/DocumentType/DocumentType";
-import InsertCode from "screens/InsertCode/InsertCode";
-import ErrorModal from "components/buying/error-modal";
+import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
 import ChooseRegisterOption from "screens/ChooseRegisterOption/ChooseRegisterOption";
-import QRRegister from "screens/QRRegister/QRRegister";
-import LinkRegister from "screens/LinkRegister/LinkRegister";
-import Register from "screens/Register/Register";
-import ScanVideo from "screens/ScanVideo/ScanVideo";
-import ScanDoc from "screens/ScanDoc/ScanDoc";
-import ScanSuccess from "screens/ScanSuccess/ScanSuccess";
-import ScanFace from "screens/ScanFace/ScanFace";
+import DocumentType from "screens/DocumentType/DocumentType";
 import FinalFaceDoc from "screens/FinalFaceDoc/FinalFaceDoc";
 import FinishRegister from "screens/FinishRegister/FinishRegister";
-import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
+import InsertCode from "screens/InsertCode/InsertCode";
+import LinkRegister from "screens/LinkRegister/LinkRegister";
 import NotMyNum from "screens/NotMyNum/NotMyNum";
+import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
+import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
+import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
+import QRRegister from "screens/QRRegister/QRRegister";
+import Register from "screens/Register/Register";
+import ScanDoc from "screens/ScanDoc/ScanDoc";
+import ScanFace from "screens/ScanFace/ScanFace";
 import ScanFaceUserExist from "screens/ScanFaceUserExist/ScanFaceUserExist";
-import { useParams } from "react-router-dom";
-import { getPartnerData } from "api/partnerApi";
+import ScanSuccess from "screens/ScanSuccess/ScanSuccess";
+import ScanVideo from "screens/ScanVideo/ScanVideo";
+import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
+import UserDetails from "screens/UserDetails/UserDetails";
+import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
+import { setCurrentScreen } from "store/navigationSlice";
 import { setPartnerData } from "store/partnerSlice";
+import { useAppDispatch, useAppSelector } from "store/store";
+import { Screens } from "types/Screens";
 
-export default function Buying({
-  setShow,
-  show,
-}: {
-  setShow: (val: boolean) => void;
-  show: boolean;
-}) {
+export default function Buying({ setShow, show }: { setShow: (val: boolean) => void; show: boolean }) {
   const params = useParams();
   const [isLoadingPartnerData, setIsLoadingPartnerData] = useState(false);
   const dispatch = useAppDispatch();
-  const currentScreen = useAppSelector(
-    (state) => state.navigation.currentScreen
-  );
+  const currentScreen = useAppSelector((state) => state.navigation.currentScreen);
   const [isShowOnBoarding, setIsShowOnBoarding] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberContact, setphoneNumberContact] = useState("0527686543");
@@ -56,9 +48,7 @@ export default function Buying({
     (async () => {
       setIsLoadingPartnerData(true);
       try {
-        const getPartnerDataResponse = await getPartnerData(
-          Number(params?.partnerId) ?? 0
-        );
+        const getPartnerDataResponse = await getPartnerData(Number(params?.partnerId) ?? 0);
 
         if (getPartnerDataResponse) {
           dispatch(setPartnerData(getPartnerDataResponse));
@@ -106,11 +96,7 @@ export default function Buying({
       return (
         <>
           <WelcomeScreen />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -118,11 +104,7 @@ export default function Buying({
       return (
         <>
           <InsertCode />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -130,11 +112,7 @@ export default function Buying({
       return (
         <>
           <ChooseRegisterOption />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -142,11 +120,7 @@ export default function Buying({
       return (
         <>
           <QRRegister />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -154,11 +128,7 @@ export default function Buying({
       return (
         <>
           <LinkRegister />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -173,11 +143,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -192,11 +158,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -211,11 +173,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.DOCUMENT_TYPE));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -230,11 +188,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.SCAN_VIDEO));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -249,11 +203,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.SCAN_DOC));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -268,11 +218,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.SCAN_SUCCESS));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -287,11 +233,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.INSERT_CODE));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -306,13 +248,12 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.SCAN_FACE));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
+
+    case Screens.CHECKOUT_FINISH:
+      return <CheckoutFinishScreen />;
 
     case Screens.FINISH_REGISTER:
       return (
@@ -325,11 +266,7 @@ export default function Buying({
               dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -345,11 +282,7 @@ export default function Buying({
               setIsShowOnBoarding(false);
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -365,11 +298,7 @@ export default function Buying({
               setIsShowOnBoarding(false);
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -383,11 +312,7 @@ export default function Buying({
               setIsShowOnBoarding(false);
             }}
           />
-          <ContactModal
-            show={show}
-            setShow={setShow}
-            phoneNumber={phoneNumberContact}
-          />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
 
@@ -402,15 +327,9 @@ export default function Buying({
     default:
       return (
         <>
-          <Payment
-            setStep={(step: Screens) => dispatch(setCurrentScreen(step))}
-            setIsShowOnBoarding={setIsShowOnBoarding}
-          />
+          <Payment setStep={(step: Screens) => dispatch(setCurrentScreen(step))} setIsShowOnBoarding={setIsShowOnBoarding} />
 
-          <OnBoarding
-            show={isShowOnBoarding}
-            setShow={(v) => setIsShowOnBoarding(v)}
-          />
+          <OnBoarding show={isShowOnBoarding} setShow={(v) => setIsShowOnBoarding(v)} />
         </>
       );
   }
