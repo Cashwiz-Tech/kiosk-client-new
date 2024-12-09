@@ -1,7 +1,21 @@
-import "./payment-success-screen.css";
+import { useEffect } from "react";
 import Lottie from "react-lottie";
+import { setCheckoutStatus } from "store/checkoutSlice";
+import { setCurrentScreen } from "store/navigationSlice";
+import { useAppDispatch } from "store/store";
+import { CheckoutStatus } from "types/CheckoutStatus";
+import { Screens } from "types/Screens";
+import "./payment-success-screen.css";
 
 const PaymentSuccessScreen = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setCheckoutStatus(CheckoutStatus.SUCCESS));
+      dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="main-container">
       <div className="header">

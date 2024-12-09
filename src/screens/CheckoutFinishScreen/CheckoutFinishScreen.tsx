@@ -1,10 +1,13 @@
 import Button from "lib/button";
-import { useAppSelector } from "store/store";
+import { setCurrentScreen } from "store/navigationSlice";
+import { useAppDispatch, useAppSelector } from "store/store";
 import { CheckoutStatus } from "types/CheckoutStatus";
+import { Screens } from "types/Screens";
 import "./checkout-finish-screen.css";
 
 const CheckoutFinishScreen = () => {
   const checkoutStatus = useAppSelector((state) => state.checkout.checkoutStatus);
+  const dispatch = useAppDispatch();
 
   const getCheckoutConfig = () => {
     switch (checkoutStatus) {
@@ -74,10 +77,10 @@ const CheckoutFinishScreen = () => {
       {header}
       <img src={icon} className={""} alt="Currency" />
       <div className="checkout-buttons-container">
-        <Button style={{ width: 660 }} type="primary" onClick={() => {}}>
+        <Button style={{ width: 660 }} type="primary" onClick={() => dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY))}>
           אני רוצה לבצע רכישה נוספת
         </Button>
-        <Button style={{ width: 660, border: "none" }} type="outline" onClick={() => {}}>
+        <Button style={{ width: 660, border: "none" }} type="outline" onClick={() => dispatch(setCurrentScreen(Screens.WELCOME_SCREEN))}>
           יציאה מהמערכת
         </Button>
       </div>

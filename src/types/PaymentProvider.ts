@@ -5,4 +5,5 @@ export interface MakePaymentRequest {
   currency: PossibleCurrencies;
   amount: number;
   pinpadId: string;
+  partnerId: number;
 }

@@ -1,17 +1,29 @@
-import { baseUrl } from "./config";
+import axios, { AxiosError } from "axios";
 import { MakePaymentRequest } from "types/PaymentProvider";
+import { baseUrl } from "./config";
 
 export const makePayment = async (args: MakePaymentRequest) => {
   try {
-    const data = fetch(baseUrl + "/make-payment", {
+    const response = await axios.post(baseUrl + "/make-payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(args),
-    }).then((res) => res.json());
-    return data;
+    });
+    return response.data;
   } catch (error) {
-    console.log(error);
+    const errorData = error as AxiosError;
+    if (errorData?.response?.status === 503) {
+      return {
+        success: false,
+        message: "STACK_ERROR",
+      };
+    } else {
+      return {
+        success: false,
+        message: "PAYMENT_ERROR",
+      };
+    }
   }
 };
