@@ -12,6 +12,7 @@ import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import { ReactComponent as SuccessSVG } from "assets/success.svg"
 import { setDarkonNum, setDBirth, setdocumentType, setIDNum } from "store/registerSlice"
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: () => void
@@ -121,6 +122,8 @@ export default function DocumentType({ onNext, onBack }: Props) {
 	}
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> הרשמה לשירות </h3>
@@ -157,22 +160,38 @@ export default function DocumentType({ onNext, onBack }: Props) {
 					/>
 				   }
 
-				   <p className={styles.birth_date_title}> תאריך לידה </p>
+
+
+<p className={styles.birth_date_title}> תאריך לידה </p>
 				   <div className={styles.date_birth + (date_birth_valid && isVisitedDate ? ' '+ styles.date_valid : (isVisitedDate ? ' ' + styles.date_notvalid : ''))}> 
-				   		<input type="text"  className={styles.date_birth_input} value={date_birth_val[0]?date_birth_val[0]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[1]?date_birth_val[1]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<span  className={styles.date_birth_sep}> / </span>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[2]?date_birth_val[2]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[3]?date_birth_val[3]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<span  className={styles.date_birth_sep}> / </span>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[4]?date_birth_val[4]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[5]?date_birth_val[5]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[6]?date_birth_val[6]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
-						<input type="text"  className={styles.date_birth_input} value={date_birth_val[7]?date_birth_val[7]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
+				   <div className={styles.date_birth_img}> </div>
+
+						<div className={styles.date_birth_input_year}>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[7]?date_birth_val[6]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[6]?date_birth_val[6]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[5]?date_birth_val[5]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[4]?date_birth_val[4]:''} onFocus={()=>{setfocusisVisitedID(false)}} />
+							<span className={styles.year_text}>שנה </span>
+						</div>
+
+						<div className={styles.date_birth_input_month}>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[3]?date_birth_val[3]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[2]?date_birth_val[2]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
+							<span className={styles.month_text}>חודש </span>
+						</div>
+
+						<div className={styles.date_birth_input_day}>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[1]?date_birth_val[1]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
+							<input type="text"  className={styles.date_birth_input} value={date_birth_val[0]?date_birth_val[0]:''} onFocus={()=>{setfocusisVisitedID(false)}}/>
+							<span className={styles.day_text}>יום </span>
+						</div>
+						
 						{errorMessageBDay=='' && isVisitedDate?<div className={styles.successIcon}>
 							<SuccessSVG />
 						</div>:''}
 				   </div>
+
+
 				  
 				   {errorMessageBDay?<p className={styles.errorMessage}>{errorMessageBDay}</p>:''}
 
@@ -195,5 +214,6 @@ export default function DocumentType({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

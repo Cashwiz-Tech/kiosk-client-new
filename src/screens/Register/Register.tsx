@@ -11,6 +11,7 @@ import { useAppDispatch } from "store/store"
 
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import { setEmail, setFullName } from "store/registerSlice"
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: () => void
@@ -20,14 +21,14 @@ type Props = {
 export default function Register({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
 
-	const [emailAddress, setemailAddress] = useState<string>("")
+	const [Address, setAddress] = useState<string>("")
 	
     const [userName, setuserName] = useState("")
 	const [errorMessage, setErrorMessage] = useState("")
     const [errorMessageIdentity, seterrorMessageIdentity] = useState("")
 
 	const [isVisitedID, setisVisitedID] = useState(false)
-	const [isVisitedEmail, setisVisitedEmail] = useState(false)
+	const [isVisitedAddress, setisVisitedAddress] = useState(false)
 	
 	const [focusisVisitedID, setfocusisVisitedID] = useState(true)
 	
@@ -45,28 +46,24 @@ export default function Register({ onNext, onBack }: Props) {
 		}
 	}
 
-	function validateEmail(){
+	function validateAdress(){
+		let address =Address.trim();
+		if(address.length>=1 ){
+			setisVisitedAddress(true);
+			if(address.length>=5){
 		
-		let email =emailAddress.trim();
-
-		if(email.length>=1 ){
-			setisVisitedEmail(true);
-
-			if( String(email)
-				.toLowerCase()
-				.match(
-				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-				)){
-					setErrorMessage("")
-				} else {
-					setErrorMessage('כתובת דוא"ל לא תקינה')
-				}
-		}
+				setErrorMessage("")
+			} else {
+				setErrorMessage('יש להכניס כתובת')
+			}
+		} 
+			
+		
 	}
 
 	function cancel_caracter(){
-		let str = emailAddress.substring(0, emailAddress.length - 1);
-		setemailAddress(str)
+		let str = Address.substring(0, Address.length - 1);
+		setAddress(str)
 	}
 
     function cancel_caracter_user(){
@@ -77,12 +74,14 @@ export default function Register({ onNext, onBack }: Props) {
 	function go_to_next_page(){
 
 		dispatch(setFullName(userName));
-		dispatch(setEmail(emailAddress));
+		dispatch(setEmail(Address));
 		
 		onNext();
 	}
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> הרשמה לשירות </h3>
@@ -100,17 +99,17 @@ export default function Register({ onNext, onBack }: Props) {
 					/>
 
 					<Input
-						type="email"
-						value={emailAddress}
-						setValue={(v) => setemailAddress(v)}
-						label="דואל"
+						type="address"
+						value={Address}
+						setValue={(v) => setAddress(v)}
+						label="כתובת (רחוב ומספר, עיר)"
 						errorMessage={errorMessage}
-						isVisited={isVisitedEmail}
-						validate={validateEmail}
+						isVisited={isVisitedAddress}
+						validate={validateAdress}
                         focus_func={()=>{setfocusisVisitedID(false)}} 
 					/>
 
-					{!focusisVisitedID ?<LettersKeypad  setValue={(v:any) => setemailAddress((prev) => prev + v)} cancel_caracter={cancel_caracter}/> :
+					{!focusisVisitedID ?<LettersKeypad  setValue={(v:any) => setAddress((prev) => prev + v)} cancel_caracter={cancel_caracter}/> :
 					<LettersKeypad  setValue={(v:any) => setuserName((prev) => prev + v)} cancel_caracter={cancel_caracter_user}/>}
 
 				</div>
@@ -122,11 +121,12 @@ export default function Register({ onNext, onBack }: Props) {
 					</div>
 					חזרה
 				</Button>
-				<Button onClick={() =>{go_to_next_page();}} disabled={(!!errorMessage || !isVisitedEmail) || (!!errorMessageIdentity || !isVisitedID)}>
+				<Button onClick={() =>{go_to_next_page();}} disabled={(!!errorMessage || !isVisitedAddress) || (!!errorMessageIdentity || !isVisitedID)}>
 					המשך
 					<Arrow />
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

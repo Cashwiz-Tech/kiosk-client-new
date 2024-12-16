@@ -4,6 +4,7 @@ import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch } from "store/store";
 import { Screens } from "types/Screens";
 import styles from "./NotMyNum.module.css";
+import Header from "layouts/header/Header";
 
 type Props = {
   onNext: (phoneNumber: string) => void;
@@ -18,6 +19,8 @@ export default function NotMyNum({ onNext, onBack }: Props) {
   }
 
   return (
+    <>
+		<Header></Header>
     <div className={styles.container}>
       <div className={styles.content}>
         <h3 className={styles.title}> לא זיהית את מס’ הטלפון? ניתן לפנות לשירות לקוחות לבירור או לבצע הרשמה </h3>
@@ -38,5 +41,6 @@ export default function NotMyNum({ onNext, onBack }: Props) {
         <p className={styles.subtitle}> להרשמה דרך שירות הלקוחות שלנו ניתן להתקשר 08-9655656 </p>
       </div>
     </div>
+    </>
   );
 }

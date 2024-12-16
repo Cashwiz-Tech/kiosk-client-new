@@ -10,6 +10,7 @@ import {setPhoneNum } from "store/navigationSlice"
 import { useAppDispatch } from "store/store"
 import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: () => void
@@ -20,6 +21,8 @@ export default function ScanVideo({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
    
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> הצמד את התעודה לסורק </h3>
@@ -42,5 +45,6 @@ export default function ScanVideo({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

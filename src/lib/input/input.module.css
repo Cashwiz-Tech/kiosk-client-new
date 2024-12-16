@@ -87,6 +87,14 @@
 padding-right: 150px;
 }
 
+
+.input.address{
+	background: url("../../assets/adress.png") no-repeat scroll calc(100% - 36px) 40px,
+	url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
+padding-right: 150px;
+}
+
+
 .input.success {
 	border: 1.448px solid var(--yellow, #f8a801);
 }

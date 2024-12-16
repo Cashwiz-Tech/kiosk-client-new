@@ -11,6 +11,7 @@ import { useAppDispatch } from "store/store"
 import axios from "axios";
 import { Screens } from "types/Screens"
 import { setIDNum } from "store/registerSlice"
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: (phoneNumber: string) => void
@@ -138,6 +139,8 @@ export default function UserDetails({ onNext, onBack }: Props) {
     }
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}>על מנת לקבל שירות עליך לבצע זיהוי קצר</h3>
@@ -182,6 +185,7 @@ export default function UserDetails({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }
 

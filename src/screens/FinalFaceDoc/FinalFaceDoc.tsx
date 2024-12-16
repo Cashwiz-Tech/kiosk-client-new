@@ -12,6 +12,7 @@ import axios from "axios";
 
 import scand_tz from '../../assets/scand_tz.png'
 import scan_face from '../../assets/scan_face.png'
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: () => void
@@ -112,6 +113,8 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 	}
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> תעודה מזהה ותצלום פנים</h3>
@@ -136,5 +139,6 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

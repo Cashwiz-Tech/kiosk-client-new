@@ -28,7 +28,7 @@
 
 .children {
 	flex: 1 1 auto;
-	padding: 100px 0;
+	/* padding: 100px 0; */
 }
 
 .children > div {
@@ -40,12 +40,13 @@
 	color: #fff;
     height: -moz-fit-content;
     height: fit-content;
-    background-color: #4f5c7d;
+    background-color: #090041;
     flex-direction: row;
     width: 100%;
     display: flex;
     justify-content: center;
 	gap: 35px;
+	border-top: 1px solid white;
 }
 
 .contacts {
@@ -72,10 +73,17 @@
 	justify-content: center;
 	margin-bottom: 46px;
 	margin-top: 40px;
-	border-right: 1px solid white;
+	/* border-right: 1px solid white; */
     padding-right: 25px;
 }
-
+.settings_icon_cont{
+	width: 40px;
+    height: 40px;
+    background-color: white;
+    margin-top: 65px;
+    padding-top: 10px;
+    border-radius: 6px;
+}
 .stick {
 	font-weight: 100;
 }

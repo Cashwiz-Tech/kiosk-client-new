@@ -7,6 +7,7 @@ import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
 import { useState } from "react";
 import Modal from "lib/modal";
+import Header from "layouts/header/Header";
 
 const OrderSummaryScreen = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ const OrderSummaryScreen = () => {
   };
   return (
     <>
+      <Header></Header>
       <Modal
         show={error}
         setShow={() => setError(false)}

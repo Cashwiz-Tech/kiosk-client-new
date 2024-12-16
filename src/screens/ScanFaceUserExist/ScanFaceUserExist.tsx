@@ -13,6 +13,7 @@ import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import scan_face from '../../assets/scan_face.png'
 import Webcam from "react-webcam";
 import { setUserImage } from "store/registerSlice"
+import Header from "layouts/header/Header"
 
 
 type Props = {
@@ -51,6 +52,8 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 	  }, [webcamRef, setImgSrc]);
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 
 			<div className={styles.content}>
@@ -96,5 +99,6 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

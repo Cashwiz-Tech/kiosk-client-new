@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "store/store"
 import { setCurrentScreen } from "store/navigationSlice"
 import { Screens } from "types/Screens"
 import well_icon from "../../assets/well_icon.png"
+import Header from "layouts/header/Header"
 
 const LinkRegister = () => {
     const dispatch = useAppDispatch();
@@ -20,6 +21,8 @@ const LinkRegister = () => {
 
 
     return (
+        <>
+        <Header></Header>
         <div className={styles.container}>
         <div className={styles.content}>
             <img src={well_icon} />
@@ -37,6 +40,7 @@ const LinkRegister = () => {
         <button className={styles.back_to_main} onClick={()=>back_to_main()}>  למסך הבית </button>
 
     </div>
+    </>
     )
 
 };

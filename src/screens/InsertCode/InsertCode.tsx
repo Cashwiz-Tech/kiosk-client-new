@@ -9,6 +9,7 @@ import { setCurrentScreen } from "store/navigationSlice"
 import { Screens } from "types/Screens"
 import ErrorModal from "components/buying/error-modal"
 import ErrorTimesModal from "components/buying/error-modal-times/error-modal-times"
+import Header from "layouts/header/Header"
 
 const InsertCode = () => {
     const dispatch = useAppDispatch();
@@ -86,6 +87,8 @@ const InsertCode = () => {
 
 
     return (
+        <> 
+        <Header></Header>
         <div className={styles.container}>
         <div className={styles.content}>
             <h3 className={styles.title}> הקלד את הקוד שקיבלת במסרון </h3>
@@ -124,6 +127,8 @@ const InsertCode = () => {
         <ErrorTimesModal show={showErrorTimes}
         setShow={setshowErrorTimes}/>
     </div>
+    </>
+
     )
 
 };

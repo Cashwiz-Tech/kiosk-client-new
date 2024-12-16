@@ -13,6 +13,7 @@ import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import scan_face from '../../assets/scan_face.png'
 import Webcam from "react-webcam";
 import { setUserImage } from "store/registerSlice"
+import Header from "layouts/header/Header"
 
 
 
@@ -26,7 +27,7 @@ export default function ScanFace({ onNext, onBack }: Props) {
 	const FACING_MODE_USER = "user";
 	const FACING_MODE_ENVIRONMENT = "environment";
 	  
-	const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+	const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
 
 	const videoConstraints = {
 		// width: 1080,
@@ -50,6 +51,8 @@ export default function ScanFace({ onNext, onBack }: Props) {
 	  }, [webcamRef, setImgSrc]);
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 
 			<div className={styles.content}>
@@ -85,5 +88,6 @@ export default function ScanFace({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

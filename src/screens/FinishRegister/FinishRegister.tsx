@@ -11,6 +11,7 @@ import { useAppDispatch } from "store/store"
 import axios from "axios";
 
 import well_icon from '../../assets/well_icon.png'
+import Header from "layouts/header/Header"
 
 
 type Props = {
@@ -22,6 +23,8 @@ export default function FinishRegister({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
    
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 
@@ -48,5 +51,6 @@ export default function FinishRegister({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

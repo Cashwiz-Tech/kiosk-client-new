@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "store/store";
 import { CheckoutStatus } from "types/CheckoutStatus";
 import { Screens } from "types/Screens";
 import "./PaymentScreen.css";
+import Header from "layouts/header/Header";
 
 const PaymentScreen = () => {
   const dispatch = useAppDispatch();
@@ -54,6 +55,8 @@ const PaymentScreen = () => {
     makePaymentRequest();
   }, []);
   return (
+    <>
+		<Header></Header>
     <div className="main-container">
       <p className="title">נא להעביר כרטיס</p>
       <div
@@ -96,6 +99,7 @@ const PaymentScreen = () => {
         </Button>
       </div>
     </div>
+    </>
   );
 };
 

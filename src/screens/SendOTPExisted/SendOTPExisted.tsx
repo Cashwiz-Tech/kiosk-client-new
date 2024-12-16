@@ -10,6 +10,7 @@ import {setCurrentScreen, setOTP, setPhoneNum, setUserExist } from "store/naviga
 import { useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 import { Screens } from "types/Screens"
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: (phoneNumber: string) => void
@@ -79,13 +80,15 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 	  }
 
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> קוד אימות ישלח אליך למספר שאתו נרשמת לשירות  </h3>
 				<p className={styles.subtitle}> הקוד ישלח לנייד שמסתיים: </p>
 
 				<div className={styles.code_place}>
-					<p className={styles.phone_to_send}> {phoneNum[0]+phoneNum[1]+phoneNum[2]+'****'+phoneNum[8]+phoneNum[9]} </p>
+				<p className={styles.phone_to_send}> {phoneNum[0]+phoneNum[1]+phoneNum[2]+'****'+phoneNum[8]+phoneNum[9]+(phoneNum[10]?phoneNum[10]: '' )} </p>
 				</div>
 
 			</div>
@@ -118,5 +121,6 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

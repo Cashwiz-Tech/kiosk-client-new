@@ -6,6 +6,7 @@ import { useAppDispatch } from "store/store";
 import { CheckoutStatus } from "types/CheckoutStatus";
 import { Screens } from "types/Screens";
 import "./payment-success-screen.css";
+import Header from "layouts/header/Header";
 
 const PaymentSuccessScreen = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,8 @@ const PaymentSuccessScreen = () => {
     return () => clearTimeout(timer);
   }, []);
   return (
+    <>
+		<Header></Header>
     <div className="main-container">
       <div className="header">
         <p className="title">המתן להוצאת השטרות</p>
@@ -49,6 +52,7 @@ const PaymentSuccessScreen = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

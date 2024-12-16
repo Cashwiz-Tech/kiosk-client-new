@@ -2,7 +2,7 @@
 	width: fit-content;
 	height: fit-content;
 	border-radius: 20px;
-	background: #d5dfed;
+	background: #090041;
 	padding: 76px 0px;
 	width: 117%;
     height: 520px;
@@ -58,42 +58,54 @@
     background-color: white;
     font-size: 38px;
     border-radius: 10px;
-    width: 40px;
+    width: 59px;
     margin-left: 5px;
-	box-shadow: 0px 2px 0px #0000005e;
+    box-shadow: 0px 2px 0px #0000005e;
+    height: 60px;
+    line-height: 60px;
 }
 
 .line{
-	display: flex;
-	flex-direction: row-reverse;
-	margin-bottom: 20px;
-    justify-content: center;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    width: 90%;
+    margin-right: 5%;
+    gap: 5px;
 }
 
 .btn_letter_1{
-	background-color: white;
+    background-color: white;
     font-size: 38px;
     border-radius: 10px;
-    width: 45px;
+    width: 60px;
     margin-left: 5px;
-	box-shadow: 0px 2px 0px #0000005e;
+    box-shadow: 0px 2px 0px #0000005e;
+    height: 60px;
+    line-height: 60px;
 }
 
 .backspace{
-	background-image: url(../../../assets/backspane.png);
-    width: 60px;
-    background-size: 82%;
+	background-image: url(../../../assets/cancel.png);
+	background-size: 62%;
     background-repeat: no-repeat;
-    background-position: 10px;
+    background-position: 12px 7px;
+    background-color: white;
+    border-radius: 10px;
+    width: 68px;
+    margin-left: 5px;
+    box-shadow: 0px 2px 0px #0000005e;
 }
 
 .long_space{
-	background-color: white;
+    background-color: white;
     font-size: 38px;
     border-radius: 10px;
-    width: 75%;
+    width: 100%;
     margin-left: 5px;
-	box-shadow: 0px 2px 0px #0000005e;
+    box-shadow: 0px 2px 0px #0000005e;
+    margin-top: 5px;
 }
 
 .long_space:hover , .btn_letter_1:hover, .btn_letter:hover{

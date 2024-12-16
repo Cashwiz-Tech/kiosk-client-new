@@ -7,6 +7,7 @@ import styles from "./ChooseRegisterOption.module.css"
 import { useAppDispatch } from "store/store"
 import { setCurrentScreen } from "store/navigationSlice"
 import { Screens } from "types/Screens"
+import Header from "layouts/header/Header"
 
 
 const ChooseRegisterOption = () => {
@@ -31,6 +32,8 @@ const ChooseRegisterOption = () => {
     }
 
     return (
+        <>
+        <Header></Header>
         <div className={styles.container}>
         <div className={styles.content}>
             <p className={styles.subtitle}> עליך להרשם תחילה לשירות. <br/>
@@ -55,6 +58,7 @@ const ChooseRegisterOption = () => {
         </div>
 
     </div>
+    </>
     )
 
 };

@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { ReactComponent as Logo } from "assets/logo.svg";
-import { ReactComponent as PowerBy } from "assets/power-by.svg";
+import  PowerBy  from "assets/smart_kiosk_logo.png";
 import styles from "./main-layout.module.css";
-
+import settings_icon from 'assets/settings_icon.png'
 type Props = {
   setShow: (val: boolean) => void;
   children: ReactNode;
@@ -12,7 +12,7 @@ export default function MainLayout({ children, setShow }: Props) {
   return (
     <div className={styles.layout}>
       <header>
-        <div className={styles.logo}>{<Logo />}</div>
+        {/* <div className={styles.logo}>{<Logo />}</div> */}
       </header>
       <div className={styles.children} dir="rtl">
         {children}
@@ -30,9 +30,13 @@ export default function MainLayout({ children, setShow }: Props) {
           <p className={styles.stick + " white-text"}>|</p>
           <p className="white-text">בקרו אותנו באתר: www.cashwis.co.il</p>
         </div>
+       
         <div className={styles.powerBy}>
-          <PowerBy /> :Power by
+          <img src={PowerBy} />
+           :Power by
         </div>
+        
+         <div className={styles.settings_icon_cont}> <img src={settings_icon} /></div>
       </footer>
     </div>
   );

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import scand_tz from '../../assets/scand_tz.png'
+import Header from "layouts/header/Header"
 type Props = {
 	onNext: () => void
 	onBack: () => void
@@ -24,6 +25,8 @@ export default function ScanSuccess({ onNext, onBack }: Props) {
 	);
 	
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> הסריקה בוצעה בהצלחה </h3>
@@ -46,5 +49,7 @@ export default function ScanSuccess({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
+
 	)
 }

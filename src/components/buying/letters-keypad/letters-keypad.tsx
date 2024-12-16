@@ -15,7 +15,7 @@ export default function LettersKeypad({ setValue, cancel_caracter }: Props) {
 		<div className={styles.container}>
 			<div className={styles.line}>
 			
-				<div  className={styles.btn_letter} onClick={() => setValue('@')}> @</div>
+				{/* <div  className={styles.btn_letter} onClick={() => setValue('@')}> @</div> */}
 				<div  className={styles.btn_letter} onClick={() => setValue('1')}> 1</div>
 				<div  className={styles.btn_letter} onClick={() => setValue('2')}> 2</div>
 				<div  className={styles.btn_letter} onClick={() => setValue('3')}> 3</div>
@@ -27,7 +27,7 @@ export default function LettersKeypad({ setValue, cancel_caracter }: Props) {
 				<div  className={styles.btn_letter} onClick={() => setValue('9')}> 9</div>
 				<div  className={styles.btn_letter} onClick={() => setValue('0')}> 0</div>
 				
-				<div  className={styles.backspace} onClick={() =>cancel_caracter && cancel_caracter('')}> </div>
+				{/* <div  className={styles.backspace} onClick={() =>cancel_caracter && cancel_caracter('')}> </div> */}
 			</div>
 		{lenguage=='he'? <>
 			<div className={styles.line}>
@@ -65,7 +65,8 @@ export default function LettersKeypad({ setValue, cancel_caracter }: Props) {
 				<div  className={styles.btn_letter_1} onClick={() => setValue('צ')}> צ</div>
 				<div  className={styles.btn_letter_1} onClick={() => setValue('ת')}> ת</div>
 				<div  className={styles.btn_letter_1} onClick={() => setValue('ץ')}> ץ</div>
-				<div  className={styles.btn_letter_1} onClick={() => setlenguage('en')}> en</div>
+				<div  className={styles.backspace} onClick={() =>cancel_caracter && cancel_caracter('')}> </div>
+				{/* <div  className={styles.btn_letter_1} onClick={() => setlenguage('en')}> en</div> */}
 			</div>
 		</>
 		: <>
@@ -111,7 +112,7 @@ export default function LettersKeypad({ setValue, cancel_caracter }: Props) {
 
 		<div className={styles.line}>
 		{lenguage=='he'? <div  className={styles.long_space} onClick={() => setValue(' ')}>רווח</div> :  <div  className={styles.long_space} onClick={() => setValue(' ')}>space</div>  }
-			<div  className={styles.btn_letter} onClick={() => setValue('.')}> .</div>
+			{/* <div  className={styles.btn_letter} onClick={() => setValue('.')}> .</div> */}
 		</div>
 
 		</div>

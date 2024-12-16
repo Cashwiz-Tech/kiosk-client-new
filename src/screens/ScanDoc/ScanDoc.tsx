@@ -13,6 +13,7 @@ import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import camera_icon from '../../assets/camera_icon.png'
 import { setUserDoc } from "store/registerSlice"
 import Webcam from "react-webcam"
+import Header from "layouts/header/Header"
 
 type Props = {
 	onNext: () => void
@@ -49,6 +50,8 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 	  }, [webcamRef, setImgSrc]);
 	  
 	return (
+		<>
+		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3 className={styles.title}> אנא סרקו את 
@@ -89,5 +92,6 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
+		</>
 	)
 }

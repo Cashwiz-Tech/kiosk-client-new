@@ -10,7 +10,7 @@ type Props = {
 	validate?: (v: string) => void
 	errorMessage?: string
 	isVisited?: boolean
-	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"
+	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"| "address"
 	focus_func?: (v: boolean) => void
 }
 

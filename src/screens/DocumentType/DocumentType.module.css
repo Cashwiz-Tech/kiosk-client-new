@@ -36,6 +36,7 @@
 	justify-content: space-between;
 	width: min(100%, 700px);
 	margin-top: 60px;
+	margin-bottom: 190px;
 }
 
 .arrowRight {
@@ -80,20 +81,71 @@
 }
 
 .date_birth{
-	background: url("../../assets/identity-number.svg") no-repeat scroll calc(100% - 36px) 40px,
-	url("../../assets/stick.svg") no-repeat scroll calc(100% - 112px) 33.77px;
-	padding-right: 150px;
-
     display: flex;
-    flex-direction: row-reverse;
+	flex-direction: row;
 	align-items: center;
 	width: 600px;
-	gap: 9px;
+	gap: 15px;
 	position: relative;
 	height: 120px;
-	border: 1px solid #8080804d;
 	border-radius: 15px;
     justify-content: flex-end;
+}
+
+.date_birth_img{
+	background: url("../../assets/identity-number.svg") no-repeat scroll calc(100% - 36px) 40px;
+	border: 1px solid #8080804d;
+	border-top-right-radius: 15px; 
+    border-bottom-right-radius: 15px; 
+	width: 115px;
+	height: 120px;
+}
+
+.date_birth_input_year{
+	border: 1px solid #8080804d;
+	width: 200px;
+	height: 120px;
+	position: relative;
+}
+
+.date_birth_input_month{
+	border: 1px solid #8080804d;
+	width: 120px;
+	height: 120px;
+	position: relative;
+}
+
+.year_text{
+	position: absolute;
+    bottom: 4px;
+    left: 75px;
+    color: #717171;
+    font-size: 20px;
+}
+
+.month_text{
+	position: absolute;
+    bottom: 4px;
+    left: 32px;
+    color: #717171;
+    font-size: 20px;
+}
+
+.day_text{
+	position: absolute;
+	bottom: 4px;
+	left: 45px;
+	color: #717171;
+	font-size: 20px;
+}
+
+.date_birth_input_day{
+	border: 1px solid #8080804d;
+	width: 120px;
+	height: 120px;
+	position: relative;
+	border-top-left-radius: 15px; 
+    border-bottom-left-radius: 15px; 
 }
 
 .date_birth_input{
@@ -102,6 +154,8 @@
     border-bottom: 4px solid #717171;
     font-size: 32px;
     color: #717171;
+    margin-right: 8px;
+    margin-top: 40px;
 }
 
 .date_birth_sep{

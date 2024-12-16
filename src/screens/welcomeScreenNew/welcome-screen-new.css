@@ -1,0 +1,83 @@
+.WelcomeScreenNew{
+    background-image: url(./../../assets/start_page_bg.png);
+    background-size: cover;
+    background-position: 0 130px;
+
+
+.head_title{
+    color: white;
+    font-size: 68px;
+}
+
+.header_cont{
+    display: flex ;
+    justify-content: center;
+    gap: 70px;
+    border-bottom: 1px solid white;
+    background-color: #090041;
+}
+
+.smart_kiosk{
+    height: 100px;
+    margin-top: 50px;
+}
+
+.mid_title{
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.action_btn{
+    width: 269px;
+    height: 116px;
+    box-shadow: 1px 1px 30px white;
+    border-radius: 20px;
+    background-color: #090041;
+    margin: 0 auto;
+    margin-bottom: 9px;
+    cursor: pointer;
+}
+
+.action_btn_cont_line{
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+    margin-top: 37px;
+    margin-bottom: 25px;
+}
+
+.action_btn_text{
+    color: white;
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.action_btn_text_small{
+    color: white;
+    font-size: 20px;
+    font-weight: 200;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.ict{
+    margin-top: 23px;
+}
+
+.pay_express_icon{
+    margin-top: 38px;
+}
+
+.action_btn_cont{
+    width: 262px;
+}
+
+
+}

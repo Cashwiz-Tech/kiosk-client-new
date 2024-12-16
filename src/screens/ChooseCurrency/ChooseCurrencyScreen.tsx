@@ -1,5 +1,6 @@
 import "./choose-currency-screen.css";
 import CurrencyBox from "components/ChooseCurrencyScreen/CurrencyBox/CurrencyBox";
+import Header from "layouts/header/Header";
 import Button from "lib/button";
 import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch } from "store/store";
@@ -19,6 +20,8 @@ const ChooseCurrencyScreen = () => {
   }
 
   return (
+    <>
+    <Header></Header>
     <div className="container">
       <div className="currencies-container">
         <p className="title">בחרו את המטבע שתרצו לרכוש</p>
@@ -43,6 +46,8 @@ const ChooseCurrencyScreen = () => {
         </Button>
       </div>
     </div>
+    </>
+
   );
 };
 

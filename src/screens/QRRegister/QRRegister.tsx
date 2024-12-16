@@ -3,6 +3,7 @@ import { useAppDispatch } from "store/store";
 import { Screens } from "types/Screens";
 import register_qr from "../../assets/register_qr.png";
 import styles from "./QRRegister.module.css";
+import Header from "layouts/header/Header";
 
 const QRRegister = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,8 @@ const QRRegister = () => {
   }
 
   return (
+    <>
+		<Header></Header>
     <div className={styles.container}>
       <div className={styles.content}>
         <h3 className={styles.title}> סרוק את הקוד והמשך את ההרשמה במכשירך האישי </h3>
@@ -28,6 +31,7 @@ const QRRegister = () => {
         חזרה למסך הבית{" "}
       </button>
     </div>
+    </>
   );
 };
 

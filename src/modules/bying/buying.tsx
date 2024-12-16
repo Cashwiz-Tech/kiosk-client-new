@@ -30,6 +30,8 @@ import ScanVideo from "screens/ScanVideo/ScanVideo";
 import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
 import UserDetails from "screens/UserDetails/UserDetails";
 import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
+import WelcomeScreenNew from "screens/welcomeScreenNew/welcome-screen-new";
+import WelcomeScreenSecond from "screens/welcomeScreenSecond/welcome-screen-second";
 import { setCurrentScreen } from "store/navigationSlice";
 import { setPartnerData } from "store/partnerSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
@@ -95,10 +97,16 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
     case Screens.WELCOME_SCREEN:
       return (
         <>
-          <WelcomeScreen />
+          <WelcomeScreenNew />
           <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
+
+
+    case Screens.WELCOME_SCREEN_SECOND:
+      return <>
+      <WelcomeScreenSecond />
+      </>;
 
     case Screens.INSERT_CODE:
       return (

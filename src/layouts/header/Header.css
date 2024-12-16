@@ -1,0 +1,38 @@
+.logo {
+	position: absolute;
+	right: 0;
+	width: 40%;
+	height: 120px;
+	max-width: 400px;
+}
+
+.logo > svg {
+	height: fit-content;
+}
+
+.Header{
+    min-height: 155px !important;
+    height: 155px;
+    background-color: #090041;
+}
+
+.menu_btn{
+    color: #283760;
+    font-size: 30px;
+    width: 126px;
+    height: 74px;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    line-height: 65px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.menu_btn_cont{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 90px;
+    padding-top: 30px;
+    gap: 30px;
+}
