@@ -26,7 +26,7 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 	const FACING_MODE_USER = "user";
 	const FACING_MODE_ENVIRONMENT = "environment";
 	  
-	const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+	const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
 
 
 	const dispatch = useAppDispatch();

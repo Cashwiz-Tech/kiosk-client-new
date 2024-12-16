@@ -25,7 +25,7 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 	const FACING_MODE_USER = "user";
 	const FACING_MODE_ENVIRONMENT = "environment";
 	  
-	const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+	const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
 
 	const videoConstraints = {
 		// width: 1080,

@@ -1,6 +1,6 @@
 import styles from "./numeric-keypad.module.css"
 import approve from '../../../assets/approve.png'
-import cancel from '../../../assets/cancel.png'
+import cancel from '../../../assets/key_del.png'
 type Props = {
 	setValue: (v: string) => void
 	cancel_caracter: (v: string) => void
@@ -19,9 +19,9 @@ export default function NumericKeypad({ setValue, cancel_caracter }: Props) {
 					</div>
 				))}
 				<div  onClick={() => setValue("")}>
-					<div className={styles.approve}>
+					{/* <div className={styles.approve}>
 						<img src={approve} />
-					</div>
+					</div> */}
 				</div>
 				<div className={styles.key} onClick={() => setValue("0")}>
 					0

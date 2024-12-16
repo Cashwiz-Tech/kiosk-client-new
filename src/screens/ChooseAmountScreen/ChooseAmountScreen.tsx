@@ -8,6 +8,7 @@ import ChooseAmountCard from "components/ChooseCurrencyAmountScreen/ChooseAmount
 import { useState } from "react";
 import { ChooseAmountScreenError } from "types/UI";
 import Modal from "lib/modal/modal";
+import Header from "layouts/header/Header";
 
 const ChooseAmountScreen = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +41,8 @@ const ChooseAmountScreen = () => {
 
   return (
     <>
+ 
+       <Header></Header>
       <Modal
         show={!!error}
         setShow={() => setError(null)}

@@ -2,8 +2,9 @@
 	width: fit-content;
 	height: fit-content;
 	border-radius: 20px;
-	background: #d5dfed;
+	/* background: #d5dfed; */
 	padding: 76px 112px;
+	border: 1px solid #AFC0D9;
 }
 
 .keypad {

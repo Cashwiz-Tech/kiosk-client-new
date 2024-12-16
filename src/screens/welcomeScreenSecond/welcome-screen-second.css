@@ -2,7 +2,7 @@
    
     background-color: #090041;
     /* padding-top: 30px; */
-
+    min-height: 92% !important;
 
 .head_title{
     color: white;

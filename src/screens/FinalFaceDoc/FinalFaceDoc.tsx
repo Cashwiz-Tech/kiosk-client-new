@@ -89,7 +89,8 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 		var formData = new FormData();
 		formData.append('fName', firstName);
 		formData.append('lName', lastName);
-		formData.append('email', email);
+		// formData.append('email', email);
+		formData.append('address', email);
 		formData.append('personalId', id_to_request);
 		formData.append('phoneNumber', phone_num_international);
 		formData.append('documentType', documentType);
