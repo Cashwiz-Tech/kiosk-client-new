@@ -1,6 +1,6 @@
 
 
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import Input from "lib/input"
 import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
@@ -25,30 +25,31 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 	const FACING_MODE_USER = "user";
 	const FACING_MODE_ENVIRONMENT = "environment";
 	  
-	const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
+	const [facingMode, setFacingMode] = useState(FACING_MODE_ENVIRONMENT);
+	const [devises, setdevises] = useState<any>([]);
+	const [imgSrc, setImgSrc] = useState(null);
+	const webcamRef = useRef(null);
 
-	const videoConstraints = {
-		// width: 1080,
-		// height: 720,
+	useEffect(() => {
+		navigator.mediaDevices.enumerateDevices().then(devices => setdevises(devices));
+		// console.log(devises[2].deviceId);
+	}, []);
+
+	let videoConstraints = {
+		deviceId:devises[2] ? devises[2].deviceId: '',
 		facingMode: facingMode
-	  };
+	};
 
-	  const webcamRef = useRef(null);
-	  const [imgSrc, setImgSrc] = useState(null);
-	
-	  const capture =useCallback(() => {
+	let capture =useCallback(() => {
 
+	if(webcamRef.current){
+		let web_info:any=webcamRef.current;
+		const imageSrc:any = web_info.getScreenshot();
+		dispatch(setUserDoc(imageSrc));
+		onNext();
+	}
+	}, [webcamRef, setImgSrc]);
 
-		if(webcamRef.current){
-			let web_info:any=webcamRef.current;
-			const imageSrc:any = web_info.getScreenshot();
-			
-			// setImgSrc(imageSrc);
-			dispatch(setUserDoc(imageSrc));
-			onNext();
-		}
-	  }, [webcamRef, setImgSrc]);
-	  
 	return (
 		<>
 		<Header></Header>
