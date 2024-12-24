@@ -29,7 +29,6 @@ import ScanSuccess from "screens/ScanSuccess/ScanSuccess";
 import ScanVideo from "screens/ScanVideo/ScanVideo";
 import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
 import UserDetails from "screens/UserDetails/UserDetails";
-import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
 import WelcomeScreenNew from "screens/welcomeScreenNew/welcome-screen-new";
 import WelcomeScreenSecond from "screens/welcomeScreenSecond/welcome-screen-second";
 import { setCurrentScreen } from "store/navigationSlice";
@@ -102,11 +101,12 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
         </>
       );
 
-
     case Screens.WELCOME_SCREEN_SECOND:
-      return <>
-      <WelcomeScreenSecond />
-      </>;
+      return (
+        <>
+          <WelcomeScreenSecond />
+        </>
+      );
 
     case Screens.INSERT_CODE:
       return (
@@ -298,9 +298,6 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
       return (
         <>
           <SendOTPExisted
-            onNext={(phoneNumber: string) => {
-              dispatch(setCurrentScreen(Screens.INSERT_CODE));
-            }}
             onBack={() => {
               dispatch(setCurrentScreen(Screens.USER_DETAILS));
               setIsShowOnBoarding(false);
