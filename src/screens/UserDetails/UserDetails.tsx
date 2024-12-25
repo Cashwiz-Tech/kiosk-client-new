@@ -1,6 +1,6 @@
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "lib/input"
 import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
@@ -12,6 +12,7 @@ import axios from "axios";
 import { Screens } from "types/Screens"
 import { setIDNum } from "store/registerSlice"
 import Header from "layouts/header/Header"
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 
 type Props = {
 	onNext: (phoneNumber: string) => void
@@ -29,8 +30,26 @@ export default function UserDetails({ onNext, onBack }: Props) {
 
     const [focusisVisitedID, setfocusisVisitedID] = useState(true)
 
-    const [israel_prefix, setisrael_prefix] = useState('972')
+    const [israel_prefix, setisrael_prefix] = useState('972');
+	const [showScreenError, setshowScreenError] = useState(false);
+	const [timeoutID, settimeoutID] = useState<any>();
 	
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+
 	const validate = (v: string) => {
 
 		let num = v;
@@ -139,7 +158,7 @@ export default function UserDetails({ onNext, onBack }: Props) {
     }
 
 	return (
-		<>
+		<div className={styles.main_cont}>
 		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
@@ -185,7 +204,11 @@ export default function UserDetails({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
-		</>
+
+			   <ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+				
+		</div>
 	)
 }
 

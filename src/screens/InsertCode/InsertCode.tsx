@@ -10,12 +10,37 @@ import { Screens } from "types/Screens"
 import ErrorModal from "components/buying/error-modal"
 import ErrorTimesModal from "components/buying/error-modal-times/error-modal-times"
 import Header from "layouts/header/Header"
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 
 const InsertCode = () => {
+    
     const dispatch = useAppDispatch();
+    const [showScreenError, setshowScreenError] = useState(false);
+
+    const [timeoutID, settimeoutID] = useState<any>();
+								
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+
     const [codeNumber, setcodeNumber] = useState("")
     const [showError, setshowError] = useState(false);
     const [showErrorTimes, setshowErrorTimes] = useState(false);
+
+
+    
     const [countTry, setcountTry] = useState(0);
     
     const OTP = useAppSelector(
@@ -87,7 +112,7 @@ const InsertCode = () => {
 
 
     return (
-        <> 
+        <div className={styles.main_cont}> 
         <Header></Header>
         <div className={styles.container}>
         <div className={styles.content}>
@@ -126,8 +151,14 @@ const InsertCode = () => {
 
         <ErrorTimesModal show={showErrorTimes}
         setShow={setshowErrorTimes}/>
+
+        <ErrorScrenLeftModal show={showScreenError}
+        setShow={setshowScreenError}/>
+
     </div>
-    </>
+
+
+    </div>
 
     )
 

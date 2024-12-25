@@ -38,7 +38,9 @@ const CurrencyBox = ({ currency }: CurrencyBoxProps) => {
   };
   return (
     <button onClick={chooseCurrency} className="currency-box-container">
-      <img src={`/currencies/${currency}.svg`} className="currency-box-icon" alt={currency} />
+    
+      <img src={`/currencies/${currency}.svg`} className="currency-box-icon" alt={currency} /> 
+       <span className="currency_text">{currency} </span>
     </button>
   );
 };

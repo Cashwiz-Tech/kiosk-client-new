@@ -1,18 +1,21 @@
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import Button from "lib/button"
 
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./FinalFaceDoc.module.css"
 
-import {  useAppSelector } from "store/store"
+import {  useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 
 import scand_tz from '../../assets/scand_tz.png'
 import scan_face from '../../assets/scan_face.png'
 import Header from "layouts/header/Header"
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
+import { setCurrentScreen } from "store/navigationSlice"
+import { Screens } from "types/Screens"
 
 type Props = {
 	onNext: () => void
@@ -20,7 +23,29 @@ type Props = {
 }
 
 export default function FinalFaceDoc({ onNext, onBack }: Props) {
+	const dispatch = useAppDispatch();
+	const [showScreenError, setshowScreenError] = useState(false);
+	
+							
+						
+    const [timeoutID, settimeoutID] = useState<any>();
+							
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
 
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+	
 	const [israel_prefix, setisrael_prefix] = useState('972')
 	const [show_error, setshow_error] = useState('')
 
@@ -114,7 +139,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 	}
 
 	return (
-		<>
+		<div className={styles.main_cont}>
 		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
@@ -140,6 +165,16 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
-		</>
+		
+		<ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+									
+									
+									
+		</div>
 	)
 }
+function dispatch(arg0: any) {
+	throw new Error("Function not implemented.")
+}
+

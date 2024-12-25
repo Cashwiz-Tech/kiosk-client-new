@@ -1,6 +1,6 @@
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "lib/input"
 import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 import { Screens } from "types/Screens"
 import Header from "layouts/header/Header"
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 
 type Props = {
 	onNext: (phoneNumber: string) => void
@@ -26,7 +27,29 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 	const [isVisited, setIsVisited] = useState(false)
 	const [isVisitedID, setisVisitedID] = useState(false)
     const [israel_prefix, setisrael_prefix] = useState('972')
+   
+	const [showScreenError, setshowScreenError] = useState(false);
+							
+						
+    const [timeoutID, settimeoutID] = useState<any>();
+	
+									
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
 
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+	
 	const phoneNum = useAppSelector(
 		(state) => state.navigation.phoneNum
 	);
@@ -80,7 +103,7 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 	  }
 
 	return (
-		<>
+		<div className={styles.main_cont}>
 		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
@@ -121,6 +144,10 @@ export default function SendOTPExisted({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
-		</>
+		
+		<ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+									
+		</div>
 	)
 }

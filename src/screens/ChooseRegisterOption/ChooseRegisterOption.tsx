@@ -11,9 +11,34 @@ import Header from "layouts/header/Header"
 import link_to_phone_icon from 'assets/link_to_phone_icon.png'
 import scna_qr_icon from 'assets/scna_qr_icon.png'
 import phone_icon from 'assets/phone_icon.png'
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 
 const ChooseRegisterOption = () => {
     const dispatch = useAppDispatch();
+	const [showScreenError, setshowScreenError] = useState(false);
+	
+							
+						
+    const [timeoutID, settimeoutID] = useState<any>();
+	
+									
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+	
+  
     const [phoneNumber, setPhoneNumber] = useState("")
     const [showError, setshowError] = useState(false);
     
@@ -34,7 +59,7 @@ const ChooseRegisterOption = () => {
     }
 
     return (
-        <>
+        <div className={styles.main_cont}>
         <Header></Header>
         <div className={styles.container}>
         <div className={styles.content}>
@@ -68,7 +93,9 @@ const ChooseRegisterOption = () => {
         </div>
 
     </div>
-    </>
+    <ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+    </div>
     )
 
 };

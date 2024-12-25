@@ -6,7 +6,7 @@ import Button from "lib/button"
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./ScanDoc.module.css"
-import {setPhoneNum } from "store/navigationSlice"
+import {setCurrentScreen, setPhoneNum } from "store/navigationSlice"
 import { useAppDispatch } from "store/store"
 import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
@@ -14,6 +14,8 @@ import camera_icon from '../../assets/camera_icon.png'
 import { setUserDoc } from "store/registerSlice"
 import Webcam from "react-webcam"
 import Header from "layouts/header/Header"
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
+import { Screens } from "types/Screens"
 
 type Props = {
 	onNext: () => void
@@ -22,6 +24,30 @@ type Props = {
 
 export default function ScanDoc({ onNext, onBack }: Props) {
 	const dispatch = useAppDispatch();
+	const [showScreenError, setshowScreenError] = useState(false);
+	
+							
+						
+    const [timeoutID, settimeoutID] = useState<any>();
+	
+									
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+
+
 	const FACING_MODE_USER = "user";
 	const FACING_MODE_ENVIRONMENT = "environment";
 	  
@@ -51,7 +77,7 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 	}, [webcamRef, setImgSrc]);
 
 	return (
-		<>
+		<div className={styles.main_cont}>
 		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
@@ -93,6 +119,10 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
-		</>
+
+		<ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+				
+		</div>
 	)
 }

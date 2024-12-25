@@ -26,13 +26,13 @@ export default function MainLayout({ children, setShow }: Props) {
             צריך עזרה?
           </p>
           <p className={styles.stick + " white-text"}>|</p>
-          <p className="white-text">077225643</p>
+          <p className="white-text">03-3851420</p>
           <p className={styles.stick + " white-text"}>|</p>
-          <p className="white-text">בקרו אותנו באתר: www.cashwis.co.il</p>
+          <p className="white-text">בקרו אותנו: www.smarttech.co.il</p>
         </div>
        
         <div className={styles.powerBy}>
-          <img src={PowerBy} />
+          <img src={PowerBy} className={styles.PowerBy}/>
            :Power by
         </div>
         

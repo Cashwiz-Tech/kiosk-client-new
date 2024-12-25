@@ -1,6 +1,6 @@
 import { makePayment } from "api/paymentProviderApi";
 import Button from "lib/button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { setCheckoutStatus } from "store/checkoutSlice";
 import { setCurrentScreen } from "store/navigationSlice";
@@ -9,9 +9,36 @@ import { CheckoutStatus } from "types/CheckoutStatus";
 import { Screens } from "types/Screens";
 import "./PaymentScreen.css";
 import Header from "layouts/header/Header";
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 
 const PaymentScreen = () => {
+
+  
   const dispatch = useAppDispatch();
+  
+	const [showScreenError, setshowScreenError] = useState(false);
+	
+  const [timeoutID, settimeoutID] = useState<any>();
+	
+									
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+	
+	
+	
   const params = useParams();
   const partnerData = useAppSelector((state) => state.partner.partnerData);
   const totalAmount = useAppSelector((state) => state.payments.totalAmount);
@@ -55,7 +82,7 @@ const PaymentScreen = () => {
     makePaymentRequest();
   }, []);
   return (
-    <>
+    <div className="main_cont">
 		<Header></Header>
     <div className="main-container">
       <p className="title">נא להעביר כרטיס</p>
@@ -99,7 +126,11 @@ const PaymentScreen = () => {
         </Button>
       </div>
     </div>
-    </>
+
+    <ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+        
+    </div>
   );
 };
 

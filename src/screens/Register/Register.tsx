@@ -1,6 +1,6 @@
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from "lib/input"
 import Button from "lib/button"
 
@@ -12,6 +12,9 @@ import { useAppDispatch } from "store/store"
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import { setEmail, setFullName } from "store/registerSlice"
 import Header from "layouts/header/Header"
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
+import { setCurrentScreen } from "store/navigationSlice"
+import { Screens } from "types/Screens"
 
 type Props = {
 	onNext: () => void
@@ -19,7 +22,32 @@ type Props = {
 }
 
 export default function Register({ onNext, onBack }: Props) {
+
 	const dispatch = useAppDispatch();
+	const [showScreenError, setshowScreenError] = useState(false);
+	
+							
+						
+    const [timeoutID, settimeoutID] = useState<any>();
+	
+									
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+	
+	
 
 	const [Address, setAddress] = useState<string>("")
 	
@@ -80,7 +108,7 @@ export default function Register({ onNext, onBack }: Props) {
 	}
 
 	return (
-		<>
+		<div className={styles.main_cont}>
 		<Header></Header>
 		<div className={styles.container}>
 			<div className={styles.content}>
@@ -127,6 +155,9 @@ export default function Register({ onNext, onBack }: Props) {
 				</Button>
 			</div>
 		</div>
-		</>
+		<ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+				
+		</div>
 	)
 }

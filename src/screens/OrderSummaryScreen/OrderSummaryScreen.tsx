@@ -5,12 +5,34 @@ import CurrencySummary from "components/ChooseCurrencyAmountScreen/CurrencySumma
 import Button from "lib/button";
 import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "lib/modal";
 import Header from "layouts/header/Header";
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 
 const OrderSummaryScreen = () => {
   const dispatch = useAppDispatch();
+  const [showScreenError, setshowScreenError] = useState(false);
+
+  const [timeoutID, settimeoutID] = useState<any>();
+					
+	useEffect(() => {
+		setTimeout(()=>{
+      setshowScreenError(true);
+      settimeoutID(setTimeout(()=>{
+        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+      }, 30000));
+
+    }, 60000);
+	}, []);
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        }
+    }, [showScreenError]);
+  
+
   const { selectedCurrency, selectedCurrencyAmount, selectedCurrencyRate } =
     useAppSelector((state) => state.currency);
   const [error, setError] = useState(false);
@@ -24,7 +46,7 @@ const OrderSummaryScreen = () => {
     dispatch(setCurrentScreen(Screens.PAYMENT));
   };
   return (
-    <>
+    <div className="main_cont">
       <Header></Header>
       <Modal
         show={error}
@@ -145,7 +167,14 @@ const OrderSummaryScreen = () => {
           </div>
         </div>
       </div>
-    </>
+
+
+      
+			<ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+									
+
+    </div>
   );
 };
 
