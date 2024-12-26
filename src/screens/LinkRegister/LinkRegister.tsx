@@ -15,21 +15,20 @@ const LinkRegister = () => {
 							
 	useEffect(() => {
 		setTimeout(()=>{
-      setshowScreenError(true);
-      settimeoutID(setTimeout(()=>{
-        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
-      }, 30000));
-
-    }, 60000);
+            setshowScreenError(true);
+        }, 60000);
 	}, []);
+
 
     useEffect(() => {
         if(showScreenError==false){
             clearTimeout(timeoutID)
+        } else {
+            settimeoutID(setTimeout(()=>{
+                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+            }, 30000));
         }
     }, [showScreenError]);
-    
-
 
 
     const phoneNum = useAppSelector(

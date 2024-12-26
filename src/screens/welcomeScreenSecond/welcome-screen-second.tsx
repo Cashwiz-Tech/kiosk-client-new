@@ -27,20 +27,22 @@ const WelcomeScreenSecond = () => {
     
 	useEffect(() => {
 		setTimeout(()=>{
-      setshowScreenError(true);
-      settimeoutID(setTimeout(()=>{
-        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
-      }, 30000));
-
-    }, 60000);
+            setshowScreenError(true);
+        }, 6000);
 	}, []);
+
 
     useEffect(() => {
         if(showScreenError==false){
             clearTimeout(timeoutID)
+        } else {
+            settimeoutID(setTimeout(()=>{
+                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+            }, 3000));
         }
     }, [showScreenError]);
         
+    
     return (
         <>
             <Header></Header>

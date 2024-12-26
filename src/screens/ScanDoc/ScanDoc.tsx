@@ -31,19 +31,21 @@ export default function ScanDoc({ onNext, onBack }: Props) {
     const [timeoutID, settimeoutID] = useState<any>();
 	
 									
+	    
 	useEffect(() => {
 		setTimeout(()=>{
-      setshowScreenError(true);
-      settimeoutID(setTimeout(()=>{
-        dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
-      }, 30000));
-
-    }, 60000);
+            setshowScreenError(true);
+        }, 60000);
 	}, []);
+
 
     useEffect(() => {
         if(showScreenError==false){
             clearTimeout(timeoutID)
+        } else {
+            settimeoutID(setTimeout(()=>{
+                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+            }, 30000));
         }
     }, [showScreenError]);
 
@@ -58,7 +60,7 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 
 	useEffect(() => {
 		navigator.mediaDevices.enumerateDevices().then(devices => setdevises(devices));
-		// console.log(devises[2].deviceId);
+		 console.log(devises);
 	}, []);
 
 	let videoConstraints = {
