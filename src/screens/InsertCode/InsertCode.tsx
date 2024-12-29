@@ -16,7 +16,7 @@ const InsertCode = () => {
     
     const dispatch = useAppDispatch();
     const [showScreenError, setshowScreenError] = useState(false);
-
+    const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
     const [timeoutID, settimeoutID] = useState<any>();
 								
 	useEffect(() => {
@@ -89,8 +89,14 @@ const InsertCode = () => {
         //check if code correct
         if(codeNumber==OTP || codeNumber=='123456'){
       
+            debugger;
             if (UserExist) {
-                dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));
+                if(typeScreen=='matah'){
+                    dispatch(setCurrentScreen(Screens.SCAN_SELECT_MATAH));
+                } else {
+                    dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));
+                }
+       
             } else {
                 dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
             }

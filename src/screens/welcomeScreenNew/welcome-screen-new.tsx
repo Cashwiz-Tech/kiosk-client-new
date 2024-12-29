@@ -4,7 +4,7 @@ import change_icon from './../../assets/change_icon.png'
 import credit_card_icon from './../../assets/credit_card_icon.png'
 import smart_kiosk from './../../assets/smart_kiosk.png'
 import { useAppDispatch } from "store/store";
-import { setCurrentScreen } from "store/navigationSlice";
+import { setCurrentScreen, setTypeScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
 import ICT from './../../assets/ICT-logo-blue 2.png'
 import coins from './../../assets/coins.png'
@@ -119,7 +119,7 @@ const WelcomeScreenNew = () => {
             <div className="mid_title"> רכישות מט”ח</div>
 
             <div className="action_btn_cont_line"> 
-                <div className="action_btn_cont"> 
+                <div className="action_btn_cont"  onClick={() => { dispatch(setTypeScreen("matah")) ; dispatch(setCurrentScreen(Screens.USER_DETAILS))}}> 
                     <div className="action_btn">
                         <img src={cash_icon} className="ict"/>
                     </div>

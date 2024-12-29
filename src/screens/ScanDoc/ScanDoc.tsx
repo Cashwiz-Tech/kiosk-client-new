@@ -59,12 +59,12 @@ export default function ScanDoc({ onNext, onBack }: Props) {
 	const webcamRef = useRef(null);
 
 	useEffect(() => {
-		navigator.mediaDevices.enumerateDevices().then(devices => setdevises(devices));
-		 console.log(devises);
+		navigator.mediaDevices.enumerateDevices().then(devices => {setdevises(devices); console.log(devices)});
+		
 	}, []);
 
 	let videoConstraints = {
-		deviceId:devises[2] ? devises[2].deviceId: '',
+		deviceId:'a18e0e86417ef43121f31fb6cdfb4d51f3653f3bda343d96bf3f9b9c7a69c222',
 		facingMode: facingMode
 	};
 
