@@ -43,7 +43,7 @@
   margin-bottom: 96px;
   margin-bottom: 31px;
   margin-top: 267px;
-  justify-content: center;
+  justify-content: space-around;
   gap: 20px;
 }
 
@@ -69,8 +69,9 @@
 
 .us_icon{
   position: relative;
-  top: 13px;
-  right:10px
+  top: 3px;
+  right: 19px;
+  width: 39px;
 }
 .subtitle{
   color:#283760;
@@ -88,7 +89,7 @@
   width: 100%;
   justify-content: space-between;
   border-bottom: 1px solid #DADADA;
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 
 .price_cont{
@@ -99,6 +100,7 @@
 .subtitle_r{
   display: flex;
   flex-direction: column;
+  width: 793px;
 }
 
 .subtitle_s{
@@ -111,6 +113,16 @@
   padding-bottom: 15px;
 }
 
+.subtitle_s_left{
+  color: #283760;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border-bottom: 1px solid #DADADA;
+  padding-bottom: 15px;
+  justify-content: flex-end;
+}
 .subtitle_sm{
   color: #283760;
   font-size: 40px;
@@ -125,6 +137,27 @@
 
 .up_down{
   position: absolute;
-  top: 333px;
+  top: 286px;
   right: 590px;
+}
+
+.small_subtitle{
+  color: #283760;
+  font-size: 24px;
+  position: absolute;
+  top: 185px;
+}
+
+.united_states{
+  width: 31px;
+  height: 31px;
+  margin-top: 13px;
+}
+
+.subtitle_m_no_border{
+  border: 0;
+}
+
+.currencies-container-gap{
+  gap:60px
 }

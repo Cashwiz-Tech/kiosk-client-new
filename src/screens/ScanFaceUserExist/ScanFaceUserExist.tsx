@@ -7,7 +7,7 @@ import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad
 import { ReactComponent as Arrow } from "assets/arrow.svg"
 import styles from "./ScanFaceUserExist.module.css"
 import {setCurrentScreen, setPhoneNum } from "store/navigationSlice"
-import { useAppDispatch } from "store/store"
+import { useAppDispatch, useAppSelector } from "store/store"
 import axios from "axios";
 import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
 import scan_face from '../../assets/scan_face.png'
@@ -27,7 +27,7 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
    
 	const dispatch = useAppDispatch();
 	const [showScreenError, setshowScreenError] = useState(false);
-	
+	const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
 							
 						
     const [timeoutID, settimeoutID] = useState<any>();
@@ -77,6 +77,15 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 		}
 	  }, [webcamRef, setImgSrc]);
 
+	  function nextPage(){
+		
+			if(typeScreen=='matah'){
+				dispatch(setCurrentScreen(Screens.SCAN_SELECT_MATAH));
+			} else {
+				dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));
+			}
+	  }
+
 	return (
 		<div className={styles.main_cont}>
 		<Header></Header>
@@ -89,7 +98,7 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 					</div>
 					סריקת פנים חוזרת
 				</Button>
-				<Button onClick={() =>{onNext()}} >
+				<Button onClick={() =>{nextPage()}} >
 					אישור תמונה
 					<Arrow />
 				</Button>

@@ -19,8 +19,8 @@
 
 }
 
-.title {
-  font-size: 60px;
+.title_currency {
+  font-size: 55px!important;
   font-weight: 800;
   margin: 0;
   padding: 0;
@@ -36,13 +36,13 @@
   height: 16px;
 }
 
-.buttons-container-currency{
+.buttons-container-currency-choose{
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-bottom: 96px;
   margin-bottom: 31px;
-  margin-top: 567px;
+  margin-top: 120px;
   justify-content: center;
 }
 

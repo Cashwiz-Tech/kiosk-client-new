@@ -11,7 +11,7 @@
   width: 92%;
 }
 
-.currencies-container {
+.currencies-container-s {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,13 +36,13 @@
   height: 16px;
 }
 
-.buttons-container-currency{
+.buttons-container-currency-select-matah{
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-bottom: 96px;
   margin-bottom: 31px;
-  margin-top: 567px;
+  margin-top: 154px;
   justify-content: center;
 }
 

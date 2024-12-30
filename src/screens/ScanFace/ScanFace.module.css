@@ -24,6 +24,7 @@
 	line-height: 109%;
 	margin: 0 0 50px;
 	padding-top: 80px;
+	margin-bottom: 530px;
 }
 
 .phoneInput {
@@ -42,7 +43,7 @@
     margin-top: 60px;
     flex-direction: column-reverse;
     gap: 22px;
-	margin-bottom: 463px;
+	margin-bottom: 50px;
 }
 
 .arrowRight {

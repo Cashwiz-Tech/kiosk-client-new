@@ -45,16 +45,18 @@ const YouChooseMatahScreen = () => {
     <div className="main_cont">
     <Header></Header>
     <div className="container">
-      <div className="currencies-container">
+      <div className="currencies-container currencies-container-gap">
         <p className="title"> בחרת לרכוש
-
+      
         <img src={united_states} className="us_icon"/>
         </p>
       
+        <div className="small_subtitle"> מקסימום רכישה: 1000 $ | ניתן לרכוש בכפולות של 100  </div>
+
         <div className="subtitle_m">
-          <div>סכום שהוכנס</div>
+          <div>סכום שהוכנס ב - ₪ :</div>
           <div className="price_cont">
-            <img src={is_icon} /> 
+            {/* <img src={is_icon} />  */}
             <div>2000 ₪</div> 
           </div>
 
@@ -64,25 +66,26 @@ const YouChooseMatahScreen = () => {
 
         <div className="subtitle_r">
           <div  className="subtitle_sm">
-            <div>סכום שהתקבל בתמורה</div>
+            <div>סכום שתקבל בתמורה:</div>
             <div className="price_cont"> 
-              <img src={united_states} /> 
+      
               <div>500 $</div>
+              <img src={united_states}  className="united_states"/> 
             </div>
           </div>
 
-          <div  className="subtitle_s">
-            <div> מקסימום רכישה: 1000 $ | ניתן לרכוש בכפולות של 100 </div>
-            <div> שער המרה: 3.7500  </div> 
+          <div  className="subtitle_s_left">
+         
+            שער המרה: 3.7500  
           </div>
 
         </div>
 
 
-        <div className="subtitle_m">
-          <div>עודף</div>
+        <div className="subtitle_m subtitle_m_no_border">
+          <div>עודף:</div>
           <div className="price_cont">
-            <img src={is_icon} /> 
+            {/* <img src={is_icon} />  */}
             <div>125 ₪</div>
           </div>
 
@@ -91,7 +94,9 @@ const YouChooseMatahScreen = () => {
       </div>
       <div className="buttons-container-currency">
 
-      <Button onClick={()=>dispatch(setCurrentScreen(Screens.TOTAL_MATAH))} >
+      <Button onClick={()=>dispatch(setCurrentScreen(Screens.TOTAL_MATAH))} 
+          style={{
+            width:'344px'}}>
       אישור
         <Arrow/>
 				
@@ -99,7 +104,7 @@ const YouChooseMatahScreen = () => {
 
         <Button
           style={{
-        
+            width:'344px',
             borderColor: "#fff",
           }}
           onClick={() => {

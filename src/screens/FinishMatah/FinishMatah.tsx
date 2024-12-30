@@ -32,7 +32,7 @@ const FinishMatahScreen = () => {
     <div className="main_cont">
     <Header></Header>
     <div className="container">
-      <div className="currencies-container">
+      <div className="currencies-container-finish">
         <p className="title">
         העסקה בוצעה בהצלחה
         </p>

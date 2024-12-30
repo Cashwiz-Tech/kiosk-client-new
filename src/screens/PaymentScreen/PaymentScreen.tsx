@@ -45,8 +45,9 @@ const PaymentScreen = () => {
   const { selectedCurrency, selectedCurrencyAmount } = useAppSelector((state) => state.currency);
 
   const handleCreditCardError = (status: CheckoutStatus) => {
-    dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
+    //dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
     dispatch(setCheckoutStatus(status));
+    dispatch(setCurrentScreen(Screens.GET_MATAH));
   };
 
   const makePaymentRequest = async () => {
@@ -65,12 +66,16 @@ const PaymentScreen = () => {
       });
       console.log(makePaymentResponse);
       if (makePaymentResponse.success) {
-        dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS));
+        // dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS));
+        handleCreditCardError(CheckoutStatus.SUCCESS);
+       
       } else {
         if (makePaymentResponse.message === "STACK_ERROR") {
           handleCreditCardError(CheckoutStatus.TECHNICAL_ERROR);
-        } else {
+    
+        } else { 
           handleCreditCardError(CheckoutStatus.CREDIT_CARD_ERROR);
+      
         }
       }
     } catch (error) {
@@ -102,13 +107,12 @@ const PaymentScreen = () => {
             <img src={`/credit-nfc-option.svg`} className="option-icon nfc-option" alt="credit-companies" />
             <p className="option-text">הצמד את הכרטיס</p>
           </div>
-        </div>
-        <div>
           <div className="option-container">
             <img src={`/phone-option.svg`} className="option-icon" alt="credit-companies" />
             <p className="option-text">הצמד את הנייד</p>
           </div>
         </div>
+
       </div>
       <p className="options-title bottom-text">לאחר ההודעה על אישור התשלום המתן לסום העסקה וקבלת השטרות</p>
       <div className="payment-bottom-container">

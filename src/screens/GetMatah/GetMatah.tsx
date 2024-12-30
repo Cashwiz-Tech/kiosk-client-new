@@ -5,7 +5,7 @@ import Header from "layouts/header/Header";
 import Button from "lib/button";
 import { useEffect, useState } from "react";
 import { setCurrentScreen } from "store/navigationSlice";
-import { useAppDispatch } from "store/store";
+import { useAppDispatch, useAppSelector } from "store/store";
 import { PossibleCurrencies } from "types/Currencies";
 import { Screens } from "types/Screens";
 import is_icon from './../../assets/israel.png'
@@ -22,7 +22,7 @@ import phone_icon from './../../assets/phone_s.png'
 const GetMatahScreen = () => {
   const dispatch = useAppDispatch();
 	const [showScreenError, setshowScreenError] = useState(false);
-	
+  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
   const [timeoutID, settimeoutID] = useState<any>();
 
 	useEffect(() => {
@@ -56,11 +56,11 @@ const GetMatahScreen = () => {
         המתן להוצאת השטרות
         </p>
 
-        <p className="subtitle">
+        {/* <p className="subtitle">
         ברגעים אלו נשלח אליך מסרון עם פרטי העסקה
-        </p>
+        </p> */}
       
-       <img src={get_matah_icon} className="get_matah_icon" onClick={()=>dispatch(setCurrentScreen(Screens.FINISH_MATAH))}/>
+       <img src={get_matah_icon} className="get_matah_icon" onClick={()=>typeScreen=='matah'? dispatch(setCurrentScreen(Screens.FINISH_MATAH)): dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH))}/>
 
 
       <div className="footer_matah">

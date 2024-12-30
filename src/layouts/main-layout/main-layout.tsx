@@ -28,7 +28,7 @@ export default function MainLayout({ children, setShow }: Props) {
           <p className={styles.stick + " white-text"}>|</p>
           <p className="white-text">03-3851420</p>
           <p className={styles.stick + " white-text"}>|</p>
-          <p className="white-text">בקרו אותנו: www.smarttech.co.il</p>
+          <p className="white-text">בקרו אותנו: www.smartech.co.il</p>
         </div>
        
         <div className={styles.powerBy}>

@@ -35,6 +35,7 @@ import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
 import TotalMatahScreen from "screens/TotalMathah/TotalMathah";
 import UserDetails from "screens/UserDetails/UserDetails";
 import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
+import WelcomeScreenMatah from "screens/welcomeScreenMatah/welcome-screen-matah";
 import WelcomeScreenNew from "screens/welcomeScreenNew/welcome-screen-new";
 import WelcomeScreenSecond from "screens/welcomeScreenSecond/welcome-screen-second";
 import TotalMathahScreen from "screens/YouChooseMatah/YouChooseMatah";
@@ -130,6 +131,14 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
         </>
       );
 
+    case Screens.WELCOME_SCREEN_MATAH:
+      return (
+        <>
+          <WelcomeScreenMatah />
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
+        </>
+      );
+  
 
     case Screens.WELCOME_SCREEN_SECOND:
       return <>

@@ -44,19 +44,19 @@ const TotalMatahScreen = () => {
     <div className="main_cont">
     <Header></Header>
     <div className="container">
-      <div className="currencies-container">
-        <p className="title">סכום עסקה לאישורך
+      <div className="currencies-container-t">
+        <p className="title title_b">סכום עסקה לאישורך
 
         {/* <img src={united_states} className="us_icon"/> */}
         </p>
       
-        <div  className="subtitle_m">
+        <div  className="subtitle_m subtitle_m_m blue_bg">
             <div>סכום שהתקבל בתמורה</div>
             <div className="price_cont_g"> 
               <div className="p_cont"> 
-                  <img src={united_states} /> 
-                
-                  <div>500 $</div>
+
+                 500 $
+                <img src={united_states} className="united_states"/> 
               </div>
 
              <div className="small_rate">שער המרה: 3.7500</div>
@@ -64,39 +64,40 @@ const TotalMatahScreen = () => {
             </div>
         </div>
 
-        <div className="subtitle_m">
-          <div>סכום שהוכנס</div>
-          <div className="price_cont">
-            <img src={is_icon} /> 
-            <div>2000 ₪</div> 
-          </div>
-
-        </div>
 
    
-        <div className="subtitle_m">
+        <div className="subtitle_m subtitle_m_m blue_bg">
           <div>סכום ששולם עבור המט״ח ב ₪</div>
           <div className="price_cont">
-            <img src={is_icon} /> 
+            {/* <img src={is_icon} />  */}
             <div>1,875 ₪</div>
           </div>
 
         </div>
 
+        <div className="subtitle_m subtitle_m_m">
+          <div>סכום שהוכנס</div>
+          <div className="price_cont">
+            {/* <img src={is_icon} />  */}
+            <div>2000 ₪</div> 
+          </div>
 
-        <div className="subtitle_m">
+        </div>
+
+        <div className="subtitle_m subtitle_m_m">
           <div>עודף</div>
           <div className="price_cont">
-            <img src={is_icon} /> 
+            {/* <img src={is_icon} />  */}
             <div>125 ₪</div>
           </div>
 
         </div>
 
       </div>
-      <div className="buttons-container-currency">
+      <div className="buttons-container-currency-total">
 
-      <Button onClick={()=>dispatch(setCurrentScreen(Screens.GET_MATAH))} >
+      <Button onClick={()=>dispatch(setCurrentScreen(Screens.GET_MATAH))}  style={{
+            width:'344px'}}>
       אישור
         <Arrow/>
 				
@@ -104,7 +105,7 @@ const TotalMatahScreen = () => {
 
         <Button
           style={{
-        
+            width:'344px',
             borderColor: "#fff",
           }}
           onClick={() => {

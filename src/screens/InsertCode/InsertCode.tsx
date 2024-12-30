@@ -91,12 +91,7 @@ const InsertCode = () => {
       
             debugger;
             if (UserExist) {
-                if(typeScreen=='matah'){
-                    dispatch(setCurrentScreen(Screens.SCAN_SELECT_MATAH));
-                } else {
-                    dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));
-                }
-       
+                    dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));       
             } else {
                 dispatch(setCurrentScreen(Screens.CHOOSE_REGISTER_OPTION));
             }

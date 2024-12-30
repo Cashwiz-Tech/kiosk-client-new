@@ -61,7 +61,7 @@ const InsertBanknotesScreen = () => {
 
         <img src={insert_matah_icon} onClick={()=>dispatch(setCurrentScreen(Screens.YOU_CHOOSE_MATAH))}/>
       </div>
-      <div className="buttons-container-currency">
+      <div className="buttons-container-currency-banknote">
         <Button
           style={{
         

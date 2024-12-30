@@ -83,8 +83,21 @@ export default function ScanFace({ onNext, onBack }: Props) {
 		<Header></Header>
 		<div className={styles.container}>
 
+			<div className={styles.buttons}>
+				<Button onClick={onBack} type="outline">
+					<div className={styles.arrowRight}>
+						<Arrow />
+					</div>
+					סריקת פנים חוזרת
+				</Button>
+				<Button onClick={() =>{capture()}} >
+					אישור תמונה
+					<Arrow />
+				</Button>
+			</div>
+
 			<div className={styles.content}>
-				<h3 className={styles.title}> כעט נבצע סריקת פנים. עמוד מול המצלמה:</h3>
+				
 				{/* <img src={scan_face} className={styles.scand_tz}/> */}
 
 				<div className={styles.webcam_cont}>
@@ -102,19 +115,8 @@ export default function ScanFace({ onNext, onBack }: Props) {
 				</div>
 
 			</div>
-
-			<div className={styles.buttons}>
-				<Button onClick={onBack} type="outline">
-					<div className={styles.arrowRight}>
-						<Arrow />
-					</div>
-					סריקת פנים חוזרת
-				</Button>
-				<Button onClick={() =>{capture()}} >
-					אישור תמונה
-					<Arrow />
-				</Button>
-			</div>
+			<h3 className={styles.title}> כעט נבצע סריקת פנים. עמוד מול המצלמה:</h3>
+		
 		</div>
 		<ErrorScrenLeftModal show={showScreenError}
 				setShow={setshowScreenError}/>

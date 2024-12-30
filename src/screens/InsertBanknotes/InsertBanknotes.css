@@ -36,13 +36,13 @@
   height: 16px;
 }
 
-.buttons-container-currency{
+.buttons-container-currency-banknote{
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-bottom: 96px;
   margin-bottom: 31px;
-  margin-top: 267px;
+  margin-top: 140px;
   justify-content: center;
 }
 

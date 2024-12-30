@@ -52,10 +52,10 @@ const ChooseCurrencyScreen = () => {
     <Header></Header>
     <div className="container">
       <div className="currencies-container">
-        <p className="title">בחרו את המטבע שתרצו לרכוש</p>
+        <p className="title title_currency">בחרו את המטבע שתרצו לרכוש</p>
         {currenciesElements}
       </div>
-      <div className="buttons-container-currency">
+      <div className="buttons-container-currency-choose">
         <Button
           style={{
         

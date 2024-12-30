@@ -45,7 +45,7 @@ const SelectMatah = () => {
     <div className="main_cont">
     <Header></Header>
     <div className="container">
-      <div className="currencies-container">
+      <div className="currencies-container-s">
         <p className="title">בחר את השירות המבוקש</p>
         <button className="currency-box-container-matah" onClick ={()=>dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY))}>
           <span className="currency_text_matah">רכישת מט”ח</span>
@@ -56,7 +56,7 @@ const SelectMatah = () => {
         </button>
 
       </div>
-      <div className="buttons-container-currency">
+      <div className="buttons-container-currency-select-matah">
         <Button
           style={{
         
