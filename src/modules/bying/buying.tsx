@@ -22,6 +22,7 @@ import InsertCode from "screens/InsertCode/InsertCode";
 import LinkRegister from "screens/LinkRegister/LinkRegister";
 import NotMyNum from "screens/NotMyNum/NotMyNum";
 import OperationSystem from "screens/OperationSystem/operation-system";
+import OperationSystemExit from "screens/OperationSystemExit/operation_system_exit";
 import OperationSystemTabs from "screens/OperationSystemTabs/operation-system-tabs";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
 import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
@@ -158,6 +159,17 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
           <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
     );
+
+    case Screens.OPERATION_SYSTEM_EXIT:
+      return (
+        <>
+          <OperationSystemExit/>
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
+        </>
+    );
+
+    
+
 
     case Screens.WELCOME_SCREEN_MATAH:
       return (
