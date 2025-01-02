@@ -11,6 +11,7 @@ import CheckoutFinishScreen from "screens/CheckoutFinishScreen/CheckoutFinishScr
 import ChooseAmountScreen from "screens/ChooseAmountScreen/ChooseAmountScreen";
 import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
 import ChooseRegisterOption from "screens/ChooseRegisterOption/ChooseRegisterOption";
+import CodeErr from "screens/CodeErr/code_err";
 import DocumentType from "screens/DocumentType/DocumentType";
 import FinalFaceDoc from "screens/FinalFaceDoc/FinalFaceDoc";
 import FinishMatahScreen from "screens/FinishMatah/FinishMatah";
@@ -20,6 +21,8 @@ import InsertBanknotesScreen from "screens/InsertBanknotes/InsertBanknotes";
 import InsertCode from "screens/InsertCode/InsertCode";
 import LinkRegister from "screens/LinkRegister/LinkRegister";
 import NotMyNum from "screens/NotMyNum/NotMyNum";
+import OperationSystem from "screens/OperationSystem/operation-system";
+import OperationSystemTabs from "screens/OperationSystemTabs/operation-system-tabs";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
 import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
 import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
@@ -130,6 +133,31 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
           <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
+
+      
+    case Screens.OPERATION_SYSTEM:
+      return (
+        <>
+          <OperationSystem/>
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
+        </>
+    );
+      
+    case Screens.CODE_ERR:
+      return (
+        <>
+          <CodeErr/>
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
+        </>
+    );
+      
+    case Screens.OPERATION_SYSTEM_TABS:
+      return (
+        <>
+          <OperationSystemTabs/>
+          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
+        </>
+    );
 
     case Screens.WELCOME_SCREEN_MATAH:
       return (
