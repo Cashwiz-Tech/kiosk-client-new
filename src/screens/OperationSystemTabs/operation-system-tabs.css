@@ -79,10 +79,11 @@
 
 .WelcomeScreenSecond_first_part{
     background-color: white;
-    height:1005px;
+    min-height: 1005px;
     width: 92%;
     margin: 0 auto;
     border-radius: 24px;
+    padding-bottom: 50px;
 }
 
 .secong_screen_title{
@@ -321,6 +322,18 @@
     padding-bottom: 20px;
 }
 
+.table_status_header_sec{
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 30px;
+    border-bottom: 3px dashed #DADADA;
+    padding-bottom: 20px; 
+}
+
 .table_status_cont{
     width: 90%;
     margin: 0 auto;
@@ -333,9 +346,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 30px;
+    margin-top: 0px;
     border-bottom: 3px dashed #DADADA;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
 }
 
 .active_text{
@@ -347,6 +360,13 @@
 .table_status_line_width{
     width: 30%;
     text-align: right;
+    padding-top: 20px;
+}
+
+.table_status_line_width_last{
+    width: 30%;
+    text-align: left;
+    margin-left: 15px;
 }
 
 .table_status_line_last{
@@ -355,8 +375,20 @@
 .table_status_line_width_first{
     width: 50%;
     text-align: right;
+    padding-top: 20px;
 }
 
+.table_status_line_width_first_sec{
+    width: 30%;
+    text-align: right;
+    padding-top: 20px;
+}
+
+.table_status_line_width_long{
+    width: 50%;
+    text-align: right;
+    padding-top: 20px;
+}
 .exit_icon{
     position: absolute;
     bottom: 212px;
@@ -367,4 +399,18 @@
     background-color: #D90026;
 }
 
+.shekel_50{
+    width: 75px;
+}
+
+.shekel_100{
+    width: 73px;
+}
+.euro_50{
+    width: 82px;  
+}
+
+.usd_100{
+    width: 90px;
+}
 }

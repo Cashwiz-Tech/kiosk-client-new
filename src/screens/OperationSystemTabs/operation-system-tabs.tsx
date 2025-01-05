@@ -1,14 +1,18 @@
 import "./operation-system-tabs.css";
-import usd_eur from './../../assets/usd_eur.png'
-import change_icon_orange from './../../assets/change_icon_orange.png'
-import card_icon from './../../assets/card_icon.png'
-import smart_kiosk from './../../assets/smart_kiosk.png'
+import usd_100 from './../../assets/usd_100.png'
+import euro_50 from './../../assets/euro_50.png'
+import shekel_100 from './../../assets/shekel_100.png'
+import shekel_50 from './../../assets/shekel_50.png'
+
+import ten_shekel from './../../assets/ten_shekel.png'
+import five_shekel from './../../assets/five_shekel.png'
+import two_shekel from './../../assets/two_shekel.png'
 import { useAppDispatch } from "store/store";
 import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
 import ICT from './../../assets/ICT-logo-blue 2.png'
-import coins from './../../assets/coins.png'
-import cash_icon from './../../assets/cash_icon.png' 
+import shekel_icon from './../../assets/shekel_icon.png'
+import pen from './../../assets/pen.png' 
 import exit_icon from './../../assets/exit_icon.png' 
 import active_icon from './../../assets/active_icon.png'
 import banknotes_white from './../../assets/banknotes_white.png'
@@ -24,6 +28,7 @@ import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 import status_icon from './../../assets/status_icon.png'
 
 import Button from "lib/button";
+import NumericKeypadSmall from "components/buying/numeric-keypad-small/numeric-keypad-small";
 const OperationSystemTabs = () => {
     const dispatch = useAppDispatch();
     
@@ -32,6 +37,25 @@ const OperationSystemTabs = () => {
     const [Value, setValue] = useState<any>('');
 
     const [selectedTab, setselectedTab] = useState<any>(1);
+
+   
+    function cancel_caracter(){
+        let Value_temp = Value;
+        let str = Value_temp.substring(0, Value_temp.length - 1);
+
+        setValue(str);
+    }
+
+    
+    function setValuefunc(v:string){
+        let Value_temp = Value ;
+        Value_temp+=v; 
+        setValue(Value_temp);
+    }
+
+    function save_coins(){
+
+    }
 
     return (
         <>
@@ -117,13 +141,129 @@ const OperationSystemTabs = () => {
 
                     </div>: <></>}
 
+                    
+                    {selectedTab==2?<>
+                    
+                    <div className="table_status_cont"> 
+
+
+                        <div className="table_status_header_sec">
+                            <div className="table_status_line_width_first_sec">סוג שטר</div>   
+                            <div className="table_status_line_width_long">כמות מטבעות במחסנית</div>  
+                            <div className="table_status_line_width">סכום</div>
+                            <div className="table_status_line_width">הטענה/ריקון</div>
+                            <div className="table_status_line_width"></div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={shekel_icon}/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">500₪</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={two_shekel}/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">500₪</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={five_shekel}/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">500₪</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={ten_shekel}/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">500₪</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        </div>
+                        <NumericKeypadSmall  setValue={(v:any) => setValuefunc(v)} cancel_caracter={cancel_caracter} /> 
+
+                        <Button onClick={()=>save_coins()}  style={{
+                                           width:'344px', marginTop:'50px'}}>
+                                       אישור
+                                       <Arrow/>
+                                               
+                        </Button>
+                    
+                    </>: <></>}
+
+
+                    {selectedTab==3?<>
+                    
+                    <div className="table_status_cont"> 
+
+
+                        <div className="table_status_header_sec">
+                            <div className="table_status_line_width_first_sec">סוג שטר</div>   
+                            <div className="table_status_line_width_long">כמות מטבעות במחסנית</div>  
+                            <div className="table_status_line_width">סכום</div>
+                            <div className="table_status_line_width">הטענה/ריקון</div>
+                            <div className="table_status_line_width"></div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={usd_100} className="usd_100"/></div>   
+                            <div className="table_status_line_width_long">5</div>  
+                            <div className="table_status_line_width">500$</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={euro_50} className="euro_50"/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">5000Є</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={shekel_100} className="shekel_100"/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">20000₪</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        <div className="table_status_line">
+                            <div className="table_status_line_width_first_sec"><img src={shekel_50} className="shekel_50"/></div>   
+                            <div className="table_status_line_width_long">1,000</div>  
+                            <div className="table_status_line_width">500₪</div>  
+                            <div className="table_status_line_width">55</div> 
+                            <div  className="table_status_line_width table_status_line_width_last"><img src={pen} /> </div>
+                        </div>
+
+                        </div>
+                        <NumericKeypadSmall  setValue={(v:any) => setValuefunc(v)} cancel_caracter={cancel_caracter} /> 
+
+                        <Button onClick={()=>save_coins()}  style={{
+                                           width:'344px', marginTop:'50px'}}>
+                                       אישור
+                                       <Arrow/>
+                                               
+                        </Button>
+                    
+                    </>: <></>}
+
                     {selectedTab==4?
                     <div>
                         <div className="mid_title">
                         דיווח על בעיה
                         </div>
 
-                        <select className="operation_code_input">
+                        <select className="operation_code_input ">
                             <option  className="operation_code_option"> בחר </option>
                             <option  className="operation_code_option"> Dispenser </option>
                             <option  className="operation_code_option"> Acceptor </option>
@@ -131,7 +271,6 @@ const OperationSystemTabs = () => {
                             <option  className="operation_code_option"> NFC </option>
                             <option  className="operation_code_option"> Printer </option>
                         </select>
-
 
                         <div className="buttons-container-currency-total">
 

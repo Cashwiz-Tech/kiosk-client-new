@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 import cancel_white from '../../assets/cancel_white.png'
 import Button from "lib/button";
+import NumericKeypadSmall from "components/buying/numeric-keypad-small/numeric-keypad-small";
 
 const OperationSystem = () => {
     const dispatch = useAppDispatch();
@@ -47,6 +48,15 @@ debugger;
         }
 
     }
+
+
+    function setValuefunc(v:string){
+        let Value_temp = Value ;
+        Value_temp+=v; 
+        setValue(Value_temp);
+    }
+
+
     return (
         <>
             <Header show_logo={false}></Header>
@@ -59,23 +69,7 @@ debugger;
                     <input type="text" className="operation_code_input" value={Value} onChange={(e)=>setValue(e.target.value)}/>
 
                  
-
-                    <div className="keypad" dir="ltr">
-                        {Array.from({ length: 9 }, (v, idx) => (
-                            <div className="key" key={idx} onClick={() => setValue(Value+`${idx + 1}`)}>
-                                {idx + 1}
-                            </div>
-                        ))}
-                       
-                        <div className="key" onClick={() => setValue(Value+"0")}>
-                            0
-                        </div>
-                        <div  onClick={() => cancel_caracter()}>
-                            <div className="key cancel_white">
-                                <img src={cancel_white} className="cancel_white_icon"/>
-                            </div>
-                        </div>
-                    </div>
+                    <NumericKeypadSmall  setValue={(v:any) => setValuefunc(v)} cancel_caracter={cancel_caracter}/> 
 
 
                     <div className="buttons-container-currency-total">
