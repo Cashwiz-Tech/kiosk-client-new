@@ -278,12 +278,12 @@
 }
 
 .tab_1{
-    width: 230px;
+    width: 20%;
     border-top-right-radius: 22px;
 }
 
 .tab_2{
-    width: 335px;
+    width: 35%;
 }
 
 .status_icon{
@@ -297,11 +297,11 @@
 }
 
 .tab_3{
-    width: 335px
+    width: 35%
 }
 
 .tab_4{
-    width: 74px;
+    width: 9%;
     border-top-left-radius: 22px;
 }
 
@@ -397,6 +397,7 @@
 
 .selected_tab_4{
     background-color: #D90026;
+    margin-left: 4px;
 }
 
 .shekel_50{
@@ -412,5 +413,35 @@
 
 .usd_100{
     width: 90px;
+}
+
+.input_num{
+    height: 73px;
+    margin-top: 0;
+    border-radius: 15px;
+    border: 2px solid #283760;
+    font-size: 30px;
+    width: 150px;
+    color: #283760;
+    font-weight: bold;
+
+}
+
+
+.input_cont{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-right: 30px;
+}
+
+
+.approve_input{
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    z-index: 5;
 }
 }

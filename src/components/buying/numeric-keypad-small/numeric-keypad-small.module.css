@@ -1,11 +1,14 @@
 
 
 .keypad {
-    display: flex; 
-    flex-wrap: wrap;
-    gap: 49px;
-    margin-top: 69px;
-    padding-left: 88px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 49px;
+	margin-top: 69px;
+	padding-left: 88px;
+	max-width: 990px;
+	margin: 0 auto;
+	margin-top: 69px;
 }
 
 .key {
