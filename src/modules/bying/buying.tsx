@@ -11,6 +11,7 @@ import CheckoutFinishScreen from "screens/CheckoutFinishScreen/CheckoutFinishScr
 import ChooseAmountScreen from "screens/ChooseAmountScreen/ChooseAmountScreen";
 import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
 import ChooseRegisterOption from "screens/ChooseRegisterOption/ChooseRegisterOption";
+import ChooseSupplier from "screens/ChooseSupplier/ChooseSupplier";
 import CodeErr from "screens/CodeErr/code_err";
 import DocumentType from "screens/DocumentType/DocumentType";
 import FinalFaceDoc from "screens/FinalFaceDoc/FinalFaceDoc";
@@ -25,6 +26,7 @@ import OperationSystem from "screens/OperationSystem/operation-system";
 import OperationSystemExit from "screens/OperationSystemExit/operation_system_exit";
 import OperationSystemTabs from "screens/OperationSystemTabs/operation-system-tabs";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
+import PayBills from "screens/PayBills/PayBills";
 import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
 import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
 import QRRegister from "screens/QRRegister/QRRegister";
@@ -406,6 +408,13 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
 
     case Screens.SCAN_SELECT_MATAH:
         return <SelectMatah/>;
+     
+    case Screens.PAY_BILLS:
+      return <PayBills/>;
+
+    case Screens.CHOOSE_SUPPLIER:
+        return <ChooseSupplier/>;
+      
       
 
     case Screens.PAYMENT:

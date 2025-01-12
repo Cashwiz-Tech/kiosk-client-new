@@ -185,7 +185,7 @@ const WelcomeScreenNew = () => {
             <div className="mid_title"> תשלומים </div>
 
             <div className="action_btn_cont_line"> 
-                <div className="action_btn_cont"> 
+                <div className="action_btn_cont" onClick={() => {dispatch(setTypeScreen("pay_bill")) ;dispatch(setCurrentScreen(Screens.PAY_BILLS))}}> 
                     <div className="action_btn">
                         <img src={pay_express_icon} className="pay_express_icon"/>
                     </div>
