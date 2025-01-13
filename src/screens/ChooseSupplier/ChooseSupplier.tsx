@@ -333,7 +333,7 @@ const ChooseSupplier = () => {
             </div>
 
 
-            <div className="my_order_3_cont">
+            <div className="my_order_3_cont" onClick={() => {dispatch(setCurrentScreen(Screens.SUPPLIER_ORDER_DETAILS))}}>
                 <img src={arrow_l_blue} className="arrow_l_blue"/>
                 <div className="my_order_3_title">לתשלום</div>
 

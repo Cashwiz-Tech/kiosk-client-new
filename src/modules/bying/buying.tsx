@@ -38,6 +38,10 @@ import ScanSuccess from "screens/ScanSuccess/ScanSuccess";
 import ScanVideo from "screens/ScanVideo/ScanVideo";
 import SelectMatah from "screens/SelectMatah/SelectMatah";
 import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
+import SupplierOrderCashPayment from "screens/SupplierOrderCashPayment/SupplierOrderCashPayment";
+import SupplierOrderChoosePayment from "screens/SupplierOrderChoosePayment/SupplierOrderChoosePayment";
+import SupplierOrderDetails from "screens/SupplierOrderDetails/SupplierOrderDetails";
+import SupplierOrderPersonalDetails from "screens/SupplierOrderPersonalDetails/SupplierOrderPersonalDetails";
 import TotalMatahScreen from "screens/TotalMathah/TotalMathah";
 import UserDetails from "screens/UserDetails/UserDetails";
 import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
@@ -414,8 +418,21 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
 
     case Screens.CHOOSE_SUPPLIER:
         return <ChooseSupplier/>;
+
+    case Screens.SUPPLIER_ORDER_DETAILS:
+      return <SupplierOrderDetails/>;
+
+    case Screens.SUPPLIER_ORDER_PERSONAL_DETAILS:
+      return <SupplierOrderPersonalDetails/>;
+
+    case Screens.SUPPLIER_ORDER_CHOOSE_PAYMENT:
+      return <SupplierOrderChoosePayment/>;
+
+    case Screens.SUPPLIER_ORDER_CASH_PAYMENT:
+      return <SupplierOrderCashPayment/>;
+
       
-      
+
 
     case Screens.PAYMENT:
       return <PaymentScreen />;

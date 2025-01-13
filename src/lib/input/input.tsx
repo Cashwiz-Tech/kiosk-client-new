@@ -10,7 +10,7 @@ type Props = {
 	validate?: (v: string) => void
 	errorMessage?: string
 	isVisited?: boolean
-	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"| "address"
+	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"| "address" | "no_type"
 	focus_func?: (v: boolean) => void
 }
 
@@ -49,7 +49,7 @@ export default function Input({ value, setValue, placeholder, label, errorMessag
 
 	return (
 		<div className={styles.inputContainer}>
-			{label && <label className={styles.label}>{label}</label>}
+			{label && <label className={(type=="no_type" ? styles.label_white : styles.label)}>{label}</label>}
 			<input
 				className={`${styles.input} ${type ? styles[type] : ""}  ${
 					errorMessage?.length && !focus ? styles.error : ""

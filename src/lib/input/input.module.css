@@ -16,6 +16,20 @@
 	font-style: normal;
 	font-weight: 700;
 	line-height: 109%;
+
+}
+
+.label_white{
+	width: 100%;
+	color: white;
+	text-align: right;
+	font-family: "Noto Sans Hebrew";
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 109%;
+	margin-top: 15px;
+	margin-bottom: 10px;
 }
 
 .input {

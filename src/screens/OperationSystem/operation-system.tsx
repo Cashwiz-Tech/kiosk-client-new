@@ -40,7 +40,7 @@ const OperationSystem = () => {
     }
 
     function validate_code(){
-debugger;
+
         if (Value=='111111') { 
            dispatch(setCurrentScreen(Screens.OPERATION_SYSTEM_TABS));
         } else {

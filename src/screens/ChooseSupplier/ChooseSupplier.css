@@ -316,8 +316,9 @@
   border-top: 3px solid white;
   border-bottom: 3px solid white;
   width: 111%;
-  margin-top: 51px;
+  margin-top: 65px;
   display: flex;
+  justify-content: center;
 }
 
 .my_order_1_title{
