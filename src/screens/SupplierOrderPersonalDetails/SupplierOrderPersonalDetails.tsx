@@ -78,7 +78,7 @@ const SupplierOrderPersonalDetails = () => {
     }
   
     const validatePhone = (v: string) => {
-      debugger;
+
       if(v.length>=1 ){
         setIsVisited(true)
         

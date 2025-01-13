@@ -66,7 +66,7 @@ export default function Input({ value, setValue, placeholder, label, errorMessag
 			/>
 			{errorMessage && !focus && <p className={styles.errorMessage}>{errorMessage}</p>}
 			{success && (
-				<div className={styles.successIcon}>
+				<div className={(type=="no_type" ? styles.successIcon_no_type : styles.successIcon)}>
 					<SuccessSVG />
 				</div>
 			)}

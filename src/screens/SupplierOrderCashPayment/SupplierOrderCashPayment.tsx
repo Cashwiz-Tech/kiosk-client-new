@@ -64,7 +64,7 @@ const SupplierOrderCashPayment = () => {
           <img src={insert_matah_icon} className="insert_matah_icon"/>
 
           <div>
-              <div className="cash_type_pay_btn"> 
+              <div className="cash_type_pay_btn" onClick={() => {dispatch(setCurrentScreen(Screens.WAIT_LOADING_DATA))}}> 
                 <div className="cash_type_pay_text">שולם</div>
                 <div className="cash_type_pay_pricetext">200</div>
                 <div className="cash_type_pay_signtext">₪</div>

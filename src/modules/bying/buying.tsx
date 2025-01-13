@@ -42,6 +42,8 @@ import SupplierOrderCashPayment from "screens/SupplierOrderCashPayment/SupplierO
 import SupplierOrderChoosePayment from "screens/SupplierOrderChoosePayment/SupplierOrderChoosePayment";
 import SupplierOrderDetails from "screens/SupplierOrderDetails/SupplierOrderDetails";
 import SupplierOrderPersonalDetails from "screens/SupplierOrderPersonalDetails/SupplierOrderPersonalDetails";
+import SupplierTakeRestPayment from "screens/SupplierTakeRestPayment/SupplierTakeRestPayment";
+import SupplierWaitLoadingData from "screens/SupplierWaitLoadingData/SupplierWaitLoadingData";
 import TotalMatahScreen from "screens/TotalMathah/TotalMathah";
 import UserDetails from "screens/UserDetails/UserDetails";
 import WelcomeScreen from "screens/welcomeScreen/welcome-screen";
@@ -130,7 +132,6 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
 
     case Screens.FINISH_MATAH:
       return <FinishMatahScreen />;
-      
 
 
     case Screens.WELCOME_SCREEN:
@@ -430,6 +431,12 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
 
     case Screens.SUPPLIER_ORDER_CASH_PAYMENT:
       return <SupplierOrderCashPayment/>;
+
+    case Screens.WAIT_LOADING_DATA:
+      return <SupplierWaitLoadingData/>;
+
+    case Screens.TAKE_REST_PAYMENT:
+      return <SupplierTakeRestPayment/>;
 
       
 
