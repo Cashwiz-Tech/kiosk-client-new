@@ -9,7 +9,7 @@ import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch } from "store/store";
 import { PossibleCurrencies } from "types/Currencies";
 import { Screens } from "types/Screens";
-
+import { setSelectedCurrency, setSelectedCurrencyAmount } from "store/currencySlice";
 import cash_blue from "./../../assets/cash_blue.png"
 import card_blue from "./../../assets/card_blue.png"
 
@@ -58,7 +58,17 @@ const SupplierOrderChoosePayment = () => {
           </div>
 
 
-          <div className="cash_btn"> 
+          <div className="cash_btn"  onClick={() => {
+
+                dispatch(
+                  setSelectedCurrencyAmount(1)
+                );
+
+                dispatch(
+                  setSelectedCurrency("USD")
+                );
+
+                dispatch(setCurrentScreen(Screens.PAYMENT))}}> 
               <img src={card_blue} className="cash_icon"/>
               <div className="cash_btn_text">אשראי</div>
           </div>

@@ -41,18 +41,24 @@ const PaymentScreen = () => {
   const params = useParams();
   const partnerData = useAppSelector((state) => state.partner.partnerData);
   const totalAmount = useAppSelector((state) => state.payments.totalAmount);
+  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+
   const numberOfPayments = useAppSelector((state) => state.payments.selectedPayments);
   const { selectedCurrency, selectedCurrencyAmount } = useAppSelector((state) => state.currency);
 
   const handleCreditCardError = (status: CheckoutStatus) => {
     //dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
     dispatch(setCheckoutStatus(status));
-    dispatch(setCurrentScreen(Screens.GET_MATAH));
+    if(typeScreen=="matah"){
+      dispatch(setCurrentScreen(Screens.GET_MATAH));
+    } else {
+      dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
+    }
   };
 
   const makePaymentRequest = async () => {
     try {
-      if (!selectedCurrency || !selectedCurrencyAmount) {
+      if ((!selectedCurrency || !selectedCurrencyAmount)) {
         dispatch(setCurrentScreen(Screens.ORDER_SUMMARY));
         return;
       }

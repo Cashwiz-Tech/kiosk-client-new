@@ -443,6 +443,8 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
 
     case Screens.PAYMENT:
       return <PaymentScreen />;
+
+
     case Screens.PAYMENT_SUCCESS:
       return <PaymentSuccessScreen />;
     case Screens.ORDER_SUMMARY:
