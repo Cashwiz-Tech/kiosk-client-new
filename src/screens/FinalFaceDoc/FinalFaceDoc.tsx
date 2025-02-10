@@ -102,7 +102,8 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 			data: formData,
         }).then((res:any) => {
 
-			if (res.data.error_code==0) {
+      // TODO: maybe remove error_code checks and rely on axios errors
+			if (!res.data.error_code) {
 				onNext()
 			} else {
 				setshow_error(res.data.error);

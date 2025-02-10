@@ -1,5 +1,5 @@
+import { sendOtp } from "api/sendOtp";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
-import axios from "axios";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
 import Input from "lib/input";
@@ -14,6 +14,21 @@ import styles from "./UserDetails.module.css";
 type Props = {
   onNext: (phoneNumber: string) => void;
   onBack: () => void;
+};
+
+function formatPhoneNumber(phone: string, uk?: boolean): string {
+  let result = phone.trim();
+
+  if (result.includes("-")) {
+    result = result.slice(0, 3) + result.slice(4, result.length);
+  }
+
+  // temporary
+  const prefix = uk ? "380" : "972";
+
+  result = prefix + result.substring(1);
+
+  return result;
 };
 
 export default function UserDetails({ onNext, onBack }: Props) {
@@ -59,8 +74,8 @@ export default function UserDetails({ onNext, onBack }: Props) {
           const step = digit * ((i % 2) + 1);
           return counter + (step > 9 ? step - 9 : step);
         }) %
-          10 ===
-          0
+        10 ===
+        0
       ) {
         seterrorMessageIdentity("");
       } else {
@@ -79,54 +94,35 @@ export default function UserDetails({ onNext, onBack }: Props) {
     setidentityNumber(str);
   }
 
-  async function store_phone_number() {
-    let phone_num = phoneNumber.trim();
+  async function sendCode() {
+    const formattedPhoneNumber = formatPhoneNumber(phoneNumber, true);
 
-    if (phone_num.includes("-")) {
-      phone_num = phone_num.slice(0, 3) + phone_num.slice(4, phone_num.length);
+    const { error, validationErrors, customer } = await sendOtp({
+      phoneNumber: formattedPhoneNumber,
+      personalId: identityNumber,
+      channel: "sms",
+    });
+
+    if (error) {
+      // Not handled for now
+
+      console.error(error);
+    } else if (validationErrors) {
+      // Not handled for now
+
+      console.error("Validation errors:");
+      for (const field in validationErrors) {
+        console.error(`Error on ${field}: ${validationErrors[field]}`);
+      }
+    } else if (customer) {
+      dispatch(setPhoneNum(phoneNumber));
+      dispatch(setUserExist(true));
+      // dispatch(setOTP(res.data.otp));
+      dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
+      dispatch(setIDNum(identityNumber));
+    } else {
+      dispatch(setUserExist(false));
     }
-
-    //phone_num=phoneNumber.slice(0,3)+phoneNumber.slice(4,11);
-
-    let phone_num_international = israel_prefix + phone_num.substring(1);
-
-    await axios({
-      url: "https://backend.no1currency.co.il/kiosk_stage/check_user.php?personalId=" + identityNumber + "&phoneNumber=" + phone_num_international,
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (res: any) => {
-        dispatch(setPhoneNum(phoneNumber));
-
-        if (res.data.error_code === 0) {
-          dispatch(setUserExist(true));
-          // dispatch(setOTP(res.data.otp));
-          dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
-          dispatch(setIDNum(identityNumber));
-        } else if (res.data.error_code === 504) {
-          // custumer not found
-
-          dispatch(setUserExist(false));
-          await axios({
-            url: "https://backend.no1currency.co.il/kiosk_stage//send_otp_new.php?phoneNumber=" + phone_num_international,
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((res_1: any) => {
-              if (res_1.data.error_code == 0) {
-                dispatch(setOTP(res_1.data.otp));
-
-                onNext(phoneNumber);
-              }
-            })
-            .catch((err: any) => {});
-        }
-      })
-      .catch((err: any) => {});
   }
 
   return (
@@ -178,7 +174,7 @@ export default function UserDetails({ onNext, onBack }: Props) {
           </Button>
           <Button
             onClick={() => {
-              store_phone_number();
+              sendCode();
             }}
             disabled={!!errorMessage || !isVisited || !!errorMessageIdentity || !isVisitedID}
           >
