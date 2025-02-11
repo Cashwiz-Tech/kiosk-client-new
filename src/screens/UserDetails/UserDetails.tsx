@@ -1,4 +1,4 @@
-import { sendOtp } from "api/sendOtp";
+import { checkUser } from "api/checkUser";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
@@ -8,27 +8,13 @@ import { setCurrentScreen, setOTP, setPhoneNum, setUserExist } from "store/navig
 import { setIDNum } from "store/registerSlice";
 import { useAppDispatch } from "store/store";
 import { Screens } from "types/Screens";
+import { formatPhoneNumber } from "utils/formatPhoneNumber";
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad";
 import styles from "./UserDetails.module.css";
 
 type Props = {
   onNext: (phoneNumber: string) => void;
   onBack: () => void;
-};
-
-function formatPhoneNumber(phone: string, uk?: boolean): string {
-  let result = phone.trim();
-
-  if (result.includes("-")) {
-    result = result.slice(0, 3) + result.slice(4, result.length);
-  }
-
-  // temporary
-  const prefix = uk ? "380" : "972";
-
-  result = prefix + result.substring(1);
-
-  return result;
 };
 
 export default function UserDetails({ onNext, onBack }: Props) {
@@ -94,13 +80,12 @@ export default function UserDetails({ onNext, onBack }: Props) {
     setidentityNumber(str);
   }
 
-  async function sendCode() {
+  async function handleCheckUser() {
     const formattedPhoneNumber = formatPhoneNumber(phoneNumber, true);
 
-    const { error, validationErrors, customer } = await sendOtp({
+    const { error, validationErrors, customer } = await checkUser({
       phoneNumber: formattedPhoneNumber,
       personalId: identityNumber,
-      channel: "sms",
     });
 
     if (error) {
@@ -174,7 +159,7 @@ export default function UserDetails({ onNext, onBack }: Props) {
           </Button>
           <Button
             onClick={() => {
-              sendCode();
+              handleCheckUser();
             }}
             disabled={!!errorMessage || !isVisited || !!errorMessageIdentity || !isVisitedID}
           >

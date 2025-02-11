@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { baseUrl } from "./config";
 
-export type SendOTPResponse = {
+export type ValidateOTPResponse = {
   error: string;
   validationErrors: null,
 } | {
@@ -14,16 +14,16 @@ export type SendOTPResponse = {
   validationErrors: null;
 };
 
-export async function sendOtp({
+export async function validateOtp({
   phoneNumber,
-  channel,
+  otp,
 }: {
   phoneNumber: string;
-  channel: "sms" | "call",
-}): Promise<SendOTPResponse> {
+  otp: string,
+}): Promise<ValidateOTPResponse> {
   try {
     await axios(
-      `${baseUrl}/send-otp`,
+      `${baseUrl}/validate-otp`,
       {
         method: "POST",
         headers: {
@@ -31,7 +31,7 @@ export async function sendOtp({
         },
         data: {
           phoneNumber,
-          channel,
+          otp,
         },
       }
     );
@@ -42,13 +42,6 @@ export async function sendOtp({
     };
   } catch (error) {
     if (error instanceof AxiosError) {
-      if (error.response?.status === 404) {
-        return {
-          error: null,
-          validationErrors: null,
-        };
-      }
-
       if (error.response?.data.errors) {
         return {
           error: null,
@@ -65,7 +58,7 @@ export async function sendOtp({
       };
     }
 
-    console.error(`Unexpected error when sending OTP: ${error}`);
+    console.error(`Unexpected error when validating OTP: ${error}`);
 
     return {
       validationErrors: null,

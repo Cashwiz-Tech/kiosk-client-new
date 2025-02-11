@@ -1,29 +1,33 @@
 import axios, { AxiosError } from "axios";
+import { CustomerInfo } from "types/Customer";
 import { baseUrl } from "./config";
 
-export type SendOTPResponse = {
+export type CheckUserResponse = {
   error: string;
+  customer: null;
   validationErrors: null,
 } | {
   validationErrors: {
     [key: string]: string;
   };
   error: null
+  customer: null;
 } | {
   error: null;
   validationErrors: null;
+  customer: CustomerInfo | null;
 };
 
-export async function sendOtp({
+export async function checkUser({
   phoneNumber,
-  channel,
+  personalId,
 }: {
   phoneNumber: string;
-  channel: "sms" | "call",
-}): Promise<SendOTPResponse> {
+  personalId: string;
+}): Promise<CheckUserResponse> {
   try {
-    await axios(
-      `${baseUrl}/send-otp`,
+    const response = await axios(
+      `${baseUrl}/check-user`,
       {
         method: "POST",
         headers: {
@@ -31,7 +35,7 @@ export async function sendOtp({
         },
         data: {
           phoneNumber,
-          channel,
+          personalId,
         },
       }
     );
@@ -39,6 +43,7 @@ export async function sendOtp({
     return {
       error: null,
       validationErrors: null,
+      customer: response.data.customer,
     };
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -46,12 +51,14 @@ export async function sendOtp({
         return {
           error: null,
           validationErrors: null,
+          customer: null,
         };
       }
 
       if (error.response?.data.errors) {
         return {
           error: null,
+          customer: null,
           validationErrors: error.response.data.errors,
         }
       }
@@ -60,16 +67,19 @@ export async function sendOtp({
         error.message || "Something went wrong";
 
       return {
+        customer: null,
         validationErrors: null,
         error: errorMessage,
       };
     }
 
-    console.error(`Unexpected error when sending OTP: ${error}`);
+    console.error(`Unexpected error when checking user: ${error}`);
 
     return {
       validationErrors: null,
+      customer: null,
       error: "Something went wrong",
     };
   }
 }
+

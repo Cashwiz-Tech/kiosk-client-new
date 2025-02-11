@@ -1,10 +1,11 @@
+import { sendOtp } from "api/sendOtp";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
-import axios from "axios";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
-import { setCurrentScreen, setOTP } from "store/navigationSlice";
+import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { Screens } from "types/Screens";
+import { formatPhoneNumber } from "utils/formatPhoneNumber";
 import styles from "./SendOTPExisted.module.css";
 
 type Props = {
@@ -22,37 +23,23 @@ export default function SendOTPExisted({ onBack }: Props) {
     dispatch(setCurrentScreen(Screens.NOT_MY_NUM));
   }
 
-  async function send_code() {
-    let phone_num = phoneNum.trim();
-    //phone_num=phoneNum.slice(0,3)+phoneNum.slice(4,11);
+  async function handleSendOtp(channel: "sms" | "call") {
+    const phoneFormatted = formatPhoneNumber(phoneNum, true);
 
-    if (phone_num.includes("-")) {
-      phone_num = phone_num.slice(0, 3) + phone_num.slice(4, phone_num.length);
+    const { error, validationErrors } = await sendOtp({
+      phoneNumber: phoneFormatted,
+      channel,
+    });
+
+    if (error || validationErrors) {
+      console.error(`Errors when sending OTP`);
+      return;
     }
 
-    let phone_num_international = "972" + phone_num.substring(1);
-
-    await axios({
-      url:
-        "https://backend.no1currency.co.il/kiosk_stage/send_otp_exist.php?personalId=" + identityNumber + "&phoneNumber=" + phone_num_international,
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res: any) => {
-        if (res.data.error_code === 0) {
-          dispatch(setOTP(res.data.otp));
-          dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
-          dispatch(setCurrentScreen(Screens.INSERT_CODE));
-        } else if (res.data.error_code === 504) {
-          // custumer not found
-        }
-      })
-      .catch((err: any) => {});
+    // dispatch(setOTP(res.data.otp));
+    // dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
+    dispatch(setCurrentScreen(Screens.INSERT_CODE));
   }
-
-  function voice_code() {}
 
   return (
     <>
@@ -71,13 +58,13 @@ export default function SendOTPExisted({ onBack }: Props) {
         </div>
 
         <div className={styles.buttons}>
-          <Button onClick={voice_code} type="outline">
+          <Button onClick={() => handleSendOtp("call")} type="outline">
             <div className={styles.arrowRight}>
               <Arrow />
             </div>
             קוד בהודעה קולית
           </Button>
-          <Button onClick={() => send_code()}>
+          <Button onClick={() => handleSendOtp("sms")}>
             שלח לי קוד
             <Arrow />
           </Button>
