@@ -1,4 +1,4 @@
-import { checkUser } from "api/checkUser";
+import { checkUser } from "api/auth/checkUser";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 import Header from "layouts/header/Header";
 import Button from "lib/button";

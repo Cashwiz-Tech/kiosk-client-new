@@ -9,7 +9,7 @@ import { Screens } from "types/Screens"
 import ErrorModal from "components/buying/error-modal"
 import ErrorTimesModal from "components/buying/error-modal-times/error-modal-times"
 import Header from "layouts/header/Header"
-import { validateOtp } from "api/validateOtp"
+import { validateOtp } from "api/auth/otp"
 import { formatPhoneNumber } from "utils/formatPhoneNumber"
 
 const InsertCode = () => {

@@ -1,4 +1,4 @@
-import { sendOtp } from "api/sendOtp";
+import { sendOtp } from "api/auth/otp";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
