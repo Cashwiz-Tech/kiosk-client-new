@@ -52,10 +52,10 @@ const InsertCode = () => {
 
 
   useEffect(() => {
-    if (showErrorAttempts == false && attempts >= 3) {
+    if (!showErrorAttempts && attempts >= 3) {
       dispatch(setCurrentScreen(Screens.USER_DETAILS));
     }
-  }, [showErrorAttempts]);
+  }, [showErrorAttempts, attempts]);
 
 
   async function validate() {

@@ -14,25 +14,16 @@ export type RegisterResponse = {
   validationErrors: null;
 };
 
-export async function register({
-  phoneNumber,
-  channel,
-}: {
-  phoneNumber: string;
-  channel: "sms" | "call",
-}): Promise<RegisterResponse> {
+export async function register(data: FormData): Promise<RegisterResponse> {
   try {
     await axios(
-      `${baseUrl}/send-otp`,
+      `${baseUrl}/register-new`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        data: {
-          phoneNumber,
-          channel,
-        },
+        data,
       }
     );
 

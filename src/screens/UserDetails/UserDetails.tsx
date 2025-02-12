@@ -1,14 +1,16 @@
 import { checkUser } from "api/checkUser";
+import { sendOtp } from "api/sendOtp";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
 import Input from "lib/input";
 import { useState } from "react";
-import { setCurrentScreen, setOTP, setPhoneNum, setUserExist } from "store/navigationSlice";
+import { setCurrentScreen, setPhoneNum, setUserExist } from "store/navigationSlice";
 import { setIDNum } from "store/registerSlice";
 import { useAppDispatch } from "store/store";
 import { Screens } from "types/Screens";
 import { formatPhoneNumber } from "utils/formatPhoneNumber";
+import { isIdValid } from "utils/validateDocs";
 import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad";
 import styles from "./UserDetails.module.css";
 
@@ -28,8 +30,6 @@ export default function UserDetails({ onNext, onBack }: Props) {
 
   const [focusisVisitedID, setfocusisVisitedID] = useState(true);
 
-  const [israel_prefix, setisrael_prefix] = useState("972");
-
   const validate = (v: string) => {
     let num = v;
 
@@ -40,7 +40,7 @@ export default function UserDetails({ onNext, onBack }: Props) {
         num = num.slice(0, 3) + num.slice(4, num.length);
       }
 
-      if (num.length !== 10 || num[0] != "0") {
+      if (num.length !== 10 || num[0] !== "0") {
         setErrorMessage("מספר הטלפון אינו תקין");
       } else {
         setErrorMessage("");
@@ -49,20 +49,12 @@ export default function UserDetails({ onNext, onBack }: Props) {
   };
 
   const validateId = (id: string) => {
-    var id = id.trim();
+    id = id.trim();
 
-    if (String(id).trim().length > 1) {
+    if (id.length > 1) {
       setisVisitedID(true);
 
-      if (
-        id.length == 9 &&
-        Array.from(id, Number).reduce((counter, digit, i) => {
-          const step = digit * ((i % 2) + 1);
-          return counter + (step > 9 ? step - 9 : step);
-        }) %
-        10 ===
-        0
-      ) {
+      if (isIdValid(id)) {
         seterrorMessageIdentity("");
       } else {
         seterrorMessageIdentity("מספר הת.ז אינו תקין");
@@ -81,10 +73,11 @@ export default function UserDetails({ onNext, onBack }: Props) {
   }
 
   async function handleCheckUser() {
-    const formattedPhoneNumber = formatPhoneNumber(phoneNumber, true);
+    const phoneFormatted = formatPhoneNumber(phoneNumber, true);
+
 
     const { error, validationErrors, customer } = await checkUser({
-      phoneNumber: formattedPhoneNumber,
+      phoneNumber: phoneFormatted,
       personalId: identityNumber,
     });
 
@@ -102,11 +95,24 @@ export default function UserDetails({ onNext, onBack }: Props) {
     } else if (customer) {
       dispatch(setPhoneNum(phoneNumber));
       dispatch(setUserExist(true));
-      // dispatch(setOTP(res.data.otp));
       dispatch(setCurrentScreen(Screens.SEND_OTP_EXISTED));
       dispatch(setIDNum(identityNumber));
     } else {
       dispatch(setUserExist(false));
+      dispatch(setPhoneNum(phoneNumber));
+      dispatch(setIDNum(identityNumber));
+
+      const { error, validationErrors } = await sendOtp({
+        phoneNumber: phoneFormatted,
+        channel: "sms",
+      });
+
+      if (error || validationErrors) {
+        console.error("Could not send OTP");
+        return;
+      }
+
+      onNext(phoneNumber);
     }
   }
 
