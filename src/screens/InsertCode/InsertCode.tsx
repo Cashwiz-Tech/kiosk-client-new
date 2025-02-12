@@ -92,20 +92,20 @@ const InsertCode = () => {
           <h3 className={styles.title}> הקלד את הקוד שקיבלת במסרון </h3>
           <div className={styles.phoneInput}>
 
-            <div className={styles.code_place}>
-              <input type="text" className={styles.code_small_input} value={codeNumber[0] ? codeNumber[0] : ''} />
-              <input type="text" className={styles.code_small_input} value={codeNumber[1] ? codeNumber[1] : ''} />
-              <input type="text" className={styles.code_small_input} value={codeNumber[2] ? codeNumber[2] : ''} />
-              <input type="text" className={styles.code_small_input} value={codeNumber[3] ? codeNumber[3] : ''} />
-              <input type="text" className={styles.code_small_input} value={codeNumber[4] ? codeNumber[4] : ''} />
-              <input type="text" className={styles.code_small_input} value={codeNumber[5] ? codeNumber[5] : ''} />
-            </div>
+            <form className={styles.code_place}>
+              <input type="text" className={styles.code_small_input} value={codeNumber[0] || ''} />
+              <input type="text" className={styles.code_small_input} value={codeNumber[1] || ''} />
+              <input type="text" className={styles.code_small_input} value={codeNumber[2] || ''} />
+              <input type="text" className={styles.code_small_input} value={codeNumber[3] || ''} />
+              <input type="text" className={styles.code_small_input} value={codeNumber[4] || ''} />
+              <input type="text" className={styles.code_small_input} value={codeNumber[5] || ''} />
+            </form>
 
             <p className={styles.no_code}> לא קיבלת קוד? </p>
 
             <p className={styles.resend_code} onClick={resendCode}> שלח לי שוב קוד </p>
 
-            <NumericKeypad setValue={(v: any) => setCodeNumber((prev) => prev + v)} cancel_caracter={cancelCharacter} />
+            <NumericKeypad setValue={(v) => setCodeNumber((prev) => prev + v)} cancel_caracter={cancelCharacter} />
 
           </div>
         </div>
