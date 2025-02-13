@@ -1,10 +1,13 @@
 .container {
 	height: 100%;
-	width: 100%;
+	width: 92%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	margin: 0 auto;
+	border-radius: 24px;
+	background-color: white;
 }
 
 .content {
@@ -20,6 +23,7 @@
 	font-weight: 800;
 	line-height: 109%;
 	margin: 0 0 50px;
+	padding-top: 25px;
 }
 
 .phoneInput {
@@ -36,7 +40,7 @@
 	justify-content: space-between;
 	width: min(100%, 700px);
 	margin-top: 60px;
-	margin-bottom: 130px;
+	margin-bottom: 91px;
 }
 
 .arrowRight {
@@ -90,4 +94,8 @@
 
     outline: none;
 
+}
+
+.main_cont{
+	background-color: #090041;
 }

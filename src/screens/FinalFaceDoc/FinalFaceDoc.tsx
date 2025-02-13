@@ -1,76 +1,83 @@
-import React, { useState } from "react"
+import { useEffect, useState } from "react";
 
-import Button from "lib/button"
+import Button from "lib/button";
 
-import { ReactComponent as Arrow } from "assets/arrow.svg"
-import styles from "./FinalFaceDoc.module.css"
+import { ReactComponent as Arrow } from "assets/arrow.svg";
+import styles from "./FinalFaceDoc.module.css";
 
-import { useAppSelector } from "store/store"
-import Header from "layouts/header/Header"
-import { register } from "api/register"
-import { formatPhoneNumber } from "utils/formatPhoneNumber"
+import { register } from "api/register";
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
+import Header from "layouts/header/Header";
+import { setCurrentScreen } from "store/navigationSlice";
+import { useAppDispatch, useAppSelector } from "store/store";
+import { Screens } from "types/Screens";
+import { formatPhoneNumber } from "utils/formatPhoneNumber";
 
 type Props = {
-  onNext: () => void
-  onBack: () => void
-}
+  onNext: () => void;
+  onBack: () => void;
+};
 
 export default function FinalFaceDoc({ onNext, onBack }: Props) {
-  const [showError, setShowError] = useState('')
-  const token = useAppSelector(state => state.auth.token);
+  const dispatch = useAppDispatch();
+  const [showScreenError, setshowScreenError] = useState(false);
 
-  const fullName = useAppSelector(
-    (state) => state.register.fullName
-  );
+  const [timeoutID, settimeoutID] = useState<any>();
 
-  const email = useAppSelector(
-    (state) => state.register.email
-  );
+  useEffect(() => {
+    setTimeout(() => {
+      setshowScreenError(true);
+    }, 60000);
+  }, []);
 
-  const teudatZehot = useAppSelector(
-    (state) => state.register.IDNum
-  );
+  useEffect(() => {
+    if (showScreenError == false) {
+      clearTimeout(timeoutID);
+    } else {
+      settimeoutID(
+        setTimeout(() => {
+          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+        }, 30000)
+      );
+    }
+  }, [showScreenError]);
 
-  const darkon = useAppSelector(
-    (state) => state.register.DarkonNum
-  );
+  const [showError, setShowError] = useState("");
+  const token = useAppSelector((state) => state.auth.token);
 
-  const documentType = useAppSelector(
-    (state) => state.register.documentType
-  );
+  const fullName = useAppSelector((state) => state.register.fullName);
 
-  const phoneNumber = useAppSelector(
-    (state) => state.navigation.phoneNum
-  );
+  const email = useAppSelector((state) => state.register.email);
 
+  const teudatZehot = useAppSelector((state) => state.register.IDNum);
 
-  const userImage = useAppSelector(
-    (state) => state.register.UserImage
-  );
+  const darkon = useAppSelector((state) => state.register.DarkonNum);
 
-  const userDoc = useAppSelector(
-    (state) => state.register.UserDoc
-  );
+  const documentType = useAppSelector((state) => state.register.documentType);
 
+  const phoneNumber = useAppSelector((state) => state.navigation.phoneNum);
+
+  const userImage = useAppSelector((state) => state.register.UserImage);
+
+  const userDoc = useAppSelector((state) => state.register.UserDoc);
 
   async function goToNextPage() {
-
-    const firstName = fullName.split(' ')[0];
-    const lastName = fullName.split(' ')[1];
+    const firstName = fullName.split(" ")[0];
+    const lastName = fullName.split(" ")[1];
 
     const phoneFormatted = formatPhoneNumber(phoneNumber, true);
 
-    const idToRequest = (documentType === "darkon" ? darkon : teudatZehot);
+    const idToRequest = documentType === "darkon" ? darkon : teudatZehot;
 
     const formData = new FormData();
-    formData.append('fName', firstName);
-    formData.append('lName', lastName);
-    formData.append('address', email);
-    formData.append('personalId', idToRequest);
-    formData.append('phoneNumber', phoneFormatted);
-    formData.append('documentType', documentType);
-    formData.append('photo', userImage);
-    formData.append('idImage', userDoc)
+    formData.append("fName", firstName);
+    formData.append("lName", lastName);
+    formData.append("address", email);
+    formData.append("personalId", idToRequest);
+    formData.append("phoneNumber", phoneFormatted);
+    formData.append("documentType", documentType);
+    formData.append("photo", userImage);
+    formData.append("idImage", userDoc);
 
     const { error, validationErrors } = await register(token as string, formData);
 
@@ -80,7 +87,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
     }
 
     if (validationErrors) {
-      setShowError('Invalid data provided');
+      setShowError("Invalid data provided");
       return;
     }
 
@@ -88,7 +95,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
   }
 
   return (
-    <>
+    <div className={styles.main_cont}>
       <Header></Header>
       <div className={styles.container}>
         <div className={styles.content}>
@@ -96,7 +103,6 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
 
           <img src={userDoc} className={styles.scand_tz} />
           <img src={userImage} className={styles.scand_tz} />
-
 
           {showError ? <p className={styles.error}> {showError} </p> : <></>}
         </div>
@@ -107,12 +113,21 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
             </div>
             חזרה
           </Button>
-          <Button onClick={() => { goToNextPage() }} >
+          <Button
+            onClick={() => {
+              goToNextPage();
+            }}
+          >
             המשך
             <Arrow />
           </Button>
         </div>
       </div>
-    </>
-  )
+
+      <ErrorScrenLeftModal show={showScreenError} setShow={setshowScreenError} />
+    </div>
+  );
+}
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
 }

@@ -5,6 +5,10 @@
   justify-content: space-between;
   padding: 0 100px;
   padding-top: 100px;
+  margin: 0 auto;
+	border-radius: 24px;
+	background-color: white;
+  width: 92%;
 }
 
 .currencies-container {
@@ -12,10 +16,11 @@
   flex-direction: column;
   align-items: center;
   gap: 100px;
+
 }
 
-.title {
-  font-size: 60px;
+.title_currency {
+  font-size: 55px!important;
   font-weight: 800;
   margin: 0;
   padding: 0;
@@ -31,8 +36,21 @@
   height: 16px;
 }
 
-.buttons-container {
+.buttons-container-currency-choose{
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-bottom: 96px;
+  margin-bottom: 31px;
+  margin-top: 120px;
+  justify-content: center;
+}
+
+.main_cont{
+  background-color: #090041;
+}
+
+.currency-box-container{
+  width: 750px;
+  height: 175px;
 }

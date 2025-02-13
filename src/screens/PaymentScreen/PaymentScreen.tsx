@@ -1,7 +1,8 @@
 import { makePayment } from "api/paymentProviderApi";
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { setCheckoutStatus } from "store/checkoutSlice";
 import { setCurrentScreen } from "store/navigationSlice";
@@ -12,16 +13,46 @@ import "./PaymentScreen.css";
 
 const PaymentScreen = () => {
   const dispatch = useAppDispatch();
+
+  const [showScreenError, setshowScreenError] = useState(false);
+
+  const [timeoutID, settimeoutID] = useState<any>();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setshowScreenError(true);
+    }, 60000);
+  }, []);
+
+  useEffect(() => {
+    if (showScreenError == false) {
+      clearTimeout(timeoutID);
+    } else {
+      settimeoutID(
+        setTimeout(() => {
+          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+        }, 30000)
+      );
+    }
+  }, [showScreenError]);
+
   const params = useParams();
   const partnerData = useAppSelector((state) => state.partner.partnerData);
   const customerId = useAppSelector((state) => state.register.IDNum);
   const totalAmount = useAppSelector((state) => state.payments.totalAmount);
+  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+
   const numberOfPayments = useAppSelector((state) => state.payments.selectedPayments);
   const { selectedCurrency, selectedCurrencyAmount } = useAppSelector((state) => state.currency);
 
   const handleCreditCardError = (status: CheckoutStatus) => {
-    dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
+    //dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
     dispatch(setCheckoutStatus(status));
+    if (typeScreen == "matah") {
+      dispatch(setCurrentScreen(Screens.GET_MATAH));
+    } else {
+      dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
+    }
   };
 
   const makePaymentRequest = async () => {
@@ -41,7 +72,8 @@ const PaymentScreen = () => {
       });
       console.log(makePaymentResponse);
       if (makePaymentResponse.success) {
-        dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS));
+        // dispatch(setCurrentScreen(Screens.PAYMENT_SUCCESS));
+        handleCreditCardError(CheckoutStatus.SUCCESS);
       } else {
         if (makePaymentResponse.message === "STACK_ERROR") {
           handleCreditCardError(CheckoutStatus.TECHNICAL_ERROR);
@@ -57,7 +89,7 @@ const PaymentScreen = () => {
     makePaymentRequest();
   }, []);
   return (
-    <>
+    <div className="main_cont">
       <Header></Header>
       <div className="main-container">
         <p className="title">נא להעביר כרטיס</p>
@@ -78,8 +110,6 @@ const PaymentScreen = () => {
               <img src={`/credit-nfc-option.svg`} className="option-icon nfc-option" alt="credit-companies" />
               <p className="option-text">הצמד את הכרטיס</p>
             </div>
-          </div>
-          <div>
             <div className="option-container">
               <img src={`/phone-option.svg`} className="option-icon" alt="credit-companies" />
               <p className="option-text">הצמד את הנייד</p>
@@ -101,7 +131,9 @@ const PaymentScreen = () => {
           </Button>
         </div>
       </div>
-    </>
+
+      <ErrorScrenLeftModal show={showScreenError} setShow={setshowScreenError} />
+    </div>
   );
 };
 

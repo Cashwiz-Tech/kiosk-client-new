@@ -1,0 +1,276 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+  padding-top: 100px;
+  margin: 0 auto;
+	border-radius: 24px;
+	background-color: #090041;
+  width: 92%;
+}
+.container_dark{
+  background-color: #090041!important;
+  width: 100%!important;
+}
+.currencies-container-d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.title {
+  font-size: 60px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+.title_cont_dark{
+  color: white!important;
+  font-size: 50px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+.button {
+  border-color: "#fff";
+}
+
+.button-icon {
+  width: 8px;
+  height: 16px;
+}
+
+.buttons-container-personal-details{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 96px;
+  margin-bottom: 31px;
+  margin-top: 100px;
+  justify-content: center;
+}
+
+.main_cont{
+  background-color: #090041;
+}
+
+.currency-box-container-matah{
+  width: 750px;
+  height: 175px;
+  background-color: #283760;
+  color: white;
+  border-radius: 10px;
+  border: 0;
+}
+
+.currency_text_matah{
+  color: white;
+  font-family: "Noto Sans Hebrew";
+  font-size: 40px;
+}
+
+.celular_bil_icon{
+  width: 186px;
+  height: 116px;
+
+  border-radius: 20px;
+  box-shadow: 1px 1px 20px #ffffffa8;
+  background-color: white;;
+}
+
+.partner{
+  background-color: #2DD5C4;
+}
+
+.partner_icon{
+  margin-top: 20px;
+}
+
+.pelephon_icon,.jawwal_icon{
+  margin-top: 10px;
+}
+
+.cellcom_icon {
+  margin-top: 35px;
+}
+
+.talk_012_icon{
+  margin-top: 12px;
+}
+
+.smile_012_icon{
+  margin-top: 15px;
+}
+
+.celular_bil_cont{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 40px;
+  width: 100%;
+}
+
+.golan_icon{
+  margin-top: 38px;
+}
+
+.text_voice_icon{
+  margin-top: 5px;
+}
+
+.carmel_tunel_icon {
+  margin-top: 40px;
+}
+
+.Kevish_6_icon {
+  margin-top: 20px;
+}
+
+.north_6_icon {
+  margin-top: 8px;
+}
+
+.ravkav{
+  background-color: #C3D021;
+}
+
+.ravkav_icon{
+  margin-top: 10px;
+}
+
+.cello_icon{
+  margin-top: 5px;
+}
+
+.top_header_cont_choose_payment {
+  display: flex;
+  justify-content: flex-start;
+  gap: 41px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.add_another_product_btn{
+  height: 73px;
+  width: 413px;
+  color: #090041;
+  font-size: 36px;
+  background-color: white;
+  border: 0;
+  border-radius: 10px;
+}
+
+.to_payment_btn{
+  width: 460px;
+  height: 116px;
+  background-color: white;
+  border:0;
+  border-radius: 10px;
+  color:#090041;
+  font-size: 40px;
+  background-image: url(./../../assets/arrow_l_blue.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-position: 113px 45px;
+  font-weight: bold;
+}
+
+.order_box{
+  height: 158px;
+  width: 500px;
+  border: 3px solid white;
+  border-radius: 17px;
+  background-color: #4FB9C7;
+  box-shadow: 1px 1px 10px white;
+}
+
+.order_box_cont{
+  position: relative;
+  margin-top: 45px;
+}
+
+.x_remove{
+  position: absolute;
+  right: -70px;
+  top: 60px;
+}
+
+.top_sub_text{
+  font-size: 12px;
+  font-weight: bold;
+  text-align: right;
+  margin-right: 40px;
+  margin-top: 13px;
+}
+
+.white_text{
+  font-size: 12px;
+  font-weight: bold;
+  color:white
+}
+
+.text_box_blue{
+  font-size: 36px;
+  font-weight: bold;
+  color:#090000;
+  direction: ltr;
+}
+
+.main_box_info_cont{
+  display: flex;
+  justify-content: space-around;
+  text-align: right;
+  margin-bottom: 6px;
+}
+
+.price_box_cont{
+  display: flex;
+  background-color: #090041;
+  justify-content: center;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+}
+
+.price_box_text{
+  font-size: 40px;
+  font-weight: bold;
+  color:white;
+}
+
+
+.price_box_subtext{
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  margin-top: 28px;
+  margin-right: 20px;
+}
+
+.cash_btn{
+  height: 238px;
+  width: 773px;
+  background-color: white;
+  margin-bottom: 50px;
+  border-radius: 24px;
+}
+
+.cash_icon{
+  margin-top: 50px;
+}
+
+.cash_btn_text{
+  font-size: 48px;
+  color: #233664;
+  font-weight: bold;
+  margin-TOP: 15PX;
+}
+
+.cash_btn_cont{
+  margin-top: 70px;
+}

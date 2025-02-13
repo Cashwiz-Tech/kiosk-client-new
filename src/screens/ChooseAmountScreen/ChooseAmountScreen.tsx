@@ -5,13 +5,39 @@ import { useAppDispatch, useAppSelector } from "store/store";
 import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
 import ChooseAmountCard from "components/ChooseCurrencyAmountScreen/ChooseAmountCard/ChooseAmountCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChooseAmountScreenError } from "types/UI";
 import Modal from "lib/modal/modal";
 import Header from "layouts/header/Header";
+import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 
 const ChooseAmountScreen = () => {
   const dispatch = useAppDispatch();
+	const [showScreenError, setshowScreenError] = useState(false);
+							
+						
+  const [timeoutID, settimeoutID] = useState<any>();
+	
+	    
+	useEffect(() => {
+		setTimeout(()=>{
+            setshowScreenError(true);
+        }, 60000);
+	}, []);
+
+
+    useEffect(() => {
+        if(showScreenError==false){
+            clearTimeout(timeoutID)
+        } else {
+            settimeoutID(setTimeout(()=>{
+                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
+            }, 30000));
+        }
+    }, [showScreenError]);
+	
+  
+
   const [error, setError] = useState<ChooseAmountScreenError | null>(null);
   const selectedPayments = useAppSelector(
     (state) => state.payments.selectedPayments
@@ -40,7 +66,7 @@ const ChooseAmountScreen = () => {
   };
 
   return (
-    <>
+    <div className="main_cont">
  
        <Header></Header>
       <Modal
@@ -100,7 +126,13 @@ const ChooseAmountScreen = () => {
           </Button>
         </div>
       </div>
-    </>
+      
+	
+			<ErrorScrenLeftModal show={showScreenError}
+				setShow={setshowScreenError}/>
+									
+									
+    </div>
   );
 };
 

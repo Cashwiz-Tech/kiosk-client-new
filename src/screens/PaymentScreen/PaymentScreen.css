@@ -7,11 +7,12 @@
 .total-container {
   background-color: #283760;
   height: 120px;
-  width: 430px;
+  width: 485px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  margin-top: 30px;
 }
 
 .credit-options-container {
@@ -29,6 +30,8 @@
   font-size: 32px;
   font-weight: 600;
   color: #283760;
+  margin-top: 60px;
+  margin-bottom: 46px;
 }
 
 .bottom-text {
@@ -37,21 +40,22 @@
 
 .payment-bottom-container {
   display: flex;
-  padding: 30px 80px 30px 80px;
-  gap: 20px;
+  padding: 0px 80px 15px 80px;
+  gap: 19px;
   width: 630px;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
   border-radius: 12px;
   border: 3px solid #f2f4f8;
+  box-shadow: 1px 1px 25px #00000096;
 }
 
 .button-container {
-  display: flex;
-  justify-content: flex-start;
-  padding-right: 100px;
+    display: flex;
+    justify-content: center;
 
-  width: 100%;
-  margin-bottom: 190px;
+      width: 100%;
+      margin-bottom: 150px;
+      margin-top: 85px;
 }
 
 .promotion-text {
@@ -73,6 +77,11 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  margin: 0 auto;
+	border-radius: 24px;
+	background-color: white;
+  width: 92%;
 }
 
 .option-container {
@@ -98,4 +107,9 @@
   font-size: 28px;
   font-weight: 700;
   color: #283760;
+}
+
+
+.main_cont{
+	background-color: #090041;
 }

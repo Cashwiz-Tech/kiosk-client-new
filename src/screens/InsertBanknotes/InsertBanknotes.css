@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+  padding-top: 100px;
+  margin: 0 auto;
+	border-radius: 24px;
+	background-color: white;
+  width: 92%;
+}
+
+.currencies-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+
+}
+
+.title {
+  font-size: 60px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  color: #283760;
+}
+
+.button {
+  border-color: "#fff";
+}
+
+.button-icon {
+  width: 8px;
+  height: 16px;
+}
+
+.buttons-container-currency-banknote{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 96px;
+  margin-bottom: 31px;
+  margin-top: 140px;
+  justify-content: center;
+}
+
+.main_cont{
+  background-color: #090041;
+}
+
+.currency-box-container{
+  width: 750px;
+  height: 175px;
+}
+
+.smalltitle{
+  font-size: 32px;
+  position: relative;
+  top: -6px;
+}
+
+.is_icon{
+  position: relative;
+  top: 13px;
+}
+
+.subtitle{
+  color:#283760;
+  font-size: 40px;
+  
+  font-weight: 500;
+}

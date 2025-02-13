@@ -4,14 +4,14 @@ import cancel from '../../../assets/key_del.png'
 type Props = {
 	setValue: (v: string) => void
 	cancel_caracter: (v: string) => void
-
+	color?:string
 
 }
 
-export default function NumericKeypad({ setValue, cancel_caracter }: Props) {
+export default function NumericKeypad({color, setValue, cancel_caracter }: Props) {
 
 	return (
-		<div className={styles.container}>
+		<div className={(color && color=="white"? styles.container_white: styles.container)}>
 			<div className={styles.keypad} dir="ltr">
 				{Array.from({ length: 9 }, (v, idx) => (
 					<div className={styles.key} key={idx} onClick={() => setValue(`${idx + 1}`)}>

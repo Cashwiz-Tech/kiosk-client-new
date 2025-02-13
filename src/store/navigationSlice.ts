@@ -6,6 +6,7 @@ interface NavigationState {
   phoneNum: string;
   OTP: string;
   UserExist: boolean;
+  typeScreen:string;
 }
 
 const initialState: NavigationState = {
@@ -13,6 +14,7 @@ const initialState: NavigationState = {
   phoneNum: "",
   OTP: "",
   UserExist: false,
+  typeScreen: ""
 };
 
 export const navigationSlice = createSlice({
@@ -31,8 +33,11 @@ export const navigationSlice = createSlice({
     setUserExist: (state, action: PayloadAction<boolean>) => {
       state.UserExist = action.payload;
     },
+    setTypeScreen: (state, action: PayloadAction<string>) => {
+      state.typeScreen = action.payload;
+    },
   },
 });
 
-export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist } = navigationSlice.actions;
+export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist ,setTypeScreen } = navigationSlice.actions;
 export default navigationSlice.reducer;
