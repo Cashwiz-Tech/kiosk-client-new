@@ -1,6 +1,5 @@
 import { sendOtp } from "api/auth/otp";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
-import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
 import { setCurrentScreen } from "store/navigationSlice";
@@ -43,7 +42,7 @@ export default function SendOTPExisted({ onBack }: Props) {
   }
 
   return (
-    <div className={styles.main_cont}>
+    <>
       <Header></Header>
       <div className={styles.container}>
         <div className={styles.content}>
@@ -84,8 +83,6 @@ export default function SendOTPExisted({ onBack }: Props) {
           </Button>
         </div>
       </div>
-
-      <ErrorScrenLeftModal show={showScreenError} setShow={setshowScreenError} />
-    </div>
+    </>
   );
 }

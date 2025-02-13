@@ -11,22 +11,13 @@ import CheckoutFinishScreen from "screens/CheckoutFinishScreen/CheckoutFinishScr
 import ChooseAmountScreen from "screens/ChooseAmountScreen/ChooseAmountScreen";
 import ChooseCurrencyScreen from "screens/ChooseCurrency/ChooseCurrencyScreen";
 import ChooseRegisterOption from "screens/ChooseRegisterOption/ChooseRegisterOption";
-import ChooseSupplier from "screens/ChooseSupplier/ChooseSupplier";
-import CodeErr from "screens/CodeErr/code_err";
 import DocumentType from "screens/DocumentType/DocumentType";
 import FinalFaceDoc from "screens/FinalFaceDoc/FinalFaceDoc";
-import FinishMatahScreen from "screens/FinishMatah/FinishMatah";
 import FinishRegister from "screens/FinishRegister/FinishRegister";
-import GetMatahScreen from "screens/GetMatah/GetMatah";
-import InsertBanknotesScreen from "screens/InsertBanknotes/InsertBanknotes";
 import InsertCode from "screens/InsertCode/InsertCode";
 import LinkRegister from "screens/LinkRegister/LinkRegister";
 import NotMyNum from "screens/NotMyNum/NotMyNum";
-import OperationSystem from "screens/OperationSystem/operation-system";
-import OperationSystemExit from "screens/OperationSystemExit/operation_system_exit";
-import OperationSystemTabs from "screens/OperationSystemTabs/operation-system-tabs";
 import OrderSummaryScreen from "screens/OrderSummaryScreen/OrderSummaryScreen";
-import PayBills from "screens/PayBills/PayBills";
 import PaymentScreen from "screens/PaymentScreen/PaymentScreen";
 import PaymentSuccessScreen from "screens/PaymentSuccessScreen/PaymentSuccessScreen";
 import QRRegister from "screens/QRRegister/QRRegister";
@@ -36,20 +27,10 @@ import ScanFace from "screens/ScanFace/ScanFace";
 import ScanFaceUserExist from "screens/ScanFaceUserExist/ScanFaceUserExist";
 import ScanSuccess from "screens/ScanSuccess/ScanSuccess";
 import ScanVideo from "screens/ScanVideo/ScanVideo";
-import SelectMatah from "screens/SelectMatah/SelectMatah";
 import SendOTPExisted from "screens/SendOTPExisted/SendOTPExisted";
-import SupplierOrderCashPayment from "screens/SupplierOrderCashPayment/SupplierOrderCashPayment";
-import SupplierOrderChoosePayment from "screens/SupplierOrderChoosePayment/SupplierOrderChoosePayment";
-import SupplierOrderDetails from "screens/SupplierOrderDetails/SupplierOrderDetails";
-import SupplierOrderPersonalDetails from "screens/SupplierOrderPersonalDetails/SupplierOrderPersonalDetails";
-import SupplierTakeRestPayment from "screens/SupplierTakeRestPayment/SupplierTakeRestPayment";
-import SupplierWaitLoadingData from "screens/SupplierWaitLoadingData/SupplierWaitLoadingData";
-import TotalMatahScreen from "screens/TotalMathah/TotalMathah";
 import UserDetails from "screens/UserDetails/UserDetails";
-import WelcomeScreenMatah from "screens/welcomeScreenMatah/welcome-screen-matah";
 import WelcomeScreenNew from "screens/welcomeScreenNew/welcome-screen-new";
 import WelcomeScreenSecond from "screens/welcomeScreenSecond/welcome-screen-second";
-import YouChooseMatahScreen from "screens/YouChooseMatah/YouChooseMatah";
 import { setCurrentScreen } from "store/navigationSlice";
 import { setPartnerData } from "store/partnerSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
@@ -115,66 +96,10 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
       );
     case Screens.CHOOSE_CURRENCY:
       return <ChooseCurrencyScreen />;
-
-    case Screens.INSERT_BANKNOTES:
-      return <InsertBanknotesScreen />;
-
-    case Screens.YOU_CHOOSE_MATAH:
-      return <YouChooseMatahScreen />;
-
-    case Screens.TOTAL_MATAH:
-      return <TotalMatahScreen />;
-
-    case Screens.GET_MATAH:
-      return <GetMatahScreen />;
-
-    case Screens.FINISH_MATAH:
-      return <FinishMatahScreen />;
-
     case Screens.WELCOME_SCREEN:
       return (
         <>
           <WelcomeScreenNew />
-          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
-        </>
-      );
-
-    case Screens.OPERATION_SYSTEM:
-      return (
-        <>
-          <OperationSystem />
-          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
-        </>
-      );
-
-    case Screens.CODE_ERR:
-      return (
-        <>
-          <CodeErr />
-          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
-        </>
-      );
-
-    case Screens.OPERATION_SYSTEM_TABS:
-      return (
-        <>
-          <OperationSystemTabs />
-          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
-        </>
-      );
-
-    case Screens.OPERATION_SYSTEM_EXIT:
-      return (
-        <>
-          <OperationSystemExit />
-          <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
-        </>
-      );
-
-    case Screens.WELCOME_SCREEN_MATAH:
-      return (
-        <>
-          <WelcomeScreenMatah />
           <ContactModal show={show} setShow={setShow} phoneNumber={phoneNumberContact} />
         </>
       );
@@ -346,14 +271,14 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
         <>
           <FinishRegister
             onNext={() => {
-              switch (selectedService) {
+              switch(selectedService) {
                 case Services.Cashwiz: {
                   dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));
                   break;
                 }
-                default:
-                  dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+                default: dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
               }
+              
             }}
             onBack={() => {
               dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
@@ -408,37 +333,8 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
 
     case Screens.CHOOSE_AMOUNT:
       return <ChooseAmountScreen />;
-
-    case Screens.SCAN_SELECT_MATAH:
-      return <SelectMatah />;
-
-    case Screens.PAY_BILLS:
-      return <PayBills />;
-
-    case Screens.CHOOSE_SUPPLIER:
-      return <ChooseSupplier />;
-
-    case Screens.SUPPLIER_ORDER_DETAILS:
-      return <SupplierOrderDetails />;
-
-    case Screens.SUPPLIER_ORDER_PERSONAL_DETAILS:
-      return <SupplierOrderPersonalDetails />;
-
-    case Screens.SUPPLIER_ORDER_CHOOSE_PAYMENT:
-      return <SupplierOrderChoosePayment />;
-
-    case Screens.SUPPLIER_ORDER_CASH_PAYMENT:
-      return <SupplierOrderCashPayment />;
-
-    case Screens.WAIT_LOADING_DATA:
-      return <SupplierWaitLoadingData />;
-
-    case Screens.TAKE_REST_PAYMENT:
-      return <SupplierTakeRestPayment />;
-
     case Screens.PAYMENT:
       return <PaymentScreen />;
-
     case Screens.PAYMENT_SUCCESS:
       return <PaymentSuccessScreen />;
     case Screens.ORDER_SUMMARY:

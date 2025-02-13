@@ -1,135 +1,121 @@
-import { ReactComponent as Arrow } from "assets/arrow.svg";
-import { ReactComponent as SuccessSVG } from "assets/success.svg";
-import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
-import Header from "layouts/header/Header";
-import Button from "lib/button";
-import Input from "lib/input";
-import { useEffect, useState } from "react";
-import { setCurrentScreen } from "store/navigationSlice";
-import { setDarkonNum, setDBirth, setdocumentType, setIDNum } from "store/registerSlice";
-import { useAppDispatch } from "store/store";
-import { Screens } from "types/Screens";
-import { isIdValid } from "utils/validateDocs";
-import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad";
-import styles from "./DocumentType.module.css";
+
+
+import { useEffect, useState } from "react"
+import Input from "lib/input"
+import Button from "lib/button"
+import NumericKeypad from "../../components/buying/numeric-keypad/numeric-keypad"
+import { ReactComponent as Arrow } from "assets/arrow.svg"
+import styles from "./DocumentType.module.css"
+import { setPhoneNum } from "store/navigationSlice"
+import { useAppDispatch } from "store/store"
+import LettersKeypad from "components/buying/letters-keypad/letters-keypad"
+import { ReactComponent as SuccessSVG } from "assets/success.svg"
+import { setDarkonNum, setDBirth, setdocumentType, setIDNum } from "store/registerSlice"
+import Header from "layouts/header/Header"
+import { isIdValid } from "utils/validateDocs"
 
 type Props = {
-  onNext: () => void;
-  onBack: () => void;
-};
+  onNext: () => void
+  onBack: () => void
+}
 
 export default function DocumentType({ onNext, onBack }: Props) {
   const dispatch = useAppDispatch();
-  const [showScreenError, setshowScreenError] = useState(false);
 
-  const [timeoutID, settimeoutID] = useState<any>();
+  const [emailAddress, setemailAddress] = useState<string>("")
 
-  useEffect(() => {
-    setTimeout(() => {
-      setshowScreenError(true);
-    }, 60000);
-  }, []);
+  const [userName, setuserName] = useState("")
+  const [darkonNum, setdarkonNum] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [ErrorMessageDarkon, setErrorMessageDarkon] = useState("")
 
-  useEffect(() => {
-    if (showScreenError == false) {
-      clearTimeout(timeoutID);
-    } else {
-      settimeoutID(
-        setTimeout(() => {
-          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
-        }, 30000)
-      );
-    }
-  }, [showScreenError]);
+  const [errorMessageIdentity, seterrorMessageIdentity] = useState("")
+  const [errorMessageBDay, seterrorMessageBDay] = useState("")
+  const [isVisitedDate, setisVisitedDate] = useState(false)
 
-  const [emailAddress, setemailAddress] = useState<string>("");
+  const [isVisitedID, setisVisitedID] = useState(false)
+  const [isVisitedDarkon, setisVisitedDarkon] = useState(false)
 
-  const [userName, setuserName] = useState("");
-  const [darkonNum, setdarkonNum] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [ErrorMessageDarkon, setErrorMessageDarkon] = useState("");
+  const [focusisVisitedID, setfocusisVisitedID] = useState(true)
 
-  const [errorMessageIdentity, seterrorMessageIdentity] = useState("");
-  const [errorMessageBDay, seterrorMessageBDay] = useState("");
-  const [isVisitedDate, setisVisitedDate] = useState(false);
-
-  const [isVisitedID, setisVisitedID] = useState(false);
-  const [isVisitedDarkon, setisVisitedDarkon] = useState(false);
-
-  const [focusisVisitedID, setfocusisVisitedID] = useState(true);
-
-  const [docType, setDocType] = useState("id");
-  const [birthdate, setBirthdate] = useState("");
-  const [isBirthdateValid, setIsBirthdateValid] = useState(false);
+  const [docType, setDocType] = useState('id')
+  const [birthdate, setBirthdate] = useState('')
+  const [isBirthdateValid, setIsBirthdateValid] = useState(false)
 
   const validateId = () => {
+
     if (userName.trim().length > 1) {
       setisVisitedID(true);
 
       if (isIdValid(userName)) {
-        seterrorMessageIdentity("");
+        seterrorMessageIdentity("")
       } else {
-        seterrorMessageIdentity("מספר הת.ז אינו תקין");
+        seterrorMessageIdentity("מספר הת.ז אינו תקין")
       }
     }
-  };
+  }
 
   function validateDarkon() {
+
     if (darkonNum.length > 1) {
       setisVisitedDarkon(true);
 
       if (darkonNum.length === 9) {
-        setErrorMessageDarkon("");
+        setErrorMessageDarkon("")
       } else {
-        setErrorMessageDarkon("מספר דרכון לא תקין");
+        setErrorMessageDarkon('מספר דרכון לא תקין')
       }
     }
   }
 
   function cancel_caracter() {
     let str = userName.substring(0, userName.length - 1);
-    setuserName(str);
+    setuserName(str)
   }
 
   function cancel_caracter_user() {
     let str = birthdate.substring(0, birthdate.length - 1);
-    setBirthdate(str);
+    setBirthdate(str)
   }
 
   function cancel_caracter_darkon() {
     let str = darkonNum.substring(0, darkonNum.length - 1);
-    setdarkonNum(str);
+    setdarkonNum(str)
   }
 
   useEffect(() => {
     validateDate();
   }, [birthdate]);
 
+
   function validateDate() {
     if (birthdate.length > 1) {
       setisVisitedDate(true);
       if (birthdate.length === 8) {
-        seterrorMessageBDay("");
+        seterrorMessageBDay('');
         setIsBirthdateValid(true);
       } else {
-        seterrorMessageBDay("תאריך לידה לא תקין");
+        seterrorMessageBDay('תאריך לידה לא תקין');
         setIsBirthdateValid(false);
       }
     }
+
   }
 
   function go_to_next_page() {
-    let birth_format = birthdate.substring(4, 8) + "-" + birthdate.substring(2, 4) + "-" + birthdate.substring(0, 2);
+
+    let birth_format = birthdate.substring(4, 8) + '-' + birthdate.substring(2, 4) + '-' + birthdate.substring(0, 2);
 
     dispatch(setIDNum(userName));
     dispatch(setDarkonNum(darkonNum));
     dispatch(setDBirth(birth_format));
     dispatch(setdocumentType(docType));
-    onNext();
+    onNext()
+
   }
 
   return (
-    <div className={styles.main_cont}>
+    <>
       <Header></Header>
       <div className={styles.container}>
         <div className={styles.content}>
@@ -137,22 +123,14 @@ export default function DocumentType({ onNext, onBack }: Props) {
           <p className={styles.subtitle}> סוג אמצעי הזיהוי שלך </p>
 
           <div className={styles.doc_type_btn_cont}>
-            <div className={styles.doc_type_btn + (docType === "id" ? " " + styles.selected_type : "")} onClick={() => setDocType("id")}>
-              {" "}
-              תעודת זהות{" "}
-            </div>
-            <div className={styles.doc_type_btn + (docType === "darkon" ? " " + styles.selected_type : "")} onClick={() => setDocType("darkon")}>
-              {" "}
-              דרכון{" "}
-            </div>
-            <div className={styles.doc_type_btn + (docType === "driver" ? " " + styles.selected_type : "")} onClick={() => setDocType("driver")}>
-              {" "}
-              רשיון נהיגה{" "}
-            </div>
+            <div className={styles.doc_type_btn + (docType === 'id' ? ' ' + styles.selected_type : '')} onClick={() => setDocType('id')}> תעודת זהות </div>
+            <div className={styles.doc_type_btn + (docType === 'darkon' ? ' ' + styles.selected_type : '')} onClick={() => setDocType('darkon')}> דרכון </div>
+            <div className={styles.doc_type_btn + (docType === 'driver' ? ' ' + styles.selected_type : '')} onClick={() => setDocType('driver')}> רשיון נהיגה </div>
           </div>
 
           <div className={styles.phoneInput}>
-            {docType === "id" || docType === "driver" ? (
+
+            {docType === "id" || docType === "driver" ?
               <Input
                 type="identityNumber"
                 value={userName}
@@ -161,11 +139,8 @@ export default function DocumentType({ onNext, onBack }: Props) {
                 errorMessage={errorMessageIdentity}
                 isVisited={isVisitedID}
                 validate={validateId}
-                focus_func={() => {
-                  setfocusisVisitedID(true);
-                }}
-              />
-            ) : (
+                focus_func={() => { setfocusisVisitedID(true) }}
+              /> :
               <Input
                 type="darkon"
                 value={darkonNum}
@@ -174,114 +149,49 @@ export default function DocumentType({ onNext, onBack }: Props) {
                 errorMessage={ErrorMessageDarkon}
                 isVisited={isVisitedDarkon}
                 validate={validateDarkon}
-                focus_func={() => {
-                  setfocusisVisitedID(true);
-                }}
+                focus_func={() => { setfocusisVisitedID(true) }}
               />
-            )}
+            }
+
+
 
             <p className={styles.birth_date_title}> תאריך לידה </p>
-            <div
-              className={
-                styles.date_birth + (isBirthdateValid && isVisitedDate ? " " + styles.date_valid : isVisitedDate ? " " + styles.date_notvalid : "")
-              }
-            >
+            <div className={styles.date_birth + (isBirthdateValid && isVisitedDate ? ' ' + styles.date_valid : (isVisitedDate ? ' ' + styles.date_notvalid : ''))}>
               <div className={styles.date_birth_img}> </div>
 
               <div className={styles.date_birth_input_year}>
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[7] ? birthdate[6] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[6] ? birthdate[6] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[5] ? birthdate[5] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[4] ? birthdate[4] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
+                <input type="text" className={styles.date_birth_input} value={birthdate[7] ? birthdate[6] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
+                <input type="text" className={styles.date_birth_input} value={birthdate[6] ? birthdate[6] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
+                <input type="text" className={styles.date_birth_input} value={birthdate[5] ? birthdate[5] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
+                <input type="text" className={styles.date_birth_input} value={birthdate[4] ? birthdate[4] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
                 <span className={styles.year_text}>שנה </span>
               </div>
 
               <div className={styles.date_birth_input_month}>
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[3] ? birthdate[3] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[2] ? birthdate[2] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
+                <input type="text" className={styles.date_birth_input} value={birthdate[3] ? birthdate[3] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
+                <input type="text" className={styles.date_birth_input} value={birthdate[2] ? birthdate[2] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
                 <span className={styles.month_text}>חודש </span>
               </div>
 
               <div className={styles.date_birth_input_day}>
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[1] ? birthdate[1] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
-                <input
-                  type="text"
-                  className={styles.date_birth_input}
-                  value={birthdate[0] ? birthdate[0] : ""}
-                  onFocus={() => {
-                    setfocusisVisitedID(false);
-                  }}
-                />
+                <input type="text" className={styles.date_birth_input} value={birthdate[1] ? birthdate[1] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
+                <input type="text" className={styles.date_birth_input} value={birthdate[0] ? birthdate[0] : ''} onFocus={() => { setfocusisVisitedID(false) }} />
                 <span className={styles.day_text}>יום </span>
               </div>
 
-              {errorMessageBDay === "" && isVisitedDate ? (
-                <div className={styles.successIcon}>
-                  <SuccessSVG />
-                </div>
-              ) : (
-                ""
-              )}
+              {errorMessageBDay === '' && isVisitedDate ? <div className={styles.successIcon}>
+                <SuccessSVG />
+              </div> : ''}
             </div>
 
-            {errorMessageBDay ? <p className={styles.errorMessage}>{errorMessageBDay}</p> : ""}
 
-            {focusisVisitedID && docType === "id" ? (
-              <NumericKeypad setValue={(v: any) => setuserName((prev) => prev + v)} cancel_caracter={cancel_caracter} />
-            ) : focusisVisitedID && docType === "darkon" ? (
-              <NumericKeypad setValue={(v: any) => setdarkonNum((prev) => prev + v)} cancel_caracter={cancel_caracter_user} />
-            ) : (
-              <NumericKeypad setValue={(v: any) => setBirthdate((prev) => prev + v)} cancel_caracter={cancel_caracter_user} />
-            )}
+
+            {errorMessageBDay ? <p className={styles.errorMessage}>{errorMessageBDay}</p> : ''}
+
+            {focusisVisitedID && docType === 'id' ? <NumericKeypad setValue={(v: any) => setuserName((prev) => prev + v)} cancel_caracter={cancel_caracter} /> :
+              focusisVisitedID && docType === 'darkon' ?
+                <NumericKeypad setValue={(v: any) => setdarkonNum((prev) => prev + v)} cancel_caracter={cancel_caracter_user} /> : <NumericKeypad setValue={(v: any) => setBirthdate((prev) => prev + v)} cancel_caracter={cancel_caracter_user} />}
+
           </div>
         </div>
         <div className={styles.buttons}>
@@ -291,19 +201,12 @@ export default function DocumentType({ onNext, onBack }: Props) {
             </div>
             חזרה
           </Button>
-          <Button
-            onClick={() => {
-              go_to_next_page();
-            }}
-            disabled={!!errorMessageIdentity || (!isVisitedID && !isVisitedDarkon) || !!errorMessageBDay || !isVisitedDate}
-          >
+          <Button onClick={() => { go_to_next_page(); }} disabled={(!!errorMessageIdentity || (!isVisitedID && !isVisitedDarkon)) || (!!errorMessageBDay || !isVisitedDate)}>
             המשך
             <Arrow />
           </Button>
         </div>
       </div>
-
-      <ErrorScrenLeftModal show={showScreenError} setShow={setshowScreenError} />
-    </div>
-  );
+    </>
+  )
 }

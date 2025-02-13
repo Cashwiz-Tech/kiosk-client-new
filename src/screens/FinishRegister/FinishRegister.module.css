@@ -1,13 +1,10 @@
 .container {
 	height: 100%;
-	width: 92%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	margin: 0 auto;
-	border-radius: 24px;
-	background-color: white;
 }
 
 .content {
@@ -83,10 +80,4 @@
 .scand_tz{
 	width: 100%;
 	margin-bottom: 20px;
-}
-
-
-
-.main_cont{
-	background-color: #090041;
 }

@@ -9,11 +9,6 @@
     margin-right: -51px;
 }
 
-.container_gray{
-    background: #AFC0D9;
-    width: 100%;
-    margin-right: 0px;
-}
 .keypad {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);

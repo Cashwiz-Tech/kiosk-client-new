@@ -12,39 +12,13 @@ import Header from "layouts/header/Header"
 import { validateOtp } from "api/auth/otp"
 import { formatPhoneNumber } from "utils/formatPhoneNumber"
 import { setAuthData } from "store/authSlice"
-import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 
 const InsertCode = () => {
-    
   const dispatch = useAppDispatch();
-    const [showScreenError, setshowScreenError] = useState(false);
-    const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
-    const [timeoutID, settimeoutID] = useState<any>();
-								
-	useEffect(() => {
-		setTimeout(()=>{
-            setshowScreenError(true);
-        }, 60000);
-	}, []);
-
-
-    useEffect(() => {
-        if(showScreenError==false){
-            clearTimeout(timeoutID)
-        } else {
-            settimeoutID(setTimeout(()=>{
-                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
-            }, 30000));
-        }
-    }, [showScreenError]);
-
   const phoneNumber = useAppSelector(state => state.navigation.phoneNum);
   const [codeNumber, setCodeNumber] = useState("")
   const [showError, setShowError] = useState(false);
   const [showErrorAttempts, setShowErrorAttempts] = useState(false);
-
-
-    
   const [attempts, setAttempts] = useState(0);
 
   const OTP = useAppSelector(
@@ -153,14 +127,8 @@ const InsertCode = () => {
 
         <ErrorTimesModal show={showErrorAttempts}
           setShow={setShowErrorAttempts} />
-  
-        <ErrorScrenLeftModal show={showScreenError}
-        setShow={setshowScreenError}/>
-
-    </div>
-
-
-    </div>
+      </div>
+    </>
   )
 };
 
