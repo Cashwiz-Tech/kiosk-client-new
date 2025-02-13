@@ -6,8 +6,9 @@ export function formatPhoneNumber(phone: string, uk?: boolean): string {
   }
 
   // for local development with ukrainian numbers only
-  // const prefix = uk ? "380" : "972";
-  const prefix = "972";
+  const prefix = uk ? "380" : "972";
+
+  // const prefix = "972";
 
   result = prefix + result.substring(1);
 

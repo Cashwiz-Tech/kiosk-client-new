@@ -10,3 +10,17 @@ export type OTPResponse = {
   validationErrors: null;
   error: null;
 };
+
+export type ValidateOTPResponse = {
+  error: string;
+  validationErrors: null;
+  token: null;
+} | {
+  validationErrors: ValidationErrors;
+  error: null;
+  token: null;
+} | {
+  token: string;
+  validationErrors: null;
+  error: null;
+}

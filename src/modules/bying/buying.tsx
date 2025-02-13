@@ -35,12 +35,15 @@ import { setCurrentScreen } from "store/navigationSlice";
 import { setPartnerData } from "store/partnerSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { Screens } from "types/Screens";
+import { Services } from "types/Services";
 
 export default function Buying({ setShow, show }: { setShow: (val: boolean) => void; show: boolean }) {
   const params = useParams();
   const [isLoadingPartnerData, setIsLoadingPartnerData] = useState(false);
   const dispatch = useAppDispatch();
   const currentScreen = useAppSelector((state) => state.navigation.currentScreen);
+  const selectedService = useAppSelector((state) => state.service.service);
+  console.log(`selectedService: ${selectedService !== null}`);
   const [isShowOnBoarding, setIsShowOnBoarding] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberContact, setphoneNumberContact] = useState("0527686543");
@@ -268,7 +271,14 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
         <>
           <FinishRegister
             onNext={() => {
-              dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+              switch(selectedService) {
+                case Services.Cashwiz: {
+                  dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));
+                  break;
+                }
+                default: dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+              }
+              
             }}
             onBack={() => {
               dispatch(setCurrentScreen(Screens.FINAL_FACE_DOC));
