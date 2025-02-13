@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "store/store";
 import { CheckoutStatus } from "types/CheckoutStatus";
 import { Screens } from "types/Screens";
 import "./checkout-finish-screen.css";
-import Header from "layouts/header/Header";
 
 const CheckoutFinishScreen = () => {
   const checkoutStatus = useAppSelector((state) => state.checkout.checkoutStatus);
@@ -16,34 +15,27 @@ const CheckoutFinishScreen = () => {
         return {
           header: (
             <div className="checkout-header">
-              <p className="title">העסקה בוצעה בהצלחה
-         
-              </p>
-              <p className="message-text">
-              ברגעים אלו נשלח אליך מסרון עם פרטי העסקה
-      
-              </p>
+              <p className="title">המתן להוצאת השטרות</p>
+              <p className="message-text">ברגעים אלו נשלח אליך מסרון עם פרטי העסקה</p>
             </div>
           ),
-          icon: "/success.svg",
+          icon: "/success-person.svg",
         };
 
       case CheckoutStatus.CREDIT_CARD_ERROR:
         return {
           header: (
             <div className="checkout-header">
-              <p className="title">אופסס..
-              <br />
-              מתנצלים אירעה תקלה 
-              </p>
+              <p className="title">לא התקבל אישור על העסקה</p>
               <p className="message-text">
-              אבל אין דאגה חשבונך לא חויב
-       
+                לצערנו לא קיבלנו אישור מחברת האשראי
+                <br />
+                <br />
+                אנא נסה שוב מאוחר יותר או פנה לחברת האשראי לבירור
               </p>
             </div>
           ),
-          icon: "/success.svg",
-
+          icon: "/error-person.svg",
         };
       case CheckoutStatus.TECHNICAL_ERROR:
         return {
@@ -81,11 +73,7 @@ const CheckoutFinishScreen = () => {
 
   const { header, icon } = getCheckoutConfig();
   return (
-    
-    <div className="main_cont">
- 
-      <Header></Header>
-      <div className="container">
+    <div className="main-container">
       {header}
       <img src={icon} className={""} alt="Currency" />
       <div className="checkout-buttons-container">
@@ -107,7 +95,6 @@ const CheckoutFinishScreen = () => {
           <img src={"/phone.svg"} alt="right arrow" />
           <p>03-5555555</p>
         </div>
-      </div>
       </div>
     </div>
   );

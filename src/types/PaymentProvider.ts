@@ -6,4 +6,5 @@ export interface MakePaymentRequest {
   amount: number;
   pinpadId: string;
   partnerId: number;
+  customerId: string;
 }

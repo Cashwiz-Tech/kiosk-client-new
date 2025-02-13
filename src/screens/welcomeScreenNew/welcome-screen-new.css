@@ -54,7 +54,7 @@
     font-size: 27px;
     font-weight: bold;
     text-align: center;
-    width: 92%;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -79,40 +79,5 @@
     width: 262px;
 }
 
-.buyme{
-    margin-top: 15px;
-}
-
-.passportcard{
-    margin-top: 25px;
-}
-
-.w_finance{
-    margin-top: 30px;
-}
-
-.rewire{
-    margin-top: 32px;
-}
-
-.w_union{
-    margin-top: 50px;
-}
-
-.mony_send{
-    margin-top: 25px;
-}
-
-.arrow_r, .arrow_l{
-    width: 30px;
-    height: 30px;
-    margin-top: 38px;
-}
-
-.progress_p_cont{
-    gap: 15px;
-    display: flex;
-    justify-content: center;
-}
 
 }

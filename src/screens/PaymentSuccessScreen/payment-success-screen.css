@@ -33,9 +33,7 @@
   color: #283760;
   gap: 10px;
   position: relative;
-  margin-top: 43px;
-  margin-bottom: 33px;
-  justify-content: center;
+  top: 50px;
 }
 
 .main-container {

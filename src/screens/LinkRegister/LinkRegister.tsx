@@ -5,30 +5,9 @@ import { setCurrentScreen } from "store/navigationSlice"
 import { Screens } from "types/Screens"
 import well_icon from "../../assets/well_icon.png"
 import Header from "layouts/header/Header"
-import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 
 const LinkRegister = () => {
     const dispatch = useAppDispatch();
-	const [showScreenError, setshowScreenError] = useState(false);
-		
-    const [timeoutID, settimeoutID] = useState<any>();
-							
-	useEffect(() => {
-		setTimeout(()=>{
-            setshowScreenError(true);
-        }, 60000);
-	}, []);
-
-
-    useEffect(() => {
-        if(showScreenError==false){
-            clearTimeout(timeoutID)
-        } else {
-            settimeoutID(setTimeout(()=>{
-                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
-            }, 30000));
-        }
-    }, [showScreenError]);
 
 
     const phoneNum = useAppSelector(
@@ -42,7 +21,7 @@ const LinkRegister = () => {
 
 
     return (
-        <div className={styles.main_cont}>
+        <>
         <Header></Header>
         <div className={styles.container}>
         <div className={styles.content}>
@@ -61,11 +40,7 @@ const LinkRegister = () => {
         <button className={styles.back_to_main} onClick={()=>back_to_main()}>  למסך הבית </button>
 
     </div>
-     <ErrorScrenLeftModal show={showScreenError}
-				setShow={setshowScreenError}/>
-									
-
-    </div>
+    </>
     )
 
 };

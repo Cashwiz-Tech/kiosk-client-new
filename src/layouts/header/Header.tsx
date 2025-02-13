@@ -7,22 +7,26 @@ import { useAppDispatch } from "store/store";
 import { ReactComponent as Logo } from "assets/logo.svg";
 import { setCurrentScreen } from "store/navigationSlice";
 import { Screens } from "types/Screens";
-const Header = (props:any) => {
-    const dispatch = useAppDispatch();
-    
-    return (
-        <div className="Header">
-          
-           {props.show_logo==false? <></>:<div className="logo">{<Logo />}</div>}
+import { setService } from "store/serviceSlice";
+const Header = () => {
+  const dispatch = useAppDispatch();
 
-            {props.user_name?<div className="user_name_text">{props.user_name}</div>: <></>}
+  const handleMenu = () => {
+    dispatch(setService(null));
+    dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+  }
 
-            <div className="menu_btn_cont"> 
-                <img src={question_mark} />
-                <div className="menu_btn" onClick={() => { dispatch(setCurrentScreen(Screens.WELCOME_SCREEN))}}> תפריט </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="Header">
+
+      <div className="logo">{<Logo />}</div>
+
+      <div className="menu_btn_cont">
+        <img src={question_mark} />
+        <div className="menu_btn" onClick={handleMenu}> תפריט </div>
+      </div>
+    </div>
+  );
 
 };
 
