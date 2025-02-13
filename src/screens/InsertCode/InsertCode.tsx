@@ -11,6 +11,7 @@ import ErrorTimesModal from "components/buying/error-modal-times/error-modal-tim
 import Header from "layouts/header/Header"
 import { validateOtp } from "api/auth/otp"
 import { formatPhoneNumber } from "utils/formatPhoneNumber"
+import { setAuthData } from "store/authSlice"
 
 const InsertCode = () => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ const InsertCode = () => {
 
 
   async function validate() {
-    const { error, validationErrors } = await validateOtp({
+    const { error, validationErrors, token } = await validateOtp({
       phoneNumber: formatPhoneNumber(phoneNumber, true),
       otp: codeNumber,
     });
@@ -74,6 +75,8 @@ const InsertCode = () => {
 
       return;
     }
+
+    dispatch(setAuthData(token));
 
     if (UserExist) {
       dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));

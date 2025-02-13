@@ -17,6 +17,7 @@ type Props = {
 
 export default function FinalFaceDoc({ onNext, onBack }: Props) {
   const [showError, setShowError] = useState('')
+  const token = useAppSelector(state => state.auth.token);
 
   const fullName = useAppSelector(
     (state) => state.register.fullName
@@ -71,7 +72,7 @@ export default function FinalFaceDoc({ onNext, onBack }: Props) {
     formData.append('photo', userImage);
     formData.append('idImage', userDoc)
 
-    const { error, validationErrors } = await register(formData);
+    const { error, validationErrors } = await register(token as string, formData);
 
     if (error) {
       setShowError(error);

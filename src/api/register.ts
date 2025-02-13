@@ -1,20 +1,8 @@
 import axios, { AxiosError } from "axios";
+import { RegisterResponse } from "types/auth";
 import { baseUrl } from "./config";
 
-export type RegisterResponse = {
-  error: string;
-  validationErrors: null,
-} | {
-  validationErrors: {
-    [key: string]: string;
-  };
-  error: null
-} | {
-  error: null;
-  validationErrors: null;
-};
-
-export async function register(data: FormData): Promise<RegisterResponse> {
+export async function register(token: string, data: FormData): Promise<RegisterResponse> {
   try {
     await axios(
       `${baseUrl}/register-new`,
@@ -22,6 +10,7 @@ export async function register(data: FormData): Promise<RegisterResponse> {
         method: "POST",
         headers: {
           "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${token}`,
         },
         data,
       }
