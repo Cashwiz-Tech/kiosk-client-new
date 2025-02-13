@@ -7,6 +7,8 @@ import navigationReducer from "./navigationSlice";
 import partnerReducer from "./partnerSlice";
 import paymentsReducer from "./paymentsSlice";
 import registersReducer from "./registerSlice";
+import serviceReducer from "./serviceSlice";
+import authReducer from "./authSlice";
 
 const rootReducer = combineReducers({
   currency: currencyReducer,
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
   register: registersReducer,
   partner: partnerReducer,
   checkout: checkoutReducer,
+  service: serviceReducer,
+  auth: authReducer,
 });
 
 export const store = configureStore({

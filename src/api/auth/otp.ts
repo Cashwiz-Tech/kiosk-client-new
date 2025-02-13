@@ -1,6 +1,6 @@
 import { baseUrl } from "api/config";
 import axios, { AxiosError } from "axios";
-import { OTPResponse } from "types/OTP";
+import { OTPResponse, ValidateOTPResponse } from "types/OTP";
 
 export async function sendOtp({
   phoneNumber,
@@ -68,9 +68,9 @@ export async function validateOtp({
 }: {
   phoneNumber: string;
   otp: string,
-}): Promise<OTPResponse> {
+}): Promise<ValidateOTPResponse> {
   try {
-    await axios(
+    const response = await axios(
       `${baseUrl}/validate-otp`,
       {
         method: "POST",
@@ -84,7 +84,10 @@ export async function validateOtp({
       }
     );
 
+    const token = response.data.token;
+
     return {
+      token,
       error: null,
       validationErrors: null,
     };
@@ -92,8 +95,9 @@ export async function validateOtp({
     if (error instanceof AxiosError) {
       if (error.response?.data.errors) {
         return {
-          error: null,
           validationErrors: error.response.data.errors,
+          token: null,
+          error: null,
         }
       }
 
@@ -101,16 +105,18 @@ export async function validateOtp({
         error.message || "Something went wrong";
 
       return {
-        validationErrors: null,
         error: errorMessage,
+        token: null,
+        validationErrors: null,
       };
     }
 
     console.error(`Unexpected error when validating OTP: ${error}`);
 
     return {
-      validationErrors: null,
       error: "Something went wrong",
+      validationErrors: null,
+      token: null,
     };
   }
 }
