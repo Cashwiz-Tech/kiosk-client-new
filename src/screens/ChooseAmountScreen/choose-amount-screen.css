@@ -43,11 +43,5 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 32px;
-  margin-top: 386px;
-}
-
-
-.main_cont{
-  background-color: #090041;
+  margin-bottom: 190px;
 }

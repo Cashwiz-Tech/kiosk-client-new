@@ -15,34 +15,10 @@ import left_arrow_orange from './../../assets/left_arrow_orange.png'
 import phones_icon from './../../assets/phones_icon.png'
 
 import Header from "layouts/header/Header";
-import { useEffect, useState } from "react";
-import ErrorScrenLeftModal from "components/buying/error-modal-screen-left";
 
 const WelcomeScreenSecond = () => {
     const dispatch = useAppDispatch();
     
-    const [showScreenError, setshowScreenError] = useState(false);
-    const [timeoutID, settimeoutID] = useState<any>();
-
-    
-	useEffect(() => {
-		setTimeout(()=>{
-            setshowScreenError(true);
-        }, 60000);
-	}, []);
-
-
-    useEffect(() => {
-        if(showScreenError==false){
-            clearTimeout(timeoutID)
-        } else {
-            settimeoutID(setTimeout(()=>{
-                dispatch(setCurrentScreen(Screens.WELCOME_SCREEN)) 
-            }, 30000));
-        }
-    }, [showScreenError]);
-        
-
     return (
         <>
             <Header></Header>
@@ -84,10 +60,6 @@ const WelcomeScreenSecond = () => {
                 </div>
                
             </div>
-
-                   <ErrorScrenLeftModal show={showScreenError}
-                            setShow={setshowScreenError}/>
-                            
         </>
     );
 

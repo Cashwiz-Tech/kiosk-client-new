@@ -36,12 +36,3 @@
     padding-top: 30px;
     gap: 30px;
 }
-
-.user_name_text{
-    color: white;
-    position: absolute;
-    top: 40px;
-    right: 60px;
-    font-size: 20px;
-    font-weight: bold;
-}

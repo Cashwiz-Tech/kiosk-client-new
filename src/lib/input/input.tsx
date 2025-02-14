@@ -10,7 +10,7 @@ type Props = {
 	validate?: (v: string) => void
 	errorMessage?: string
 	isVisited?: boolean
-	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"| "address" | "no_type"
+	type?: "phoneNumber" | "identityNumber" | "email" | "userName" | "darkon"| "address"
 	focus_func?: (v: boolean) => void
 }
 
@@ -49,7 +49,7 @@ export default function Input({ value, setValue, placeholder, label, errorMessag
 
 	return (
 		<div className={styles.inputContainer}>
-			{label && <label className={(type=="no_type" ? styles.label_white : styles.label)}>{label}</label>}
+			{label && <label className={styles.label}>{label}</label>}
 			<input
 				className={`${styles.input} ${type ? styles[type] : ""}  ${
 					errorMessage?.length && !focus ? styles.error : ""
@@ -66,7 +66,7 @@ export default function Input({ value, setValue, placeholder, label, errorMessag
 			/>
 			{errorMessage && !focus && <p className={styles.errorMessage}>{errorMessage}</p>}
 			{success && (
-				<div className={(type=="no_type" ? styles.successIcon_no_type : styles.successIcon)}>
+				<div className={styles.successIcon}>
 					<SuccessSVG />
 				</div>
 			)}

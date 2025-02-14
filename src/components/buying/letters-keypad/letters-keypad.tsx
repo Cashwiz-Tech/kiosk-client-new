@@ -5,15 +5,14 @@ import { useState } from "react"
 type Props = {
 	setValue: (v: string) => void
 	cancel_caracter?: (v: string) => void
-	gray_color?: string
 }
 
-export default function LettersKeypad({ setValue, cancel_caracter,gray_color }: Props) {
+export default function LettersKeypad({ setValue, cancel_caracter }: Props) {
 
 	const [lenguage, setlenguage] = useState("he");
 
 	return (
-		<div className={styles.container +' ' +(gray_color && gray_color=="gray_color" ? styles.container_gray: '')}>
+		<div className={styles.container}>
 			<div className={styles.line}>
 			
 				{/* <div  className={styles.btn_letter} onClick={() => setValue('@')}> @</div> */}
