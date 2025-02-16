@@ -1,7 +1,12 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "/static/css/main.55f0d63e.css",
     "main.js": "/static/js/main.6bffc31e.js",
+=======
+    "main.css": "/static/css/main.af85becc.css",
+    "main.js": "/static/js/main.5a7d3485.js",
+>>>>>>> main
     "static/media/start_page_bg.png": "/static/media/start_page_bg.e77b9be34d40c93f05c8.png",
     "static/media/emblem.svg": "/static/media/emblem.3a8a732f4c7ed0f0d473d6bd0cfca88f.svg",
     "static/media/register_qr.png": "/static/media/register_qr.03becb8c66143532c276.png",
@@ -10,6 +15,8 @@
     "static/media/buying-forex.svg": "/static/media/buying-forex.c8d7ad203b2c5097621dc225dba6aee1.svg",
     "static/media/error_img.png": "/static/media/error_img.73247d36a60d9a55327b.png",
     "static/media/qrcode_icon.png": "/static/media/qrcode_icon.bcab8a9e57dacb1ed9f9.png",
+    "static/media/ten_shekel.png": "/static/media/ten_shekel.a151b6dfbd536b4dfcbb.png",
+    "static/media/two_shekel.png": "/static/media/two_shekel.646a0cd3cba6ab884177.png",
     "static/media/pay_express_icon.png": "/static/media/pay_express_icon.97e6b7807c426a573442.png",
     "static/media/logo.svg": "/static/media/logo.6eb728bbc67f99a5db8500d79a5d7068.svg",
     "static/media/exchange.svg": "/static/media/exchange.2e1fa8d2b2d923244bb25da26fe40338.svg",
@@ -21,6 +28,7 @@
     "static/media/visa.svg": "/static/media/visa.d5256cd5d350080339b481db43d93f77.svg",
     "static/media/whatsapp.svg": "/static/media/whatsapp.c93dabbd35f662464b56600b58ef5970.svg",
     "index.html": "/index.html",
+<<<<<<< HEAD
     "static/media/error.svg": "/static/media/error.1430477fae0d949b5d46.svg",
     "static/media/clock.svg": "/static/media/clock.b0cb2dd3b45e2692520f96c9cad0887d.svg",
     "static/media/success-circle.svg": "/static/media/success-circle.6f7bdeef831608904a21b21a7548f368.svg",
@@ -36,5 +44,22 @@
   "entrypoints": [
     "static/css/main.55f0d63e.css",
     "static/js/main.6bffc31e.js"
+=======
+    "static/media/error.svg": "/static/media/error.5475152723802f3dadcb.svg",
+    "static/media/clock.svg": "/static/media/clock.fc93d74839d0ffed537c9b25f29c1b32.svg",
+    "static/media/success-circle.svg": "/static/media/success-circle.78e584706ee4fccf51414a672404f48a.svg",
+    "static/media/plus.svg": "/static/media/plus.f70f1ffa0f1df7ea3531.svg",
+    "static/media/minus.svg": "/static/media/minus.3c056d34c651fc0dc049.svg",
+    "static/media/success.svg": "/static/media/success.c666e50da840f49cc755d9cdc09f0479.svg",
+    "static/media/arrow.svg": "/static/media/arrow.39cf42e8af72925a1731d4cd4870309c.svg",
+    "static/media/cross.svg": "/static/media/cross.f30f37c59a1e7e0899dd58a3c2564b2e.svg",
+    "static/media/stick.svg": "/static/media/stick.d837287168b145d1351d.svg",
+    "main.af85becc.css.map": "/static/css/main.af85becc.css.map",
+    "main.5a7d3485.js.map": "/static/js/main.5a7d3485.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af85becc.css",
+    "static/js/main.5a7d3485.js"
+>>>>>>> main
   ]
 }

@@ -39,7 +39,7 @@ const PaymentSuccessScreen = () => {
         width={900}
       />
 
-      <div className="bottom-container">
+      <div className="bottom-container-b">
         <p>לכל שאלה אנחנו זמינים עבורך</p>
         <div className="contact-info-container">
           <img src={"/mail.svg"} alt="right arrow" />

@@ -1,10 +1,13 @@
 .container {
 	height: 100%;
-	width: 100%;
+	width: 92%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	margin: 0 auto;
+	border-radius: 24px;
+	background-color: white;
 }
 
 .content {
@@ -20,6 +23,8 @@
 	font-weight: 800;
 	line-height: 109%;
 	margin: 0 0 50px;
+	margin-top: 20px;
+	margin-bottom: 514px;
 }
 
 .phoneInput {
@@ -38,6 +43,7 @@
     margin-top: 60px;
     flex-direction: column-reverse;
     gap: 22px;
+	margin-bottom: 60px;
 }
 
 .arrowRight {
@@ -78,4 +84,9 @@
 .webcam_cont{
 	margin: 0 auto;
 	/* margin-right: -255px; */
+}
+
+
+.main_cont{
+	background-color: #090041;
 }

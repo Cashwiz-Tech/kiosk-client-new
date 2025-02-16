@@ -2,6 +2,7 @@ import { sendOtp } from "api/auth/otp";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 import Header from "layouts/header/Header";
 import Button from "lib/button";
+import { useEffect, useState } from "react";
 import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { Screens } from "types/Screens";
@@ -16,6 +17,28 @@ export default function SendOTPExisted({ onBack }: Props) {
   const dispatch = useAppDispatch();
 
   const phoneNum = useAppSelector((state) => state.navigation.phoneNum);
+
+  const [showScreenError, setshowScreenError] = useState(false);
+
+  const [timeoutID, settimeoutID] = useState<any>();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setshowScreenError(true);
+    }, 60000);
+  }, []);
+
+  useEffect(() => {
+    if (showScreenError == false) {
+      clearTimeout(timeoutID);
+    } else {
+      settimeoutID(
+        setTimeout(() => {
+          dispatch(setCurrentScreen(Screens.WELCOME_SCREEN));
+        }, 30000)
+      );
+    }
+  }, [showScreenError]);
 
   const identityNumber = useAppSelector((state) => state.register.IDNum);
 
