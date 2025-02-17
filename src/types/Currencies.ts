@@ -8,3 +8,18 @@ export interface GetCurrencyExchangeRateResponse {
     };
   };
 }
+
+export type CurrencyDTO = {
+  name: PossibleCurrencies;
+  rate: number;
+  profitSelling: number;
+  profitBuying: number;
+};
+
+export type GetCurrenciesResponse = {
+  error: string;
+  currencies?: never;
+} | {
+  currencies: CurrencyDTO[];
+  error?: never;
+};
