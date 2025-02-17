@@ -21,7 +21,6 @@ const CurrencyBox = ({ currency }: CurrencyBoxProps) => {
   const chooseCurrency = async () => {
 
     if(typeScreen!='matah'){
-
       
       try {
         const exchangeRate = await getCurrencyExchangeRate(currency);
