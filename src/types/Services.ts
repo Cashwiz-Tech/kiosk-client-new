@@ -1,3 +1,5 @@
 export enum Services {
-  Cashwiz,
+  Cash,
+  Matah,
+  PayBills,
 };

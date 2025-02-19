@@ -17,7 +17,7 @@ import styles from "./InsertCode.module.css";
 const InsertCode = () => {
   const dispatch = useAppDispatch();
   const [showScreenError, setshowScreenError] = useState(false);
-  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+  const service = useAppSelector((state) => state.navigation.service);
   const [timeoutID, settimeoutID] = useState<any>();
 
   useEffect(() => {

@@ -15,6 +15,7 @@ import { ReactComponent as Arrow } from "./../../assets/arrow.svg"
 import get_matah_icon from './../../assets/get_matah.png'
 import email_icon from './../../assets/email_icon.png'
 import phone_icon from './../../assets/phone_s.png'
+import { Services } from "types/Services";
 
 
 
@@ -22,7 +23,7 @@ import phone_icon from './../../assets/phone_s.png'
 const GetMatahScreen = () => {
   const dispatch = useAppDispatch();
 	const [showScreenError, setshowScreenError] = useState(false);
-  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+  const service = useAppSelector((state) => state.navigation.service);
   const [timeoutID, settimeoutID] = useState<any>();
 
 	useEffect(() => {
@@ -60,7 +61,7 @@ const GetMatahScreen = () => {
         ברגעים אלו נשלח אליך מסרון עם פרטי העסקה
         </p> */}
       
-       <img src={get_matah_icon} className="get_matah_icon" onClick={()=>typeScreen=='matah'? dispatch(setCurrentScreen(Screens.FINISH_MATAH)): dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH))}/>
+       <img src={get_matah_icon} className="get_matah_icon" onClick={()=>service === Services.Matah ? dispatch(setCurrentScreen(Screens.FINISH_MATAH)): dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH))}/>
 
 
       <div className="footer_matah">

@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Screens } from "types/Screens";
+import { Services } from "types/Services";
 
 interface NavigationState {
   currentScreen: Screens;
   phoneNum: string;
   OTP: string;
   UserExist: boolean;
-  typeScreen:string;
+  service: Services | null;
 }
 
 const initialState: NavigationState = {
@@ -14,7 +15,7 @@ const initialState: NavigationState = {
   phoneNum: "",
   OTP: "",
   UserExist: false,
-  typeScreen: ""
+  service: null,
 };
 
 export const navigationSlice = createSlice({
@@ -33,11 +34,11 @@ export const navigationSlice = createSlice({
     setUserExist: (state, action: PayloadAction<boolean>) => {
       state.UserExist = action.payload;
     },
-    setTypeScreen: (state, action: PayloadAction<string>) => {
-      state.typeScreen = action.payload;
+    setService: (state, action: PayloadAction<Services | null>) => {
+      state.service = action.payload;
     },
   },
 });
 
-export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist ,setTypeScreen } = navigationSlice.actions;
+export const { setCurrentScreen, setPhoneNum, setOTP, setUserExist, setService } = navigationSlice.actions;
 export default navigationSlice.reducer;

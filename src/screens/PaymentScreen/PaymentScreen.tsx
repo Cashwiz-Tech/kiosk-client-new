@@ -9,6 +9,7 @@ import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { CheckoutStatus } from "types/CheckoutStatus";
 import { Screens } from "types/Screens";
+import { Services } from "types/Services";
 import "./PaymentScreen.css";
 
 const PaymentScreen = () => {
@@ -40,7 +41,7 @@ const PaymentScreen = () => {
   const partnerData = useAppSelector((state) => state.partner.partnerData);
   const customerId = useAppSelector((state) => state.register.IDNum);
   const totalAmount = useAppSelector((state) => state.payments.totalAmount);
-  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+  const service = useAppSelector((state) => state.navigation.service);
 
   const numberOfPayments = useAppSelector((state) => state.payments.selectedPayments);
   const { selectedCurrency, selectedCurrencyAmount } = useAppSelector((state) => state.currency);
@@ -48,7 +49,7 @@ const PaymentScreen = () => {
   const handleCreditCardError = (status: CheckoutStatus) => {
     //dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));
     dispatch(setCheckoutStatus(status));
-    if (typeScreen == "matah") {
+    if (service === Services.Matah) {
       dispatch(setCurrentScreen(Screens.GET_MATAH));
     } else {
       dispatch(setCurrentScreen(Screens.CHECKOUT_FINISH));

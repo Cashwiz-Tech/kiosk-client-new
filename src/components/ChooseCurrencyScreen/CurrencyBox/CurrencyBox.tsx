@@ -7,6 +7,7 @@ import { setPayments, setPercentageProfit } from "store/paymentsSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { PossibleCurrencies } from "types/Currencies";
 import { Screens } from "types/Screens";
+import { Services } from "types/Services";
 import "./currency-box.css";
 
 interface CurrencyBoxProps {
@@ -16,11 +17,11 @@ interface CurrencyBoxProps {
 const CurrencyBox = ({ currency }: CurrencyBoxProps) => {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+  const service = useAppSelector((state) => state.navigation.service);
       
   const chooseCurrency = async () => {
 
-    if(typeScreen!='matah'){
+    if(service !== Services.Matah){
       
       try {
         const exchangeRate = await getCurrencyExchangeRate(currency);
