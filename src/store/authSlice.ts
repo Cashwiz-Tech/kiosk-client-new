@@ -16,13 +16,13 @@ export const authSlice = createSlice({
   reducers: {
     setAuthToken: (
       state,
-      action: PayloadAction<AuthState["token"]>
+      action: PayloadAction<string | null>
     ) => {
       state.token = action.payload;
     },
     setAdminAuthToken: (
       state,
-      action: PayloadAction<AuthState["adminToken"]>
+      action: PayloadAction<string | null>
     ) => {
       state.adminToken = action.payload;
     },
