@@ -33,7 +33,7 @@ const OperationSystem = () => {
       return;
     }
 
-    setAdminAuthToken(token);
+    dispatch(setAdminAuthToken(token));
     dispatch(setCurrentScreen(Screens.OPERATION_SYSTEM_TABS));
   }
 
