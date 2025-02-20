@@ -1,6 +1,5 @@
 import { ReactComponent as Logo } from "assets/logo.svg";
-import { setCurrentScreen } from "store/navigationSlice";
-import { setService } from "store/serviceSlice";
+import { setCurrentScreen, setService } from "store/navigationSlice";
 import { useAppDispatch } from "store/store";
 import { Screens } from "types/Screens";
 import question_mark from "./../../assets/question_mark.png";

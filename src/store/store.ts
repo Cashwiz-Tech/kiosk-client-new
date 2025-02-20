@@ -7,7 +7,6 @@ import navigationReducer from "./navigationSlice";
 import partnerReducer from "./partnerSlice";
 import paymentsReducer from "./paymentsSlice";
 import registersReducer from "./registerSlice";
-import serviceReducer from "./serviceSlice";
 import authReducer from "./authSlice";
 
 const rootReducer = combineReducers({
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
   register: registersReducer,
   partner: partnerReducer,
   checkout: checkoutReducer,
-  service: serviceReducer,
   auth: authReducer,
 });
 

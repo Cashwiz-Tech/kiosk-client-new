@@ -16,6 +16,7 @@ import { setUserImage } from "store/registerSlice"
 import Header from "layouts/header/Header"
 import ErrorScrenLeftModal from "components/buying/error-modal-screen-left"
 import { Screens } from "types/Screens"
+import { Services } from "types/Services"
 
 
 type Props = {
@@ -27,7 +28,7 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
    
 	const dispatch = useAppDispatch();
 	const [showScreenError, setshowScreenError] = useState(false);
-	const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+	const service = useAppSelector((state) => state.navigation.service);
 							
 						
     const [timeoutID, settimeoutID] = useState<any>();
@@ -79,7 +80,7 @@ export default function ScanFaceUserExist({ onNext, onBack }: Props) {
 
 	  function nextPage(){
 		
-			if(typeScreen=='matah'){
+			if(service === Services.Matah){
 				dispatch(setCurrentScreen(Screens.SCAN_SELECT_MATAH));
 			} else {
 				dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));

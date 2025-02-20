@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { setCurrentScreen, setTypeScreen } from "store/navigationSlice";
-import { setService } from "store/serviceSlice";
+import { setCurrentScreen, setService } from "store/navigationSlice";
 import { useAppDispatch } from "store/store";
 import { Screens } from "types/Screens";
 import { Services } from "types/Services";
@@ -30,7 +29,7 @@ const WelcomeScreenNew = () => {
   const [top_part, settop_part] = useState<boolean>(true);
 
   const handleCashwiz = () => {
-    dispatch(setService(Services.Cashwiz));
+    dispatch(setService(Services.Cash));
     dispatch(setCurrentScreen(Screens.WELCOME_SCREEN_SECOND));
   };
 
@@ -117,7 +116,7 @@ const WelcomeScreenNew = () => {
         <div
           className="action_btn_cont"
           onClick={() => {
-            dispatch(setTypeScreen("matah"));
+            dispatch(setService(Services.Matah));
             dispatch(setCurrentScreen(Screens.WELCOME_SCREEN_MATAH));
           }}
         >
@@ -130,7 +129,7 @@ const WelcomeScreenNew = () => {
         <div
           className="action_btn_cont"
           onClick={() => {
-            dispatch(setTypeScreen("cash"));
+            dispatch(setService(Services.Cash));
             dispatch(setCurrentScreen(Screens.WELCOME_SCREEN_SECOND));
           }}
         >
@@ -183,7 +182,7 @@ const WelcomeScreenNew = () => {
         <div
           className="action_btn_cont"
           onClick={() => {
-            dispatch(setTypeScreen("pay_bill"));
+            dispatch(setService(Services.PayBills));
             dispatch(setCurrentScreen(Screens.PAY_BILLS));
           }}
         >
