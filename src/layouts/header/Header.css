@@ -32,7 +32,7 @@
 .menu_btn_cont{
     display: flex;
     justify-content: flex-end;
-    margin-left: 90px;
+    margin-left: 76px;
     padding-top: 30px;
     gap: 30px;
 }
