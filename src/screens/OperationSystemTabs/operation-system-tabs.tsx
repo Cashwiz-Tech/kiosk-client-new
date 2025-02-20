@@ -204,7 +204,7 @@ const OperationSystemTabs = () => {
             <div className="table_status_header">
               <div className="table_status_line_width_first">רכיב</div>
               <div className="table_status_line_width">קוד</div>
-              <div className="table_status_line_width">סטטוס</div>
+              <div className="table_status_line_width_last">סטטוס</div>
             </div>
 
             {
@@ -217,7 +217,7 @@ const OperationSystemTabs = () => {
                     {getComponentTypeName(c.componentType)}
                   </div>
                   <div className="table_status_line_width">{c.code || ""}</div>
-                  <div className="table_status_line_width">
+                  <div className="table_status_line_width_last">
                     <img src={getComponentStatusImg(c.status)} />
                     <span className="active_text">
                       {getComponentStatusText(c.status)}
