@@ -1,10 +1,12 @@
 export type StackType =
-  "FIFTY_USD" |
   "HUNDRED_USD" |
   "FIFTY_EUR" |
-  "HUNDRED_EUR" |
   "FIFTY_ILS" |
-  "HUNDRED_ILS";
+  "HUNDRED_ILS" |
+  "ONE_ILS" |
+  "TWO_ILS" |
+  "FIVE_ILS" |
+  "TEN_ILS";
 
 export type StackMoneyForm = "COINS" | "BILLS";
 
