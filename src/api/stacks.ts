@@ -1,6 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { CheckHealthResponse } from "types/components";
-import { StackMoneyForm } from "types/stacks";
+import { FetchStacksResponse, StackMoneyForm } from "types/stacks";
 import { baseUrl } from "./config";
 
 export async function fetchStacks({
@@ -8,13 +7,17 @@ export async function fetchStacks({
   form,
 }: {
   token: string;
-  form: StackMoneyForm;
+  form?: StackMoneyForm;
 }): Promise<
-  CheckHealthResponse
+  FetchStacksResponse
 > {
   try {
+    let query = "";
+    if (form) {
+      query = `?form=${form}`;
+    }
     const response = await axios(
-      `${baseUrl}/stacks?form=${form}`,
+      `${baseUrl}/stacks${query}`,
       {
         method: "GET",
         headers: {

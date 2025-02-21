@@ -15,3 +15,11 @@ export type StackDTO = {
   form: StackMoneyForm;
   count: number;
 };
+
+export type FetchStacksResponse = {
+  data: StackDTO[];
+  error?: never;
+} | {
+  error: string;
+  data?: never;
+};

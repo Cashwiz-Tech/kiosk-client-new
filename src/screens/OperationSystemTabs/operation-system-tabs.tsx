@@ -29,6 +29,9 @@ import NumericKeypadSmall from "components/buying/numeric-keypad-small/numeric-k
 import { checkHealth } from "api/components";
 import { ComponentDTO } from "types/components";
 import { getComponentStatusImg, getComponentStatusText, getComponentTypeName } from "utils/components";
+import { fetchStacks } from "api/stacks";
+import { StackDTO } from "types/stacks";
+import { deflate } from "zlib";
 
 enum Tab {
   Health,
@@ -43,6 +46,8 @@ const OperationSystemTabs = () => {
   const [selectedTab, setselectedTab] = useState<Tab>(Tab.Health);
   const token = useAppSelector((state) => state.auth.adminToken);
   const [components, setComponents] = useState<ComponentDTO[] | null>(null)
+  const [billStacks, setBillStacks] = useState<StackDTO[] | null>(null);
+  const [coinStacks, setCoinStacks] = useState<StackDTO[] | null>(null);
 
   useEffect(() => {
     if (!token) {
@@ -50,11 +55,21 @@ const OperationSystemTabs = () => {
       return;
     }
 
-    console.log(`We have a token!`);
     (async () => {
       const { data } = await checkHealth(token);
       if (data) {
         setComponents(data);
+      }
+    })();
+
+    (async () => {
+      const { data } = await fetchStacks({ token });
+      if (data) {
+        const bills = data.filter(s => s.form === "BILLS");
+        const coins = data.filter(s => s.form === "COINS");
+
+        setBillStacks(bills);
+        setCoinStacks(coins);
       }
     })();
   }, [token]);
@@ -240,38 +255,56 @@ const OperationSystemTabs = () => {
                 <div className="table_status_line_width"></div>
               </div>
 
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={shekel_icon} /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">500₪</div>
-                <div className="table_status_line_width">{!showEdit_val_1 ? value_1 : (<div className="input_cont"> {ShowApproveBtn ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_1(value_temp_1); setShowApproveBtn(false); setshowEdit_val_1(false); setvalue_temp_1(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_1} onChange={(e) => { setShowApproveBtn(true); setvalue_temp_1(e.target.value) }} /> {ShowApproveBtn ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn(false); setshowEdit_val_1(false); setValue(''); setvalue_temp_1('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_1(true)} /> </div>
-              </div>
+              {
+                coinStacks?.map(s => {
+                  let img: string;
+                  let amount: number;
+                  switch (s.stackType) {
+                    case "ONE_ILS": {
+                      img = shekel_icon;
+                      amount = s.count;
+                      break;
+                    }
+                    case "TWO_ILS": {
+                      img = two_shekel;
+                      amount = 2 * s.count;
+                      break;
+                    }
+                    case "FIVE_ILS": {
+                      img = five_shekel;
+                      amount = 5 * s.count;
+                      break;
+                    }
+                    case "TEN_ILS": {
+                      img = ten_shekel;
+                      amount = 10 * s.count;
+                      break;
+                    }
+                    default: {
+                      img = shekel_icon;
+                      amount = s.count;
+                    }
+                  }
 
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={two_shekel} /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">500₪</div>
-                <div className="table_status_line_width">{!showEdit_val_2 ? value_2 : (<div className="input_cont"> {ShowApproveBtn_2 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_2(value_temp_2); setShowApproveBtn_2(false); setshowEdit_val_2(false); setvalue_temp_2(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_2} onChange={(e) => { setShowApproveBtn_2(true); setvalue_temp_2(e.target.value) }} /> {ShowApproveBtn_2 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_2(false); setshowEdit_val_2(false); setValue(''); setvalue_temp_2('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_2(true)} /> </div>
-              </div>
-
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={five_shekel} /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">500₪</div>
-                <div className="table_status_line_width">{!showEdit_val_3 ? value_3 : (<div className="input_cont"> {ShowApproveBtn_3 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_3(value_temp_3); setShowApproveBtn_3(false); setshowEdit_val_3(false); setvalue_temp_3(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_3} onChange={(e) => { setShowApproveBtn_3(true); setvalue_temp_2(e.target.value) }} /> {ShowApproveBtn_3 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_3(false); setshowEdit_val_3(false); setValue(''); setvalue_temp_3('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_3(true)} /> </div>
-              </div>
-
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={ten_shekel} /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">500₪</div>
-                <div className="table_status_line_width">{!showEdit_val_4 ? value_4 : (<div className="input_cont"> {ShowApproveBtn_4 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_4(value_temp_4); setShowApproveBtn_4(false); setshowEdit_val_4(false); setvalue_temp_4(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_4} onChange={(e) => { setShowApproveBtn_4(true); setvalue_temp_4(e.target.value) }} /> {ShowApproveBtn_4 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_4(false); setshowEdit_val_4(false); setValue(''); setvalue_temp_4('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_4(true)} /> </div>
-              </div>
-
+                  return (
+                    <div className="table_status_line">
+                      <div className="table_status_line_width_first_sec">
+                        <img src={img} />
+                      </div>
+                      <div className="table_status_line_width_long">{s.count}</div>
+                      <div className="table_status_line_width">{amount}₪</div>
+                      <div className="table_status_line_width">0</div>
+                      <div className="table_status_line_width table_status_line_width_last">
+                        <img
+                        src={pen}
+                        onClick={() => console.log("Editing")}
+                        alt="Edit coin stack"
+                        />
+                      </div>
+                    </div>
+                  );
+                })
+              }
             </div>
             <NumericKeypadSmall setValue={(v: any) => setValuefunc(v)} cancel_caracter={cancel_caracter} />
 
@@ -288,8 +321,6 @@ const OperationSystemTabs = () => {
           {selectedTab === Tab.Bills ? <>
 
             <div className="table_status_cont">
-
-
               <div className="table_status_header_sec">
                 <div className="table_status_line_width_first_sec">סוג שטר</div>
                 <div className="table_status_line_width_long">כמות מטבעות במחסנית</div>
@@ -298,42 +329,66 @@ const OperationSystemTabs = () => {
                 <div className="table_status_line_width"></div>
               </div>
 
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={usd_100} className="usd_100" /></div>
-                <div className="table_status_line_width_long">5</div>
-                <div className="table_status_line_width">500$</div>
-                <div className="table_status_line_width">{!showEdit_val_5 ? value_5 : (<div className="input_cont"> {ShowApproveBtn_5 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_5(value_temp_5); setShowApproveBtn_5(false); setshowEdit_val_5(false); setvalue_temp_5(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_5} onChange={(e) => { setShowApproveBtn_5(true); setvalue_temp_5(e.target.value) }} /> {ShowApproveBtn_5 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_5(false); setshowEdit_val_5(false); setValue(''); setvalue_temp_5('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_5(true)} /> </div>
-
-              </div>
-
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={euro_50} className="euro_50" /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">5000Є</div>
-                <div className="table_status_line_width">{!showEdit_val_6 ? value_6 : (<div className="input_cont"> {ShowApproveBtn_6 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_6(value_temp_6); setShowApproveBtn_6(false); setshowEdit_val_6(false); setvalue_temp_6(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_6} onChange={(e) => { setShowApproveBtn_6(true); setvalue_temp_6(e.target.value) }} /> {ShowApproveBtn_6 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_6(false); setshowEdit_val_6(false); setValue(''); setvalue_temp_6('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_6(true)} /> </div>
-
-              </div>
-
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={shekel_100} className="shekel_100" /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">20000₪</div>
-                <div className="table_status_line_width">{!showEdit_val_7 ? value_7 : (<div className="input_cont"> {ShowApproveBtn_7 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_7(value_temp_7); setShowApproveBtn_7(false); setshowEdit_val_7(false); setvalue_temp_7(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_7} onChange={(e) => { setShowApproveBtn_7(true); setvalue_temp_7(e.target.value) }} /> {ShowApproveBtn_7 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_7(false); setshowEdit_val_7(false); setValue(''); setvalue_temp_7('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_7(true)} /> </div>
-
-              </div>
-
-              <div className="table_status_line">
-                <div className="table_status_line_width_first_sec"><img src={shekel_50} className="shekel_50" /></div>
-                <div className="table_status_line_width_long">1,000</div>
-                <div className="table_status_line_width">500₪</div>
-                <div className="table_status_line_width">{!showEdit_val_8 ? value_8 : (<div className="input_cont"> {ShowApproveBtn_8 ? <img src={approve_input} className="approve_input" onClick={() => { setvalue_8(value_temp_8); setShowApproveBtn_8(false); setshowEdit_val_8(false); setvalue_temp_8(''); setValue('') }} /> : <></>} <input type="text" className="input_num" value={value_temp_8} onChange={(e) => { setShowApproveBtn_8(true); setvalue_temp_8(e.target.value) }} /> {ShowApproveBtn_8 ? <img src={cancel_input} className="approve_input" onClick={() => { setShowApproveBtn_8(false); setshowEdit_val_8(false); setValue(''); setvalue_temp_8('') }} /> : <></>} </div>)}</div>
-                <div className="table_status_line_width table_status_line_width_last"><img src={pen} onClick={() => setshowEdit_val_8(true)} /> </div>
-
-              </div>
-
+              {
+                billStacks?.map((s, i) => {
+                  let img: string;
+                  let imgClass: string;
+                  let sign: string;
+                  let amount: number;
+                  switch (s.stackType) {
+                    case "HUNDRED_USD": {
+                      img = usd_100;
+                      imgClass = "usd_100";
+                      sign = "$";
+                      amount = 100 * s.count;
+                      break;
+                    }
+                    case "FIFTY_EUR": {
+                      img = euro_50;
+                      imgClass = "euro_50";
+                      sign = "€";
+                      amount = 50 * s.count;
+                      break;
+                    }
+                    case "FIFTY_ILS": {
+                      img = shekel_50;
+                      imgClass = "shekel_50";
+                      sign = "₪";
+                      amount = 50 * s.count;
+                      break;
+                    }
+                    case "HUNDRED_ILS": {
+                      img = shekel_100;
+                      imgClass = "shekel_100";
+                      sign = "₪";
+                      amount = 100 * s.count;
+                      break;
+                    }
+                    default: {
+                      img = usd_100;
+                      imgClass = "usd_100";
+                      amount = 100;
+                      sign = "$";
+                    }
+                  }
+                  return (
+                    <div
+                      className="table_status_line"
+                      key={`bill-stack-${i + 1}`}
+                    >
+                      <div className="table_status_line_width_first_sec">
+                        <img src={img} className={imgClass} alt="Currency icon" />
+                      </div>
+                      <div className="table_status_line_width_long">{s.count}</div>
+                      <div className="table_status_line_width">{amount}{sign}</div>
+                      <div className="table_status_line_width">0</div>
+                      <div className="table_status_line_width table_status_line_width_last">
+                        <img src={pen} onClick={() => console.log(`Editing...`)} alt="Edit stack" />
+                      </div>
+                    </div>
+                  );
+                })
+              }
             </div>
             <NumericKeypadSmall setValue={(v: any) => setValuefunc(v)} cancel_caracter={cancel_caracter} />
 
