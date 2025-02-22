@@ -345,16 +345,17 @@
     font-weight: bold;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 8px;
     margin-top: 0px;
     border-bottom: 3px dashed #DADADA;
     padding-bottom: 5px;
+    align-items: center;
 }
 
 .active_text{
     font-size: 20px;
     position: relative;
-    top: -13px;
+    margin-right: 8px;
 }
 
 .table_status_line_width{
@@ -365,8 +366,13 @@
 
 .table_status_line_width_last{
     width: 30%;
-    text-align: left;
-    margin-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: end;
+    gap: 8px;
+    text-align: right;
+    padding-right: 110px;
 }
 
 .table_status_line_last{
