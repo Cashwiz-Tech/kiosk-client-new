@@ -6,7 +6,7 @@ import ErrorTimesModal from "components/buying/error-modal-times/error-modal-tim
 import Header from "layouts/header/Header";
 import Button from "lib/button";
 import { useEffect, useState } from "react";
-import { setAuthData } from "store/authSlice";
+import { setAuthToken } from "store/authSlice";
 import { setCurrentScreen } from "store/navigationSlice";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { Screens } from "types/Screens";
@@ -17,7 +17,7 @@ import styles from "./InsertCode.module.css";
 const InsertCode = () => {
   const dispatch = useAppDispatch();
   const [showScreenError, setshowScreenError] = useState(false);
-  const typeScreen = useAppSelector((state) => state.navigation.typeScreen);
+  const service = useAppSelector((state) => state.navigation.service);
   const [timeoutID, settimeoutID] = useState<any>();
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const InsertCode = () => {
       return;
     }
 
-    dispatch(setAuthData(token));
+    dispatch(setAuthToken(token));
 
     if (UserExist) {
       dispatch(setCurrentScreen(Screens.SCAN_FACE_USER_EXIST));

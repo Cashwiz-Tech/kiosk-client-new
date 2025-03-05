@@ -61,7 +61,7 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
   const [isLoadingPartnerData, setIsLoadingPartnerData] = useState(false);
   const dispatch = useAppDispatch();
   const currentScreen = useAppSelector((state) => state.navigation.currentScreen);
-  const selectedService = useAppSelector((state) => state.service.service);
+  const selectedService = useAppSelector((state) => state.navigation.service);
   console.log(`selectedService: ${selectedService !== null}`);
   const [isShowOnBoarding, setIsShowOnBoarding] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -346,8 +346,9 @@ export default function Buying({ setShow, show }: { setShow: (val: boolean) => v
         <>
           <FinishRegister
             onNext={() => {
+              console.log(`Selected service: ${selectedService}`);
               switch (selectedService) {
-                case Services.Cashwiz: {
+                case Services.Cash: {
                   dispatch(setCurrentScreen(Screens.CHOOSE_CURRENCY));
                   break;
                 }
